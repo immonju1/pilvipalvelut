@@ -1,25 +1,25 @@
 # DevOps - Docker ja Kubernetes osana mikropalveluarkkitehtuuria
-Pilvipalvelut kurssin projektityö kevät 2019
+***Pilvipalvelut kurssin projektityö kevät 2019***
 Juha Immonen
 
-# Projektin tausta
+### Projektin tausta
 
-# Projektin tavoitteet
+### Projektin tavoitteet
 
-# Projektin eteneminen ja välitavoitteet
+### Projektin eteneminen ja välitavoitteet
 
-# Projektiorganisaatio ja sidosryhmät
+### Projektiorganisaatio ja sidosryhmät
 
-# Aikataulu
+### Aikataulu
 
-# Riskit ja vaatimukset etenemiselle
+### Riskit ja vaatimukset etenemiselle
 
-# Projektisuunnitelma
+### Projektisuunnitelma
 
-# Kommunikaatio
+### Kommunikaatio
 
 
-# Projektisuunnitelma
+### Projektisuunnitelma
 
 |Task #|Task|Goal|Hours pp|Planned timeframe|
 |------|----|----|-----|-----------------|
