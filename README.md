@@ -41,8 +41,9 @@ Projekti etenee seuraavasti
   - Kontitus, tuotantoonvienti Kubernetesin avulla
  
 ### Projektiorganisaatio ja sidosryhmät
+
 Projektin omistaja: Juha Immonen
-Projketin ohjaaja: Olavi korhonen
+Projektin ohjaaja: Olavi korhonen
 
 ### Alustava aikataulu
 
