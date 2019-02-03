@@ -50,14 +50,17 @@ Projketin ohjaaja: Olavi korhonen
 --------|-------------
 Viikko 5-6|Projektin aloitus
 Viikko 7|Projektisuunnitelman esittely
-Viikko 8|Esoselvitys valmis
+Viikko 8|Esiselvitys valmis
 Viikot 9-16|Projektin tekemistä
 Viikko 17|Loppuraportti valmis
 Viikko 18|Projektin tuotoksen esittely
 
 ### Riskit ja vaatimukset etenemiselle
 
-### Projektisuunnitelma
+Riskit
+- Tekniikoiden opiskelu vaatii enemmän aikaa kuin suunniteltu
+- Asennuksissa tulee viiveitä / haasteita
+- Ylipääsemätön tekninen ongelma
 
 ### Kommunikaatio
 
