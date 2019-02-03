@@ -42,8 +42,8 @@ Projekti etenee seuraavasti
  
 ### Projektiorganisaatio ja sidosryhmät
 
-Projektin omistaja: Juha Immonen
-Projektin ohjaaja: Olavi korhonen
+Projektin omistaja on Juha Immonen, ollen samalla projektiryhmä.
+Projektin ohjaajana toimii Olavi korhonen.
 
 ### Alustava aikataulu
 
