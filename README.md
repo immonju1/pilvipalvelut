@@ -55,6 +55,10 @@ Viikot 9-16|Projektin tekemistä
 Viikko 17|Loppuraportti valmis
 Viikko 18|Projektin tuotoksen esittely
 
+### Projektisuunnitelma
+
+[Tarkempi suunnitelma](https://github.com/immonju1/documents/projektisuunnitelma.md)
+
 ### Riskit ja vaatimukset etenemiselle
 
 Riskit
