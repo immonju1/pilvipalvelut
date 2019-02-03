@@ -30,15 +30,15 @@ Projektin tavoitteean on oppia
 
 ### Projektin eteneminen ja välitavoitteet
 
-Projekti etenee eseuraavasti
-- Esiselvitys
-   Teknologioiden opiskelua (Docker, Kubernetes, mikropalvelut)
-- Docker kontitus LAMPlle
-   Asennusohjeet Githubissa
-- Kubernetes asennus / pilvipalveluna
-   Asennusohjeet Githubissa
-- Lopullinen testisovellus, ja koko pinon testaaminen
-   Kontitus, tuotantoonvienti Kubernetesin avulla
+Projekti etenee seuraavasti
+1. Esiselvitys
+   - Teknologioiden opiskelua (Docker, Kubernetes, mikropalvelut)
+2. Docker kontitus LAMPlle
+   - Asennusohjeet Githubissa
+3. Kubernetes asennus / pilvipalveluna
+  -  Asennusohjeet Githubissa
+4. Lopullinen testisovellus, ja koko pinon testaaminen
+   - Kontitus, tuotantoonvienti Kubernetesin avulla
  
 ### Projektiorganisaatio ja sidosryhmät
 Projektin omistaja: Juha Immonen
@@ -57,7 +57,7 @@ Viikko 18|Projektin tuotoksen esittely
 
 ### Projektisuunnitelma
 
-[Tarkempi suunnitelma](https://github.com/immonju1/documents/projektisuunnitelma.md)
+[Tarkempi suunnitelma](https://github.com/immonju1/pilvipalvelut/blob/master/documents/projektisuunnitelma.md)
 
 ### Riskit ja vaatimukset etenemiselle
 
