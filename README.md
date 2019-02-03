@@ -38,7 +38,7 @@ Projekti etenee seuraavasti
 3. Kubernetes asennus / pilvipalveluna
   -  Asennusohjeet Githubissa
 4. Lopullinen testisovellus, ja koko pinon testaaminen
-   - Kontitus, tuotantoonvienti Kubernetesin avulla
+  - Kontitus, tuotantoonvienti Kubernetesin avulla
  
 ### Projektiorganisaatio ja sidosryhmät
 Projektin omistaja: Juha Immonen
