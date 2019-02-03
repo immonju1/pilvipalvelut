@@ -6,27 +6,27 @@
 
 Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsin aiheen oman projektin aiheeksi, koska haluan oppia enemmän DevOps:sta. DevOps on, sekä tapa organisoida töitä ohjemistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
 
-Palveluiden nopemapi tuotantoonvienti ja kehittäminen vaatii myöss uudenlaista arkkitehtuuria. Isojen monoliittisten sovellusten sijaan tarvitaan arkkiehtuuri, joka mahdollistaa pienten itsenäisten palveluiden kehittämisen ja tuotantoonviennin. Arkkitehtuuria kutsutaan mikropalveluarkkitehtuuriksi. Jokainen toiminnallisuus / palvelu on itsenäinen sovellus, joka tarjoaa rajapinnan muille palveluille. Kukin mikropalvelu voidaan viedä tuotantoon riippumattaa muista mikropalevluista. Yhdessä mikropalvelut muodostavat varsinaisen sovelluksen. Mikropalvelut lisäävät tarvetta automaatiolle, helpolle tavalle viedä mikropalvelut tuotantoon. 
+Palveluiden nopeampi tuotantoonvienti ja kehittäminen vaatii myös uudenlaista arkkitehtuuria. Isojen monoliittisten sovellusten sijaan tarvitaan arkkiehtuuri, joka mahdollistaa pienten itsenäisten palveluiden kehittämisen ja tuotantoonviennin. Arkkitehtuuria kutsutaan mikropalveluarkkitehtuuriksi. Jokainen toiminnallisuus / palvelu on itsenäinen sovellus, joka tarjoaa rajapinnan muille palveluille. Kukin mikropalvelu voidaan viedä tuotantoon riippumattaa muista mikropalevluista. Yhdessä mikropalvelut muodostavat varsinaisen sovelluksen. Mikropalvelut lisäävät tarvetta automaatiolle, helpolle tavalle viedä mikropalvelut tuotantoon. Samalla palveluiden skaalautuminen tarpeen mukaan helpottuu.
 
-DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulen opettelemaan DevOps teknologioista Dockerin ja Kubernetesin. Näiden toiminnan testaamista varten tulen tekemään pienen testisovelluksen LAMP pinon päälle. Kokonaisuus on minulle täysin uutta asiaa, joten testisovelluksesta pyrin tekemään mikropalveluarkkitehtuurin mukaisen, jos aikataulu sen sallii. Ensijainen tavoite on saada testisovellus kontitettua Dockerin avulla ja vietyä se tuotantoon Kubernetesin avulla. Tähän pyrin tekemään oman alusta, mutta vaihtoehtona on käyttää olemassaolevia pilvipalveluita.
+DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulen opettelemaan DevOps teknologioista Dockerin ja Kubernetesin. Näiden toiminnan testaamista varten tulen tekemään pienen testisovelluksen LAMP pinon päälle. Kokonaisuus on minulle täysin uutta asiaa, joten testisovelluksesta pyrin tekemään mikropalveluarkkitehtuurin mukaisen, jos aikataulu sen sallii. Ensijainen tavoite on saada testisovellus kontitettua Dockerin avulla ja vietyä se tuotantoon Kubernetesin avulla. Tähän pyrin tekemään oman alustan, mutta vaihtoehtona on käyttää olemassaolevia pilvipalveluita.
 
 ### Projektin tavoitteet
 
 Projektin tavoitteean on oppia 
 1. Docker-teknologia
-..Asennus
-..Arkkitehtuuri
-..Docker kontin tekeminen
-..Deployment 
+  - Asennus
+  - Arkkitehtuuri
+  - Docker kontin tekeminen
+  - Deployment 
 2. Kubernetes
-..Asennus
-..Arkkitehtuuri
-..Deployment
+  - Asennus
+  - Arkkitehtuuri
+  - Deployment
 3. Tehdä testisovellus komponenttien testaamiseen.
-..Yksinkertainen LAMP pino
+  - Yksinkertainen LAMP pino
 4. Tutkia eri pilvipalveluita, jotka tarjoavat Dockerin ja Kubernetesin sovelluskehityseen 
-.. Google
-.. Docker
+  - Google
+  - Docker
 
 ### Projektin eteneminen ja välitavoitteet
 
