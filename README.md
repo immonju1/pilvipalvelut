@@ -46,10 +46,14 @@ Projketin ohjaaja: Olavi korhonen
 
 ### Alustava aikataulu
 
-|Task #|Task|Goal|Hours pp|Planned timeframe|
-|------|----|----|-----|-----------------|
-|1     |Starting the project|Finding out the requirements for the course||
-|1.1   |Forming the project group|Project group formed|7|wk 34|
+**Viikko**|**Taski**
+--------|-------------
+Viikko 5-6|Projektin aloitus
+Viikko 7|Projektisuunnitelman esittely
+Viikko 8|Esoselvitys valmis
+Viikot 9-16|Projektin tekemistä
+Viikko 17|Loppuraportti valmis
+Viikko 18|Projektin tuotoksen esittely
 
 ### Riskit ja vaatimukset etenemiselle
 
@@ -57,6 +61,7 @@ Projketin ohjaaja: Olavi korhonen
 
 ### Kommunikaatio
 
+Projketilla on käytössä Github, jonne eteneminen ja loppuraportti tulaan kirjaamaan. Samoin kaikki Dock
 
 ### Projektisuunnitelma
 
