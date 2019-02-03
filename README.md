@@ -5,7 +5,13 @@
 
 ### Projektin tausta
 
-Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsin aiheen oman proketin aiheeksi, koska haluan oppia enemmän DevOps:sta ja teknissistä ratkaisuista, joita DevOpsin puitteissa käytetään.
+Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsin aiheen oman projektin aiheeksi, koska haluan oppia enemmän DevOps:sta. DevOps on, sekä tapa organisoida töitä ohjemistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
+
+Mikropalvelut ovat
+
+DevOpsiin liittyy teknisistä ratkaisuista, joita DevOpsin puitteissa käytetään.
+
+Projektin aikana tulen opettelemaan teknologioista Dockerin ja Kubernetesin. Näiden toiminnan testaamista varten tulen tekemään pienen testisovelluksen. Kokonaisuus on minulle täysin uutta asiaa, joten testisovelluksesta pyrin tekemään mikripalveluarkkitehtuurin mukaisen, jos aikataulu sen sallii. Ensijainen tavoite on saada testisovellus kontitettua Dockerin avulla ja vietyä se tuotantoon Kubernetesin avulla.
 
 ### Projektin tavoitteet
 
