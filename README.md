@@ -14,27 +14,42 @@ DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulen opet
 
 Projektin tavoitteean on oppia 
 1. Docker-teknologia
-  - Asennus
-  - Arkkitehtuuri
-  - Docker kontin tekeminen
-  - Deployment 
+   - Asennus
+   - Arkkitehtuuri
+   - Docker kontin tekeminen
+   - Deployment 
 2. Kubernetes
-  - Asennus
-  - Arkkitehtuuri
-  - Deployment
-3. Tehdä testisovellus komponenttien testaamiseen.
-  - Yksinkertainen LAMP pino
+   - Asennus
+   - Arkkitehtuuri
+   - Deployment
+3. Tehdä testisovellus komponenttien testaamiseen
+   - Yksinkertainen LAMP pinon päällä toimiva ohjelma, joka hakee tietokannasta Web-sivulle sisältöä
 4. Tutkia eri pilvipalveluita, jotka tarjoavat Dockerin ja Kubernetesin sovelluskehityseen 
-  - Google
-  - Docker
+   - Google
+   - Docker
 
 ### Projektin eteneminen ja välitavoitteet
 
-
-
+Projekti etenee eseuraavasti
+- Esiselvitys
+   Teknologioiden opiskelua (Docker, Kubernetes, mikropalvelut)
+- Docker kontitus LAMPlle
+   Asennusohjeet Githubissa
+- Kubernetes asennus / pilvipalveluna
+   Asennusohjeet Githubissa
+- Lopullinen testisovellus, ja koko pinon testaaminen
+   Kontitus, tuotantoonvienti Kubernetesin avulla
+ 
 ### Projektiorganisaatio ja sidosryhmät
+Projektin omistaja: Juha Immonen
+Projketin ohjaaja: Olavi korhonen
 
-### Aikataulu
+### Alustava aikataulu
+
+|Task #|Task|Goal|Hours pp|Planned timeframe|
+|------|----|----|-----|-----------------|
+|1     |Starting the project|Finding out the requirements for the course||
+|1.1   |Forming the project group|Project group formed|7|wk 34|
 
 ### Riskit ja vaatimukset etenemiselle
 
