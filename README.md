@@ -1,12 +1,25 @@
 # DevOps - Docker ja Kubernetes osana mikropalveluarkkitehtuuria
 ***Pilvipalvelut kurssin projektityö kevät 2019***
+
 *[Juha Immonen](https://github.com/immonju1)
 
 ### Projektin tausta
 
+Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsin aiheen oman proketin aiheeksi, koska haluan oppia enemmän DevOps:sta ja teknissistä ratkaisuista, joita DevOpsin puitteissa käytetään.
+
 ### Projektin tavoitteet
 
+Tehdä testisovellus kaikkien komponenttien testaamiseen.
+
+Asentaa Docker ja paketoida testisovellus Docker konttiin.
+
+Asentaa / testata Kubernetsia Docker konttien hallinnointiin.
+
+Samalla voi käydä läpi olemassa olevia palvelualustoja, jotka tarjoavat 
+
 ### Projektin eteneminen ja välitavoitteet
+
+
 
 ### Projektiorganisaatio ja sidosryhmät
 
