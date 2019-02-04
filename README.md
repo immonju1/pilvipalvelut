@@ -1,6 +1,6 @@
 # DevOps - Docker ja Kubernetes mikropalveluarkkitehtuurin mahdollistajina
 ***Pilvipalvelut kurssin projektityö kevät 2019***   
-*[Juha Immonen](https://github.com/immonju1)[Niina Villman]
+*[Juha Immonen](https://github.com/immonju1)[Niina Villman](https://github.com/niinavi)
 
 ### Projektin tausta
 
