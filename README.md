@@ -16,29 +16,29 @@ Projektin tavoitteean on oppia
 1. Docker-teknologia
 - Asennus
 - Arkkitehtuuri
-  Docker kontin tekeminen
-  Deployment 
+- Docker kontin tekeminen
+- Deployment 
 2. Kubernetes
-   - Asennus
-   - Arkkitehtuuri
-   - Deployment
+- Asennus
+- Arkkitehtuuri
+- Deployment
 3. Tehdä testisovellus komponenttien testaamiseen
-   - Yksinkertainen LAMP pinon päällä toimiva ohjelma, joka hakee tietokannasta Web-sivulle sisältöä
+- Yksinkertainen LAMP pinon päällä toimiva ohjelma, joka hakee tietokannasta Web-sivulle sisältöä
 4. Tutkia eri pilvipalveluita, jotka tarjoavat Dockerin ja Kubernetesin sovelluskehityseen 
-   - Google
-   - Docker
+- Google
+- Docker
 
 ### Projektin eteneminen ja välitavoitteet
 
 Projekti etenee seuraavasti
 1. Esiselvitys
-   - Teknologioiden opiskelua (Docker, Kubernetes, mikropalvelut)
+- Teknologioiden opiskelua (Docker, Kubernetes, mikropalvelut)
 2. Docker kontitus LAMPlle
-   - Asennusohjeet Githubissa
+- Asennusohjeet Githubissa
 3. Kubernetes asennus / pilvipalveluna
-  -  Asennusohjeet Githubissa
+-  Asennusohjeet Githubissa
 4. Lopullinen testisovellus, ja koko pinon testaaminen
-  - Kontitus, tuotantoonvienti Kubernetesin avulla
+- Kontitus, tuotantoonvienti Kubernetesin avulla
  
 ### Projektiorganisaatio ja sidosryhmät
 
