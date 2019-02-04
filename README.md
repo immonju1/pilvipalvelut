@@ -14,10 +14,10 @@ DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulen opet
 
 Projektin tavoitteean on oppia 
 1. Docker-teknologia
-   - Asennus
-   - Arkkitehtuuri
-   - Docker kontin tekeminen
-   - Deployment 
+  Asennus
+  Arkkitehtuuri
+  Docker kontin tekeminen
+  Deployment 
 2. Kubernetes
    - Asennus
    - Arkkitehtuuri
