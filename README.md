@@ -12,7 +12,7 @@ DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulen opet
 
 ### Projektin tavoitteet
 
-Projektin tavoitteean on oppia 
+Projektin tavoitteena on oppia 
 1. Docker-teknologia
 - Asennus
 - Arkkitehtuuri
@@ -43,6 +43,7 @@ Projekti etenee seuraavasti
 ### Projektiorganisaatio ja sidosryhmät
 
 Projektin omistaja on Juha Immonen, ollen samalla projektiryhmä.
+
 Projektin ohjaajana toimii Olavi korhonen.
 
 ### Alustava aikataulu
