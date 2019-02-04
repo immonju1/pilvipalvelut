@@ -1,10 +1,10 @@
 # DevOps - Docker ja Kubernetes mikropalveluarkkitehtuurin mahdollistajina
 ***Pilvipalvelut kurssin projektityö kevät 2019***   
-*[Juha Immonen](https://github.com/immonju1) [Niina Villman](https://github.com/niinavi)
+* [Juha Immonen](https://github.com/immonju1) [Niina Villman](https://github.com/niinavi)
 
 ### Projektin tausta
 
-Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsin aiheen oman projektin aiheeksi, koska haluan oppia enemmän DevOps:sta. DevOps on, sekä tapa organisoida töitä ohjemistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
+Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsin aiheen oman projektin aiheeksi, koska haluan oppia enemmän DevOps:sta. DevOps on, sekä tapa organisoida töitä ohjelmistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
 
 Palveluiden nopeampi tuotantoonvienti ja kehittäminen vaatii myös uudenlaista arkkitehtuuria. Isojen monoliittisten sovellusten sijaan tarvitaan arkkiehtuuri, joka mahdollistaa pienten itsenäisten palveluiden kehittämisen ja tuotantoonviennin. Arkkitehtuuria kutsutaan mikropalveluarkkitehtuuriksi. Jokainen toiminnallisuus / palvelu on itsenäinen sovellus, joka tarjoaa rajapinnan muille palveluille. Kukin mikropalvelu voidaan viedä tuotantoon riippumattaa muista mikropalevluista. Yhdessä mikropalvelut muodostavat varsinaisen sovelluksen. Mikropalvelut lisäävät tarvetta automaatiolle, helpolle tavalle viedä mikropalvelut tuotantoon. Samalla palveluiden skaalautuminen tarpeen mukaan helpottuu.
 
@@ -42,7 +42,7 @@ Projekti etenee seuraavasti
  
 ### Projektiorganisaatio ja sidosryhmät
 
-Projektin omistaja on Juha Immonen, ollen samalla projektiryhmä.
+Projektin omistaja on projektiryhmä, jonka jäseniä ovat Juha Immonen ja Niina Villman.
 
 Projektin ohjaajana toimii Olavi korhonen.
 
@@ -51,9 +51,10 @@ Projektin ohjaajana toimii Olavi korhonen.
 **Viikko**|**Taski**
 --------|-------------
 Viikko 5-6|Projektin aloitus
-Viikko 7|Projektisuunnitelman esittely
-Viikko 8|Esiselvitys valmis
-Viikot 9-16|Projektin tekemistä
+Viikko 7|Projektisuunnitelman palautus
+Viikko 10|Esiselvitys valmis ja projektin edistymisraportti
+Viikot 11-15|Projektin tekemistä
+Viikko 15|Edistymisraportti 2
 Viikko 17|Loppuraportti valmis
 Viikko 18|Projektin tuotoksen esittely
 
@@ -70,6 +71,6 @@ Riskit
 
 ### Kommunikaatio
 
-Projketilla on käytössä Github, jonne eteneminen, konfiguraatiot, koodit ja loppuraportti tullaan kirjaamaan.
+Projektilla on käytössä Github, jonne eteneminen, konfiguraatiot, koodit ja loppuraportti tullaan kirjaamaan.
 
 
