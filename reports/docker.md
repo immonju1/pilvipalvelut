@@ -1,30 +1,42 @@
-# docker asennus
+# docker
 
+## ympäristö
 
 Asennus Vagrant boxiin, Ubuntu 16.04
+'''
 $ vagrant up
 $ vagrant ssh
+'''
 
-vagrant:~$ sudo apt-get update
-vagrant:~$ sudo apt-get upgrade
-
-Docker asennus
-vagrant:~$ wget -qO- https://get.docker.com/ | sh
+Päivitetään paketit.
 
 '''
+vagrant:~$ sudo apt-get update
+vagrant:~$ sudo apt-get upgrade
+'''
+
+## Docker asennus
+
+'''
+vagrant:~$ wget -qO- https://get.docker.com/ | sh
+
 # Executing docker install script, commit: 4957679
 + sudo -E sh -c apt-get update -qq >/dev/null
 + sudo -E sh -c apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
 '''
 
-Luodaan käyttäjä, jolla Dockeria jetaan. Ei haluta ajaa roottina.
+Luodaan käyttäjä, jolla Dockeria ajetaan. Ei haluta ajaa roottina.
 
-
-vagrant:~$ sudo adduser mono
-vagrant:~$ sudo usermod -aG docker mono
-
-mono@vagrant:$ docker run hello-world
 '''
+vagrant:~$ sudo adduser m
+vagrant:~$ sudo usermod -aG docker mono
+'''
+
+Ajetaan ensimmäinen docker kontti
+
+'''
+mono@vagrant:$ docker run hello-world
+
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 1b930d010525: Pull complete 
@@ -53,15 +65,21 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 '''
 
+Kontti haettiin Docker Hubista, koska sitä ei ollut vielä lokaalina.
 
+'''
 vagrant:~$ docker ps -a | grep hello-world
+'''
 
-Nähdään Docker prosessit, jotta voidaan poistaa
+Komennolla nähdään Docker prosessit, jotta voidaan poistaa ID:llä
+
 '''
 65b14c92ecfa        hello-world         "/hello"            5 seconds ago       Exited (0) 3 seconds ago                       amazing_ellis
 '''
 
 Poistaminen, voidaan nyt poistaa docker rm id
 
+'''
 mono@vagrant:/home/vagrant$ docker rm 65
 65
+'''
