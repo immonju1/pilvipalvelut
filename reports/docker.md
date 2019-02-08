@@ -268,5 +268,30 @@ $ docker cp "determined_elion://mydir/Short introduction to Docker (Scribe)-UFLC
 
 ## Lokaalien hakemistojen liittäminen konttiin
 
+1. Portti jota kontti kuuntelee
+2. Isäntäkoneen portti, joka liitetty kontin porttiin
 
+To expose a port, add line EXPOSE <port> in your Dockerfile
 
+To publish a port, run the container with -p <host-port>:<container-port>
+ 
+ esim.:
+ ```
+ expose 4567 Dockerfilessa
+ ```
+ 
+ Sidotaan hostin portti 1234 porttiin 4567
+ ```
+ docker run -p 1234:4567 app-in-port
+ ```
+ Seuraava komento näyttää mappaykset kontille
+ ```
+ docker port id
+ ```
+ 
+ # konttien julkaisu Docker hubissa
+ 
+ 
+  
+  
+ 
