@@ -1,5 +1,7 @@
 # docker
 
+Nämä ovat muistiinpanoni kurssista https://docker-hy.github.io/part1/
+
 ## ympäristö
 
 Asennus Vagrant boxiin, Ubuntu 16.04
@@ -217,6 +219,49 @@ Toinen lähestymistapa Dockerin luontii, tehdään se interaktiivisesti ja testa
 
 docker run -it myfirst
 
+Kontissa voi testata toimiiko ohjela. Tässä asenentaan youtube-dl ohjelmaa
+
+Lopullinen Dockerfile
+```
+FROM ubuntu:16.04 
+
+WORKDIR /mydir 
+RUN apt-get update && apt-get install -y wget
+RUN touch hello.txt 
+COPY local.txt . 
+RUN wget http://example.com/index.html 
+CMD ["/bin/bash"]
+
+RUN apt-get install -y curl python # python ja curl tarvitaan
+
+RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/yout
+ube-dl # haetaan sovellus
+
+RUN chmod a+x /usr/local/bin/youtube-dl 
+
+ENV LC_ALL=C.UTF-8 # merkistö kuntoon
+
+CMD ["/usr/local/bin/youtube-dl"] 
+
+ENTRYPOINT ["/usr/local/bin/youtube-dl"] # konttia ajettaessa annetaan ajokomennossa oleva parametri tälle komennole. muutoin menee CMD:lle ja ei toimi
+```
+
+Kääntäminen
+
+docker build -t youtube-dl .
+
+ENTRYPOINT ja CMD erot, "-merkkien käyttö parametrien välittämiseen
+
+Ohjelman lataamat tiedostot latautuvat konttiin.
+$ docker diff id 
+
+  C /mydir 
+  A /mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4 
+
+Kopiointi kontista lokaaliin hakemistoon:
+$ docker cp "determined_elion://mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4" . 
+
+## Lokaalien hakemistojen liittäminen konttiin
 
 
 
