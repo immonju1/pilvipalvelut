@@ -251,16 +251,17 @@ Kääntäminen
 ```
 docker build -t youtube-dl .
 ```
-ENTRYPOINT ja CMD erot, "-merkkien käyttö parametrien välittämiseen
+ENTRYPOINT ja CMD erot, "-merkkien käyttö parametrien välittämiseen. ENTRYPOINTia käyttämällä saadaan parametri ohjelmalle, ei komentoriville.
 
 Ohjelman lataamat tiedostot latautuvat konttiin.
-
+```
 $ docker diff id 
 
   C /mydir 
   A /mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4 
 ```
 Kopiointi kontista lokaaliin hakemistoon:
+
 ```
 $ docker cp "determined_elion://mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4" . 
 ```
