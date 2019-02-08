@@ -136,4 +136,39 @@ docker run fav_distro:xenial uptime
 
 # kontainerien ajaminen ja pysäyttäminen
 
+docker run -d --name looper ubuntu:16.04 sh -c 'while true; do date; sleep 1; done'
+
+Lokitus kontista
+docker logs -f looper
+
+Tauolle
+docker pause looper
+docker unpause looper
+
+Toisessa terminaalissa
+docker attach looper, jos klikkaa ctrl-C kontin suoritus lakkaa
+
+Estetään tämä
+
+$ docker start looper 
+
+$ docker attach --sig-proxy=false looper
+
+--> terminaali katkeaa, prosesi jää taustallle
+
+Kontiin pääsy, saadaan komentorivikehoite konttiin
+docker exec -it looper bash
+
+-i is “interactive, connect STDIN” and -t “allocate a pseudo-TTY”
+
+$ docker kill looper 
+$ docker rm looper 
+
+ovat sama kuin docker rm --force looper
+
+docker run -d --rm -it --name looper-it ubuntu:16.04 sh -c 'while true; do date; sleep 1; done'
+
+- rm siivoaa pois automaattiseti exitin jälkeen
+
+# Luodaan oma image
 
