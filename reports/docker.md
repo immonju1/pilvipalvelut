@@ -291,7 +291,18 @@ To publish a port, run the container with -p <host-port>:<container-port>
  
  # konttien julkaisu Docker hubissa
  
+ Luo tunnus:   https://hub.docker.com/ 
  
-  
-  
+ Dashboard: Create Repository
+ 
+ Muuta imagen nimi
+ ```
+ docker tag youtube-dl <username>/<repositoryname>
+ ```
+ Login
+ ```
+ docker login
+ 
+ docker push <username>/<repositoryname>
+ ```
  
