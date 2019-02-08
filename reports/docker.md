@@ -83,6 +83,25 @@ Poistaminen, voidaan nyt poistaa docker rm id
 mono@vagrant:/home/vagrant$ docker rm 65
 65
 ```
+Poistaa kaikki kontainerit
+```
+docker container prune
+```
+
+## Nginx
+
+Käynnistyy terminaalissa
+```
+docker run nginx
+```
+Taustalla, pitää stopata ensin, jotta voi poistaa
+
+```
+docker run -d nginx
+docker stop <container id or name>
+```
+
+
 
 # Docker komennot
 
@@ -96,5 +115,25 @@ docker rmi <image-id>|poistaa imagen
 docker stop <container-id>|pysäyttää kontainerin
 docker run <image>|ajaa imagen ja luo kontainerin
  
-
+# Mistä imaget saadaan?
+(docker hub)https://hub.docker.com/
+```
+docker search
+```
+(quai)https://quay.io/
  
+# Imaget
+
+docker pull ubuntu
+
+docker pull ubuntu:16.04
+
+Voi tagata lokaalisti
+
+docker tag ubuntu:16.04 ubuntu:xenial
+
+docker run fav_distro:xenial uptime
+
+# kontainerien ajaminen ja pysäyttäminen
+
+
