@@ -216,10 +216,10 @@ docker run myfirst-pluschanges ls -l
 # Isomman / monimutkaisemman kontainerin luonti
 
 Toinen lähestymistapa Dockerin luontii, tehdään se interaktiivisesti ja testataan, että toimii. Jatkuvan buildauksen sijaan.
-
+```
 docker run -it myfirst
-
-Kontissa voi testata toimiiko ohjela. Tässä asenentaan youtube-dl ohjelmaa
+```
+Kontissa voi testata toimiiko ohjelma. Tässä asennetaan youtube-dl ohjelmaa esimerkin mukaan.
 
 Lopullinen Dockerfile
 ```
@@ -248,18 +248,22 @@ ENTRYPOINT ["/usr/local/bin/youtube-dl"] # konttia ajettaessa annetaan ajokomenn
 
 Kääntäminen
 
+```
 docker build -t youtube-dl .
-
+```
 ENTRYPOINT ja CMD erot, "-merkkien käyttö parametrien välittämiseen
 
 Ohjelman lataamat tiedostot latautuvat konttiin.
+
 $ docker diff id 
 
   C /mydir 
   A /mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4 
-
+```
 Kopiointi kontista lokaaliin hakemistoon:
+```
 $ docker cp "determined_elion://mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4" . 
+```
 
 ## Lokaalien hakemistojen liittäminen konttiin
 
