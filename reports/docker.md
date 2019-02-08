@@ -306,3 +306,5 @@ To publish a port, run the container with -p <host-port>:<container-port>
  docker push <username>/<repositoryname>
  ```
  
+# H
+ docker exec -it looper-it /bin/sh -c 'read website; sleep 3; curl http://$website';
