@@ -168,7 +168,11 @@ ovat sama kuin docker rm --force looper
 
 docker run -d --rm -it --name looper-it ubuntu:16.04 sh -c 'while true; do date; sleep 1; done'
 
-- rm siivoaa pois automaattiseti exitin jälkeen
+- rm siivoaa pois automaattiseti exitin jälkeen, tai ctrl-C terminaalissa
+
+docker attach looper-it 
+
+control+p, control+q -> pois STDOUT
 
 # Luodaan oma image
 
