@@ -83,3 +83,18 @@ Poistaminen, voidaan nyt poistaa docker rm id
 mono@vagrant:/home/vagrant$ docker rm 65
 65
 ```
+
+# Docker komennot
+
+Komento|Selite
+--------|-------------
+docker ps -a|Listaa kontainerit
+docker images|Listaa Imaget
+docker pull <image>|Hakee imagen Docker Hubista
+docker rm <container-id>|poistaa kontainerin (id tai nimi)
+docker rmi <image-id>|poistaa imagen
+docker stop <container-id>|pysäyttää kontainerin
+docker run <image>|ajaa imagen ja luo kontainerin
+ 
+
+ 
