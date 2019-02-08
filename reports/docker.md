@@ -123,59 +123,63 @@ docker search
 (quai)https://quay.io/
  
 # Imaget
-
+```
 docker pull ubuntu
 
 docker pull ubuntu:16.04
-
+```
 Voi tagata lokaalisti
-
+```
 docker tag ubuntu:16.04 ubuntu:xenial
 
 docker run fav_distro:xenial uptime
-
+```
 # kontainerien ajaminen ja pysäyttäminen
-
+```
 docker run -d --name looper ubuntu:16.04 sh -c 'while true; do date; sleep 1; done'
-
+```
 Lokitus kontista
+```
 docker logs -f looper
-
+```
 Tauolle
+```
 docker pause looper
 docker unpause looper
-
+```
 Toisessa terminaalissa
+```
 docker attach looper, jos klikkaa ctrl-C kontin suoritus lakkaa
-
+```
 Estetään tämä
-
+```
 $ docker start looper 
 
 $ docker attach --sig-proxy=false looper
-
+```
 --> terminaali katkeaa, prosesi jää taustallle
 
 Kontiin pääsy, saadaan komentorivikehoite konttiin
+```
 docker exec -it looper bash
-
+```
 -i is “interactive, connect STDIN” and -t “allocate a pseudo-TTY”
-
+```
 $ docker kill looper 
 $ docker rm looper 
-
-ovat sama kuin docker rm --force looper
-
+```
+ovat sama kuin ```docker rm --force looper```
+```
 docker run -d --rm -it --name looper-it ubuntu:16.04 sh -c 'while true; do date; sleep 1; done'
-
+```
 - rm siivoaa pois automaattiseti exitin jälkeen, tai ctrl-C terminaalissa
-
+```
 docker attach looper-it 
-
+```
 control+p, control+q -> pois STDOUT
 
 # Luodaan oma image
-
+```
 Dockerfile
 FROM ubuntu:16.04 
 
@@ -185,20 +189,34 @@ RUN touch hello.txt
 COPY local.txt . # lopioidan lokaali tiedosto konttiin
 RUN wget http://example.com/index.html 
 CMD ["/bin/bash"]
-
+```
 nimetään kontti:
+```
 docker build -t myfirst .
-
+```
 Ajetaan 
+```
 $ docker run -it myfirst 
-
+```
 Muokataan kontin sisäsltöä kontista käsin ja haetaan erot:
+```
 $ docker diff id
-
+```
 Luodaan uusi image kontin sisällöllä
+```
 $ docker commit id myfirst-pluschanges
-
-
-
-
+```
+Ajetaan ja testataan uusi image
+```
 docker run myfirst-pluschanges ls -l
+```
+
+# Isomman / monimutkaisemman kontainerin luonti
+
+Toinen lähestymistapa Dockerin luontii, tehdään se interaktiivisesti ja testataan, että toimii. Jatkuvan buildauksen sijaan.
+
+docker run -it myfirst
+
+
+
+
