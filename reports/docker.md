@@ -176,3 +176,29 @@ control+p, control+q -> pois STDOUT
 
 # Luodaan oma image
 
+Dockerfile
+FROM ubuntu:16.04 
+
+WORKDIR /mydir 
+RUN apt-get update && apt-get install -y wget # komennot liittyvät toisiinsa
+RUN touch hello.txt 
+COPY local.txt . # lopioidan lokaali tiedosto konttiin
+RUN wget http://example.com/index.html 
+CMD ["/bin/bash"]
+
+nimetään kontti:
+docker build -t myfirst .
+
+Ajetaan 
+$ docker run -it myfirst 
+
+Muokataan kontin sisäsltöä kontista käsin ja haetaan erot:
+$ docker diff id
+
+Luodaan uusi image kontin sisällöllä
+$ docker commit id myfirst-pluschanges
+
+
+
+
+docker run myfirst-pluschanges ls -l
