@@ -5,7 +5,7 @@ https://docker-hy.github.io/part1/
 
 
  
-- Mikä on Docker?
+Mikä on Docker?
  - Dockerin avulla pystyy kontittamaan sovelluksia, jolloin käsitteleminen ja siirtäminen eri alustalle on helpompaa
  - Docker onkin luotu erityisesti ottaen huomioon kehittäjien yhteensopivuus ongelmia. Eli sovellus toimii omalla koneella, mutta jos se siirretään toiselle koneelle, saattaa tulla yhteensopivuus ongelmia eri versioiden kesken.
  
