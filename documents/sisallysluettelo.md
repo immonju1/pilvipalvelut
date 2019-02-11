@@ -1,25 +1,26 @@
 # Sisällyluettelo.
 
-[1. Johdanto](#1. Johdanto)
-2. Mitä on DevOps
-3. Mikä on docker
+1. [Johdanto](#Johdanto)
+2. [Mitä on DevOps](#Mitä on Devops)
+3. [Mikä on Docker](#Mikä on Docker)
 - Arkkitehtuuri
 - Komentokieli, käytetyimmät komennot
-docker ps -a 	Lists all containers
-docker images 	Lists all images
-docker pull <image> 	Pulls image from a docker registry called docker hub
-docker rm <container-id> 	Removes a container, you can use either container name or id
-docker rmi <image-id> 	Removes an image, you can use either image name or id
-docker stop <container-id> 	Stops a container, you can use either container name or id
-docker run <image> 	Runs an image creating a container, you can use either image name or id
-  
 - Imaget, mistä saadaan
 - Konttien ajaminen
 
 
-4. Mikä on Kuberbetes
-5. Mikropalvelut
-6. Testisovellus
-7. Yhteenveto
+4. [Mikä on Kuberbetes](#Mikä on Kubernetes)
+5. [Mikropalvelut (?)](#Mikropalvelut (?))
+6. [Testisovellus](#Testisovellus)
+7. [Yhteenveto](#Yhteenveto)
 
-## 1. Johdanto
+## Johdanto
+## Mitä on Devops
+## Mikä on Docker
+## Mikä on Kubernetes
+## Mikropalvelut (?)
+## Testisovellus
+## Yhteenveto
+
+
+
