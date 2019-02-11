@@ -16,13 +16,14 @@
 
 ## Johdanto  <a name="Johdanto"></a>
 ## Mitä on Devops <a name="mita-on-devops"></a>
-<details>
 
-<summary>Mikä on Docker <a name="mika-on-docker"></a></summary>
+
+## Mikä on Docker <a name="mika-on-docker"></a>
 
 Tähän tulee tekstiä.
+<details>
     
-### Arkkitehtuuri <a name="arkkitehtuuri1"></a>
+<summary>Arkkitehtuuri <a name="arkkitehtuuri1"></a></summary>
 
 ### Komentokieli, käytetyimmät komennot  <a name="komennot"></a>
 
