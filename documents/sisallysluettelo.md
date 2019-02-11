@@ -19,10 +19,10 @@
 ## Mikä on Docker <a name="mika-on-docker"></a>
 <details>
     <summary>Docker</summary>
-### Arkkitehtuuri <a name="arkkitehtuuri1"></a>
-### Komentokieli, käytetyimmät komennot  <a name="komennot"></a>
-### Imaget, mistä saadaan <a name="imaget"></a>
-### Konttien ajaminen <a name="kontit"></a>
+### Arkkitehtuuri
+### Komentokieli, käytetyimmät komennot
+### Imaget, mistä saadaan 
+### Konttien ajaminen 
  </details>
 ## Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
 ## Mikropalvelut (?)  <a name="mikropalvelut"></a>
