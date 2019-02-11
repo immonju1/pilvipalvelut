@@ -25,11 +25,23 @@ Tähän tulee tekstiä.
     
 <summary>Arkkitehtuuri <a name="arkkitehtuuri1"></a></summary>
 
-### Komentokieli, käytetyimmät komennot  <a name="komennot"></a>
+</details>
 
-### Imaget, mistä saadaan <a name="imaget"></a>
+<details>
+    
+<summary>Komentokieli, käytetyimmät komennot  <a name="komennot"></a></summary>
 
-### Konttien ajaminen <a name="kontit"></a>
+</details>
+
+<details>
+
+<summary>Imaget, mistä saadaan <a name="imaget"></a></summary>
+
+</details>
+
+<details>
+
+<summary>Konttien ajaminen <a name="kontit"></a></summary>
 
 </details>
 
