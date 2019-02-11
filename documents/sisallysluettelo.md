@@ -1,6 +1,6 @@
 # Sisällyluettelo.
 
-1. [Johdanto](#1. Johdanto)
+1. [Johdanto](#Johdanto)
 2. Mitä on DevOps
 3. Mikä on docker
 - Arkkitehtuuri
@@ -22,4 +22,4 @@ docker run <image> 	Runs an image creating a container, you can use either image
 6. Testisovellus
 7. Yhteenveto
 
-# 1. Johdanto
+## Johdanto
