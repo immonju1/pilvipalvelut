@@ -18,7 +18,7 @@
 ## Mitä on Devops <a name="mita-on-devops"></a>
 <details>
 
-<summary>## Mikä on Docker <a name="mika-on-docker"></a></summary>
+## <summary>Mikä on Docker <a name="mika-on-docker"></a></summary>
 
 Tähän tulee tekstiä.
     
