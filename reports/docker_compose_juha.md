@@ -8,6 +8,8 @@ Composen avulla voidaan skaalata palveluita.
 
 Composen networking avulla voidaan yhdistää eri palveluita.
 
+Jos hosteja useampi tarvitaan muita ratkaisuita --> kubernetes, Docker Swarn
+
 ## docker-compose.yml
 
 Yaml-file, jonka avulla voi hallinnoida Docker imageja. Samaan hakemistoon kuin Docker-file.
