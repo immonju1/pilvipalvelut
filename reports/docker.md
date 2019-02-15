@@ -2,6 +2,30 @@
 
 Nämä ovat muistiinpanoni kurssista https://docker-hy.github.io/part1/
 
+## Docker arkkitehtuuri
+
+### Tietoturva
+
+- Kuka on luonut imagen? Tietoturva
+
+### Optimointi
+
+- Dockerfile komennot loogiseen järjestykseen
+- Hakemistojen nimet
+- RUN komennot yhteen -> yksi layer
+$ docker history -> imagen koko
+
+### Koon pienentäminen
+- rm tai apt-get purge
+
+### Ajaminen ei rootinta
+Luo käyttäjä
+USER app 
+
+### Alpine Linux variant
+
+
+
 ## ympäristö
 
 Asennus Vagrant boxiin, Ubuntu 16.04
