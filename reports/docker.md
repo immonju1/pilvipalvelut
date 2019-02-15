@@ -330,9 +330,13 @@ To publish a port, run the container with -p <host-port>:<container-port>
  docker push <username>/<repositoryname>
  ```
  
-# H
+# Frontend
+
+```
  docker exec -it looper-it /bin/sh -c 'read website; sleep 3; curl http://$website';
+ ```
  
+ ```
  Esimerkki node.js Docker imagesta (Dockerfile)
  
  FROM ubuntu:16.04 
@@ -358,4 +362,40 @@ RUN npm install
 EXPOSE 5000
 
 CMD [ "npm", "start" ]
+```
+
+# Back with volume file
+
+Dockerfile
+```
+FROM ubuntu:16.04 
+
+RUN apt-get update && apt-get install -y wget 
+
+RUN touch hello.txt
+
+RUN apt-get install -y curl sudo
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+
+RUN sudo apt install -y nodejs
+
+RUN sudo apt-get install -y git
+
+RUN git clone https://github.com/docker-hy/backend-example-docker.git
+
+WORKDIR backend-example-docker/
+
+RUN npm install
+
+EXPOSE 8000
+
+CMD [ "npm", "start" ]
+
+```
+
+Command
+```
+$ docker run -v $(pwd)/logs.txt:/backend-example-docker/logs.txt -d -p 8000:8000 back
+```
 
