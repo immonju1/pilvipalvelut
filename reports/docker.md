@@ -2,6 +2,9 @@
 
 Nämä ovat muistiinpanoni kurssista https://docker-hy.github.io/part1/
 
+Use cases for Docker
+https://nodesource.com/blog/containerizing-node-js-applications-with-docker/
+
 ## Docker arkkitehtuuri
 
 ### Tietoturva
