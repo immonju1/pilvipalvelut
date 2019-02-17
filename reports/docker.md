@@ -360,6 +360,8 @@ RUN git clone https://github.com/docker-hy/frontend-example-docker.git
 
 WORKDIR frontend-example-docker/
 
+ENV API_URL=http://localhost:8000
+
 RUN npm install
 
 EXPOSE 5000
@@ -388,6 +390,8 @@ RUN sudo apt-get install -y git
 RUN git clone https://github.com/docker-hy/backend-example-docker.git
 
 WORKDIR backend-example-docker/
+
+ENV FRONT_URL=http://localhost:5000
 
 RUN npm install
 
