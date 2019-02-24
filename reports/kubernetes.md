@@ -21,9 +21,26 @@ Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes ymp�
 
 ## Asennus
 
+https://kubernetes.io/docs/tasks/tools/install-minikube/
+
 - Vaatii VMn koneelle
 
 Asennuksen jälkeen 
 
 minikube start
+minikube status
+
+Konfiguraatiotiedosto syntyy ~/.kube hakemistoon
+
+## Asenna kubectl
+
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+Komentorivi työkalu sovellusten hallintaan Kubernetesissä.
+
+## Komentoja
+
+kubectl 
+kubectl cluster-info
+
 
