@@ -19,6 +19,8 @@ https://github.com/kubernetes/minikube/
 
 Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes ympäristön 
 
+Toinen vaihtoehto on Docker Client?
+
 ## Asennus
 
 https://kubernetes.io/docs/tasks/tools/install-minikube/
