@@ -30,6 +30,7 @@ https://kubernetes.io/docs/tasks/tools/install-minikube/
 Asennuksen jälkeen 
 
 minikube start
+
 minikube status
 
 Konfiguraatiotiedosto syntyy ~/.kube hakemistoon
@@ -43,6 +44,7 @@ Komentorivi työkalu sovellusten hallintaan Kubernetesissä.
 ## Komentoja
 
 kubectl 
+
 kubectl cluster-info
 
 
