@@ -306,10 +306,19 @@ AWS konsolista tarkistus
 
 ### Palomuurit
 
+Nodeilla on palomuurit, exposed portti pitää sallia
+
+### Testaaminen WEb selaimella
+
+IP osoite AWSstä
 
 ## AWS Kubernetes klusterin poistaminen
 
 Maksullinen, joten poista kun ei tarvita
+
+```
+$ kops delete kluster kubernetes.juhaimmonen.com --state=S3://kops-state-a1703033
+```
 
 
 
