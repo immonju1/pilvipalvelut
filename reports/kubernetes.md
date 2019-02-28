@@ -19,13 +19,18 @@ https://github.com/kubernetes/minikube/
 
 Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes ympäristön 
 
-Toinen vaihtoehto on Docker Client?
+Toinen vaihtoehto on Docker Client.
 
 ## Asennus
 
 https://kubernetes.io/docs/tasks/tools/install-minikube/
 
-- Vaatii VMn koneelle
+- Vaatii VMn koneelle, esim. Virtualbox
+
+Asennus
+ ```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+ ```
 
 Asennuksen jälkeen 
  ```
@@ -39,7 +44,17 @@ Konfiguraatiotiedosto syntyy ~/.kube hakemistoon
 
 https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
-Komentorivi työkalu sovellusten hallintaan Kubernetesissä.
+Kubectl on komentorivityökalu sovellusten hallintaan Kubernetesissä.
+
+Asennus
+ ```
+
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+ ```
 
 ## Komentoja
  ```
