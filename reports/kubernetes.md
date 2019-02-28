@@ -79,7 +79,7 @@ Asennetaan Kubernetes clusteri kops:in avulla AWSään. Kops tarkoitta Kubernete
 
 Kubernetes clusterin asennus kops:lla pitäisi olla melko helppoa. muut DNS asetusten kanssa voi tulla haasteita. Tätä varten on olemassa mahdollisuus asentaa Kubernetes "gossib based", jolloin ei tarvita DNS nimeä.
 
-Tarvitaan image, jota voidaan, joten ensin luodaan Docker image Docker Hubiin.
+Tarvitaan image, joten ensin luodaan Docker image Docker Hubiin. TODO: parempi testi-image?
 
 ## Testi Docker containerin luonti
 
@@ -125,47 +125,100 @@ Testataan
 
 ## Asenna kubectl
 
-Asenna kubectl aiemmin olleen ohjeen mukaan
+Asenna kubectl aiemmin olleen ohjeen mukaan.
 
 ## Asenna kops
+
+Kops on työkalu, jolla voi tehdä tuotantotason Kubernetes asennuksia, päivityksiä ja ylläpitoa.
+
+https://github.com/kubernetes/kops
+
 ```
-$ curl -LO https://github.com/kubernetes/kops/releases/download/1.10.0/kops-linux-amd64
-$ chmod +x kops-linux-amd64
-$ mv kops-linux-amd64 /usr/local/bin/kops
+curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
+
 ```
 
 Testaus
 ```
 $ kops version
 ```
+Version 1.11.0 (git-2c2042465)
+
 
 ## Asenna ja konfiguroi awscli
 
 ### Asennus
 
+Uusimman version saa näillä ohjeilla
+https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html
+
+#### Asenna pip3
+
+Tarkista ensin Python versio
+- python3 --version
+
+Asenna pip3
 ```
- $ sudo apt-get install awscli -y
+$ curl -O https://bootstrap.pypa.io/get-pip.py
+$ python3 get-pip.py --user
+```
+Testaus
+```
+$ pip3 --version
+```
+
+#### AWS asennus
+```
+$ pip3 install awscli --upgrade --user
+```
+
+testaus
+```
+$ aws --version
 ```
 
 ### Konfigurointi
 
-Tarvitaan AWS tunnus yllä mainituilla oikeuksilla.
+Tarvitaan AWS tunnus. Luodaan sellainen.
+
+Kirjaudu sisään ja mene:
+
+- Identity and access management (IAM) -> users -> create new user.
+
+Luodaan käyttäjä nimellä kops. Käyttäjän luonnisen jälkeen saadaan access key käyttäjälle.
+
+Komentoriviltä tämän jälkeen:
 
 ```
 $ aws configure
 AWS Access Key ID [None]: **************
 AWS Secret Access Key [None]: **************
-Default region name [None]: enter-your-region-here
+Default region name [None]: 
 Default output format [None]:
 
 ```
+Tarkistus
+
+ls -ahl ~/.aws/
+
+Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia.
+
+- administration access
+
+
 ### Luodaan S3 bucket
+
+Käyttöliittymän kautta create new bucket. bucket-name: kops-state-random
 
 ```
 $ aws s3 mb s3://cluster1.k8s.juhaimmonen.com
 ```
 
 Tarvitaan konfiguraation ja tilan tallentamiseen
+
+### Seuraavaksi DNS
 
 Tänne syötetään klusterin DNS nimi, olkoon tässä vaiheessa:
 
