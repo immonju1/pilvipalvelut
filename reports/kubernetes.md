@@ -220,13 +220,14 @@ Tarvitaan konfiguraation ja tilan tallentamiseen
 
 ### Seuraavaksi DNS
 
-Tänne syötetään klusterin DNS nimi, olkoon tässä vaiheessa:
+Route 53 -> DNS management -> create hosted zone
+kubernetes.juhaimmonen.com
 
-k8s.juhaimmonen.com
+Pitää asetta NameCheapiin recordit, jotta osoite ohjautuu Route 53
 
-Alidomain pitää asettaa AWSn Route 53:ssa 
+kubernetes.juhaimmonen.com
 
-Alidomainilla voi olla sitten klustereita omilla nimillään
+Alidomainilla voi olla sitten klustereita omilla nimillään?
 
 cluster1.k8s.juhaimmonen.com
 
