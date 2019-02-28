@@ -40,7 +40,13 @@ minikube status
  ```
 Konfiguraatiotiedosto syntyy ~/.kube hakemistoon
 
-## Asenna kubectl
+## Testaus
+
+todo
+
+# Kubectl
+
+## asennus
 
 https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
@@ -62,6 +68,10 @@ kubectl
 
 kubectl cluster-info
  ```
+ 
+## Testaus
+
+todo
  
 # Kubernetesin asennus AWS:ään
 
