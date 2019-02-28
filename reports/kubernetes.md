@@ -75,9 +75,13 @@ todo
  
 # Kubernetesin asennus AWS:ään
 
-Asennetaan Kubernetes palvelun kops:in avulla AWSään.
+Asennetaan Kubernetes clusteri kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa.
 
-## konttien julkaisu Docker hubissa
+Kubernetes clusterin asennus kops:lla pitäisi olla melko helppoa. muut DNS asetusten kanssa voi tulla haasteita. Tätä varten on olemassa mahdollisuus asentaa Kubernetes "gossib based", jolloin ei tarvita DNS nimeä.
+
+Tarvitaan image, jota voidaan, joten ensin luodaan Docker image Docker Hubiin.
+
+## Testi Docker containerin luonti
 
 Docker Hubiin pitää viedä ensin image, jota voidaan ajaa AWSssä.
 
@@ -109,6 +113,61 @@ Testataan
  
  docker push immonju/helloworld
 ```
+
+## AWS asennuksen esiehdot
+
+- AWS tunnus
+- kubectl
+- kops binaryt omalle koneelle
+- awscli tool
+- AWS tunnukselle seuraavat oikeudet: AmazonEC2FullAccess, AmazonRoute53FullAccess, AmazonS3FullAccess, IAMFullAccess, AmazonVPCFullAccess
+- DNS domain nimi, jos halutaan käyttää
+
+## Asenna kubectl
+
+Asenna kubectl aiemmin olleen ohjeen mukaan
+
+## Asenna kops
+
+## Asenna ja konfiguroi awscli
+
+### Asennus
+
+### Konfiguroi awscli
+
+### Luo S3 bucker AWSään
+
+Konfiguraation ja tilan tallentamiseen
+
+Tänne syötetään klusterin DNS nimi, olkoon tässä vaiheessa:
+
+k8s.juhaimmonen.com
+
+Alidomain pitää asettaa AWSn Route 53:ssa 
+
+Alidomainilla voi olla sitten klustereita omilla nimillään
+
+cluster1.k8s.juhaimmonen.com
+
+### Tarkista S3 bucket
+
+todo
+
+### Mistä kops löytää konfiguraatiot
+
+todo
+
+### Luodaan klusteri
+
+### Testaus
+
+## AWS Kubernetes klusterin poistaminen
+
+Maksullinen, joten poista kun ei tarvita
+
+
+
+
 
 
  
