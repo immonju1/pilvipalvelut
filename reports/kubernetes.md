@@ -1,5 +1,5 @@
 
-# Mikä on Kubernetes
+# Mikä on Kubernetes (kesken)
 
 https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
 
@@ -128,16 +128,44 @@ Testataan
 Asenna kubectl aiemmin olleen ohjeen mukaan
 
 ## Asenna kops
+```
+$ curl -LO https://github.com/kubernetes/kops/releases/download/1.10.0/kops-linux-amd64
+$ chmod +x kops-linux-amd64
+$ mv kops-linux-amd64 /usr/local/bin/kops
+```
+
+Testaus
+```
+$ kops version
+```
 
 ## Asenna ja konfiguroi awscli
 
 ### Asennus
 
-### Konfiguroi awscli
+```
+ $ sudo apt-get install awscli -y
+```
 
-### Luo S3 bucker AWSään
+### Konfigurointi
 
-Konfiguraation ja tilan tallentamiseen
+Tarvitaan AWS tunnus yllä mainituilla oikeuksilla.
+
+```
+$ aws configure
+AWS Access Key ID [None]: **************
+AWS Secret Access Key [None]: **************
+Default region name [None]: enter-your-region-here
+Default output format [None]:
+
+```
+### Luodaan S3 bucket
+
+```
+$ aws s3 mb s3://cluster1.k8s.juhaimmonen.com
+```
+
+Tarvitaan konfiguraation ja tilan tallentamiseen
 
 Tänne syötetään klusterin DNS nimi, olkoon tässä vaiheessa:
 
@@ -151,15 +179,33 @@ cluster1.k8s.juhaimmonen.com
 
 ### Tarkista S3 bucket
 
-todo
+```
+$ aws s3 ls | grep k8s
+```
 
 ### Mistä kops löytää konfiguraatiot
 
-todo
+```
+$ export KOPS_STATE_STORE=s3://cluster1.k8s.juhaimmonen.com
+```
 
 ### Luodaan klusteri
 
+```
+ $ kops create cluster \
+  --cloud=aws \
+  --zones=eu-west-1b \
+  --dns-zone=k8s.tf1.com \
+  --name cluster1.k8s.tf1.com  \
+--ssh-public-key ~/np-k8s.pub \
+  --yes
+```
+
 ### Testaus
+
+```
+ $ kops validate cluster
+ ```
 
 ## AWS Kubernetes klusterin poistaminen
 
