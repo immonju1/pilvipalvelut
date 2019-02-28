@@ -120,8 +120,9 @@ Testataan
 - kubectl
 - kops binaryt omalle koneelle
 - awscli tool
-- AWS tunnukselle seuraavat oikeudet: AmazonEC2FullAccess, AmazonRoute53FullAccess, AmazonS3FullAccess, IAMFullAccess, AmazonVPCFullAccess
+- AWS tunnukselle seuraavat oikeudet: AmazonEC2FullAccess, AmazonRoute53FullAccess, AmazonS3FullAccess, IAMFullAccess, AmazonVPCFullAccess -> tässä asennuksessa laitetaan administrator.
 - DNS domain nimi, jos halutaan käyttää
+- Asennetaan bento/ubuntu-16.04 Vagrant koneelle
 
 ## Asenna kubectl
 
@@ -207,11 +208,13 @@ Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia.
 
 - administration access
 
-
 ### Luodaan S3 bucket
 
-Käyttöliittymän kautta create new bucket. bucket-name: kops-state-random
+Käyttöliittymän kautta create new bucket. bucket-name: kops-state-a1703033
 
+Miten tehdään awscli komennnolla?
+
+Tämä tuskin toimii?
 ```
 $ aws s3 mb s3://cluster1.k8s.juhaimmonen.com
 ```
@@ -220,46 +223,89 @@ Tarvitaan konfiguraation ja tilan tallentamiseen
 
 ### Seuraavaksi DNS
 
-Route 53 -> DNS management -> create hosted zone
-kubernetes.juhaimmonen.com
+AWS: Route 53 -> DNS management -> create hosted zone
 
-Pitää asetta NameCheapiin recordit, jotta osoite ohjautuu Route 53
+Domain name
+- kubernetes.juhaimmonen.com
 
-kubernetes.juhaimmonen.com
+Tämän jälkeen pitää asettaa nimipalveluun recordit, jotta osoite ohjautuu Route 53 nimipalvelimille.
 
-Alidomainilla voi olla sitten klustereita omilla nimillään?
+### Luodaan SSH avaimet
 
-cluster1.k8s.juhaimmonen.com
+Tarvitaan loginia varten, kun loggaudutaan klusteriin.
+
+Yksityinen avain
+
+```
+$ ssh-keygen -f .ssh/id_rsa
+```
 
 ### Tarkista S3 bucket
+
+Mikä komento? testattava
 
 ```
 $ aws s3 ls | grep k8s
 ```
 
+### Luodaan klusteri
+
+```
+ $ kops create cluster --name=kubernetes.juhaimmonen.com --state=S3://kops-state-a1703033 zones=eu-west-1b --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=ubernetes.juhaimmonen.com
+```
+
+Komennon jälkeen klusteri pitää vielä julkaista.
+
+```
+$ kops update cluster kubernetes.juhaimmonen.com --yes --state=S3://kops-state-a1703033
+```
+
+status saadaan selville
+
+```
+kunectl get node
+```
+
+Pitäisi näkyä master ja kaksi nodea.
+
 ### Mistä kops löytää konfiguraatiot
 
+kops luo konfiguraatio tiedostoon
+
+```
+- cat ~.kube/config
+```
+
+Onko tarpeen??:
 ```
 $ export KOPS_STATE_STORE=s3://cluster1.k8s.juhaimmonen.com
 ```
 
-### Luodaan klusteri
-
-```
- $ kops create cluster \
-  --cloud=aws \
-  --zones=eu-west-1b \
-  --dns-zone=k8s.tf1.com \
-  --name cluster1.k8s.tf1.com  \
---ssh-public-key ~/np-k8s.pub \
-  --yes
-```
-
 ### Testaus
 
+Deployment
+
 ```
- $ kops validate cluster
- ```
+$ kubectl run hello-minikube --image=k8s.grc.io/echoserver:1.4 --port=8080
+```
+Kytketään päälle nodet ja portit
+
+```
+$ kubectl expose deployment hello-minikube --type=NodePort
+```
+Testaus, ja nähdään portti
+
+```
+$ kubectl get services
+```
+AWS konsolista tarkistus
+
+- Palvelu EC2
+- instances
+- autoscaling groups
+
+### Palomuurit
+
 
 ## AWS Kubernetes klusterin poistaminen
 
