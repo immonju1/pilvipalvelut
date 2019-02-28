@@ -47,4 +47,10 @@ kubectl
 
 kubectl cluster-info
 
+# Kubernetesin asennus AWS:ään
+
+Docker Hubiin pitää viedä image, jota voidaan ajaa AWSssä.
+
+Tähän tarkoitukseen on aiemmin luoto Hello World image, joka /scrpits hakemistossa.
+
 
