@@ -28,11 +28,11 @@ https://kubernetes.io/docs/tasks/tools/install-minikube/
 - Vaatii VMn koneelle
 
 Asennuksen jälkeen 
-
+ ```
 minikube start
 
 minikube status
-
+ ```
 Konfiguraatiotiedosto syntyy ~/.kube hakemistoon
 
 ## Asenna kubectl
@@ -42,15 +42,44 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/
 Komentorivi työkalu sovellusten hallintaan Kubernetesissä.
 
 ## Komentoja
-
+ ```
 kubectl 
 
 kubectl cluster-info
-
+ ```
+ 
 # Kubernetesin asennus AWS:ään
 
 Docker Hubiin pitää viedä image, jota voidaan ajaa AWSssä.
 
-Tähän tarkoitukseen on aiemmin luoto Hello World image, joka /scrpits hakemistossa.
+Tähän tarkoitukseen on aiemmin luotu Hello World image, joka /scrpits hakemistossa.
+
+Rakennetaan image
+ ```
+docker build -t helloworld .
+ ```
+Testataan
+
+ ```
+ docker run -d -p 8080:8080 helloworld
+ ```
+
+# konttien julkaisu Docker hubissa
+ 
+ Luotu tunnus:   https://hub.docker.com/ 
+ 
+ Luotu Dashboard: Create Repository
+ 
+ Muutettu imagen nimi
+ ```
+ docker tag helloworld <username>/<repositoryname>
+ ```
+ Login
+ ```
+ docker login
+ 
+ docker push <username>/<repositoryname>
+```
 
 
+ 
