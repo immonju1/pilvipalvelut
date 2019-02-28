@@ -65,7 +65,11 @@ kubectl cluster-info
  
 # Kubernetesin asennus AWS:ään
 
-Docker Hubiin pitää viedä image, jota voidaan ajaa AWSssä.
+Asennetaan Kubernetes palvelun kops:in avulla AWSään.
+
+## konttien julkaisu Docker hubissa
+
+Docker Hubiin pitää viedä ensin image, jota voidaan ajaa AWSssä.
 
 Tähän tarkoitukseen on aiemmin luotu Hello World image, joka /scrpits hakemistossa.
 
@@ -78,14 +82,14 @@ Testataan
  ```
  docker run -d -p 8080:8080 helloworld
  ```
-
-# konttien julkaisu Docker hubissa
  
- Luotu tunnus:   https://hub.docker.com/ 
+## Julkaistaan Docker Hub image 
  
- Luotu Dashboard: Create Repository
+ Luotu tunnus osoitteessa:   https://hub.docker.com/ 
  
- Muutettu imagen nimi
+ Luotu Dashboard: Create Repository-toiminnolla.
+ 
+ Muutettu imagen nimi omalla koneella
  ```
  docker tag helloworld immonju/helloworld
  ```
