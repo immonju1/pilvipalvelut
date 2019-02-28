@@ -72,13 +72,13 @@ Testataan
  
  Muutettu imagen nimi
  ```
- docker tag helloworld <username>/<repositoryname>
+ docker tag helloworld immonju/helloworld
  ```
- Login
+ Login ja vienti repoon.
  ```
  docker login
  
- docker push <username>/<repositoryname>
+ docker push immonju/helloworld
 ```
 
 
