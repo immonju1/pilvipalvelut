@@ -225,7 +225,7 @@ Tämän jälkeen pitää asettaa nimipalveluun recordit, jotta osoite ohjautuu R
 
 ### Luodaan SSH avaimet
 
-Tarvitaan loginia varten, kun loggaudutaan klusteriin. 
+Tarvitaan loginia varten, kun loggaudutaan klusterin nodeille.
 
 Yksityinen avain
 
@@ -236,7 +236,12 @@ $ ssh-keygen -f .ssh/id_rsa
 ### Luodaan klusteri
 
 ```
-kops create cluster --name=kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033 --zones=eu-central-1 --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.juhaimmonen.com
+kops create cluster --name=kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033 --zones=eu-central-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.juhaimmonen.com
+```
+
+Jos zonen kanssa ongelmia, oman saa haettua
+```
+aws ec2 describe-availability-zones --region eu-central-1
 ```
 
 Komennon jälkeen klusteri pitää vielä julkaista.
@@ -244,32 +249,29 @@ Komennon jälkeen klusteri pitää vielä julkaista.
 ```
 $ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
 ```
+### Validointi
 
-status saadaan selville
-
+Status saadaan selville
 ```
 kunectl get node
 ```
 
-Pitäisi näkyä master ja kaksi nodea.
+Pitäisi näkyä master ja kaksi nodea. Luonti voi kestää jonkin aikaa.
 
-### Mistä kops löytää konfiguraatiot
-
-kops luo konfiguraatio tiedostoon
+```
+ * validate cluster: kops validate cluster
+ * list nodes: kubectl get nodes --show-labels
+ * ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.kubernetes.juhaimmonen.com
+```
+kops luo konfiguraatiot tiedostoon
 
 ```
 - cat ~.kube/config
 ```
 
-Onko tarpeen??:
-```
-$ export KOPS_STATE_STORE=s3://kops-state-a1703033
-```
-
 ### Testaus
 
 Deployment
-
 ```
 $ kubectl run hello-minikube --image=k8s.grc.io/echoserver:1.4 --port=8080
 ```
@@ -278,6 +280,7 @@ Kytketään päälle nodet ja portit
 ```
 $ kubectl expose deployment hello-minikube --type=NodePort
 ```
+
 Testaus, ja nähdään portti
 
 ```
@@ -302,7 +305,7 @@ IP osoite AWSstä
 Maksullinen, joten poista kun ei tarvita
 
 ```
-$ kops delete kluster kubernetes.juhaimmonen.com --state=S3://kops-state-a1703033
+$ kops delete kluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
 
 
