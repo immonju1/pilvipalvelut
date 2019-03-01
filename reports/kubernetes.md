@@ -298,16 +298,16 @@ Nodeilla on palomuurit, exposed portti pitää sallia
 
 ### Testaaminen WEb selaimella
 
-IP osoite AWSstä
+IP osoite AWSstä. Tänne asti pääsin, mutta sitten ei toiminut selaimesta...
 
 ## AWS Kubernetes klusterin poistaminen
 
-Maksullinen, joten poista kun ei tarvita
+Maksullinen, joten poista kun ei tarvita. Tein poiston.
 
 ```
 $ kops delete kluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
-
+Klusterin voi luoda uudestaan: kops create cluster-komennolla
 
 
 
