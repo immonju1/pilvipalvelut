@@ -305,7 +305,7 @@ IP osoite AWSstä. Tänne asti pääsin, mutta sitten ei toiminut selaimesta...
 Maksullinen, joten poista kun ei tarvita. Tein poiston.
 
 ```
-$ kops delete kluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
+$ kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
 Klusterin voi luoda uudestaan: kops create cluster-komennolla
 
