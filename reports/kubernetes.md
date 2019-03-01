@@ -188,7 +188,7 @@ Kirjaudu sisään ja mene:
 
 - Identity and access management (IAM) -> users -> create new user.
 
-Luodaan käyttäjä nimellä kops. Käyttäjän luonnisen jälkeen saadaan access key käyttäjälle.
+Luodaan käyttäjä nimellä kops. Käyttäjän luomisen jälkeen saadaan access key ja secret access key käyttäjälle. Ole huolellinen näiden kanssa.
 
 Komentoriviltä tämän jälkeen:
 
@@ -204,7 +204,7 @@ Tarkistus
 
 ls -ahl ~/.aws/
 
-Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia.
+Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia AWS konsolissa.
 
 - administration access
 
@@ -225,7 +225,7 @@ Tämän jälkeen pitää asettaa nimipalveluun recordit, jotta osoite ohjautuu R
 
 ### Luodaan SSH avaimet
 
-Tarvitaan loginia varten, kun loggaudutaan klusteriin.
+Tarvitaan loginia varten, kun loggaudutaan klusteriin. 
 
 Yksityinen avain
 
