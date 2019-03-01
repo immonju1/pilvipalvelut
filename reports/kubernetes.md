@@ -198,8 +198,8 @@ AWS Access Key ID [None]: **************
 AWS Secret Access Key [None]: **************
 Default region name [None]: 
 Default output format [None]:
-
 ```
+
 Tarkistus
 
 ls -ahl ~/.aws/
@@ -211,13 +211,6 @@ Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia.
 ### Luodaan S3 bucket
 
 Käyttöliittymän kautta create new bucket. bucket-name: kops-state-a1703033
-
-Miten tehdään awscli komennnolla?
-
-Tämä tuskin toimii?
-```
-$ aws s3 mb s3://cluster1.k8s.juhaimmonen.com
-```
 
 Tarvitaan konfiguraation ja tilan tallentamiseen
 
@@ -240,24 +233,16 @@ Yksityinen avain
 $ ssh-keygen -f .ssh/id_rsa
 ```
 
-### Tarkista S3 bucket
-
-Mikä komento? testattava
-
-```
-$ aws s3 ls | grep k8s
-```
-
 ### Luodaan klusteri
 
 ```
- $ kops create cluster --name=kubernetes.juhaimmonen.com --state=S3://kops-state-a1703033 zones=eu-west-1b --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=ubernetes.juhaimmonen.com
+kops create cluster --name=kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033 --zones=eu-central-1 --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.juhaimmonen.com
 ```
 
 Komennon jälkeen klusteri pitää vielä julkaista.
 
 ```
-$ kops update cluster kubernetes.juhaimmonen.com --yes --state=S3://kops-state-a1703033
+$ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
 ```
 
 status saadaan selville
@@ -278,7 +263,7 @@ kops luo konfiguraatio tiedostoon
 
 Onko tarpeen??:
 ```
-$ export KOPS_STATE_STORE=s3://cluster1.k8s.juhaimmonen.com
+$ export KOPS_STATE_STORE=s3://kops-state-a1703033
 ```
 
 ### Testaus
