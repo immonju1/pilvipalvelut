@@ -273,7 +273,7 @@ kops luo konfiguraatiot tiedostoon
 
 Deployment
 ```
-$ kubectl run hello-minikube --image=k8s.grc.io/echoserver:1.4 --port=8080
+$ kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.4 --port=8080 (tässä oli typo)
 ```
 Kytketään päälle nodet ja portit
 
