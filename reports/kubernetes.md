@@ -192,13 +192,13 @@ Kirjaudu sisään ja mene:
 
 - Identity and access management (IAM) -> users -> create new user.
 
-Luodaan käyttäjä nimellä kops. Käyttäjän luomisen jälkeen saadaan access key ja secret access key käyttäjälle. Ole huolellinen näiden kanssa.
+Luodaan käyttäjä nimellä kops. Käyttäjän luomisen jälkeen saadaan access key ja secret access key käyttäjälle. Ole huolellinen näiden kanssa, ne voi tallentaa omalle koneelle .cvs formaatissa.
 
-![AWS services](https://github.com/immonju1/pilvipalvelut/blob/master/pics/IAM_user.png)
+![IAM user](https://github.com/immonju1/pilvipalvelut/blob/master/pics/IAM_user.png)
 
 Kuva. IAM käyttäjä.
 
-Komentoriviltä tämän jälkeen:
+Konfiguraoidaan komentoriviltä tämän jälkeen avaimet:
 
 ```
 $ aws configure
@@ -220,7 +220,11 @@ Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia AWS konsolissa.
 
 Käyttöliittymän kautta create new bucket. bucket-name: kops-state-a1703033
 
-Tarvitaan konfiguraation ja tilan tallentamiseen
+Tarvitaan konfiguraation ja tilan tallentamiseen.
+
+![S3 bucket](https://github.com/immonju1/pilvipalvelut/blob/master/pics/S3_bucket.png)
+
+Kuva. S3 bucket.
 
 ### Seuraavaksi DNS
 
@@ -228,6 +232,10 @@ AWS: Route 53 -> DNS management -> create hosted zone
 
 Domain name
 - kubernetes.juhaimmonen.com
+
+![DNS](https://github.com/immonju1/pilvipalvelut/blob/master/pics/dns.png)
+
+Kuva. DNS zone
 
 Tämän jälkeen pitää asettaa nimipalveluun recordit, jotta osoite ohjautuu Route 53 nimipalvelimille.
 
