@@ -182,7 +182,7 @@ $ aws --version
 
 ### Konfigurointi
 
-Tarvitaan AWS tunnus. Luodaan sellainen.
+Tarvitaan AWS tunnus. Luodaan sellainen AWS:ssä. Tämän jälkeen pitää luoda IAM tunnus.
 
 ![AWS services](https://github.com/immonju1/pilvipalvelut/blob/master/pics/AWS_services.png)
 
@@ -193,6 +193,10 @@ Kirjaudu sisään ja mene:
 - Identity and access management (IAM) -> users -> create new user.
 
 Luodaan käyttäjä nimellä kops. Käyttäjän luomisen jälkeen saadaan access key ja secret access key käyttäjälle. Ole huolellinen näiden kanssa.
+
+![AWS services](https://github.com/immonju1/pilvipalvelut/blob/master/pics/IAM_user.png)
+
+Kuva. IAM käyttäjä.
 
 Komentoriviltä tämän jälkeen:
 
