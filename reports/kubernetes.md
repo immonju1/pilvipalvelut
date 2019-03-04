@@ -184,6 +184,9 @@ $ aws --version
 
 Tarvitaan AWS tunnus. Luodaan sellainen.
 
+![AWS services](pilvipalvelut/pics/AWS_services.png)
+Kuva. AWS palvelut näkymä
+
 Kirjaudu sisään ja mene:
 
 - Identity and access management (IAM) -> users -> create new user.
