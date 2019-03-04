@@ -253,7 +253,7 @@ $ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-
 
 Status saadaan selville
 ```
-kunectl get node
+kubectl get node
 ```
 
 Pitäisi näkyä master ja kaksi nodea. Luonti voi kestää jonkin aikaa.
@@ -273,7 +273,7 @@ kops luo konfiguraatiot tiedostoon
 
 Deployment
 ```
-$ kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.4 --port=8080 (tässä oli typo)
+$ kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.4 --port=8080
 ```
 Kytketään päälle nodet ja portit
 
