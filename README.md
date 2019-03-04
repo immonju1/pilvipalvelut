@@ -8,7 +8,7 @@ Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Valitsimme aihee
 
 Palveluiden nopeampi tuotantoonvienti ja kehittäminen vaatii myös uudenlaista arkkitehtuuria. Isojen monoliittisten sovellusten sijaan tarvitaan arkkiehtuuri, joka mahdollistaa pienten itsenäisten palveluiden kehittämisen ja tuotantoonviennin. Arkkitehtuuria kutsutaan mikropalveluarkkitehtuuriksi. Jokainen toiminnallisuus / palvelu on itsenäinen sovellus, joka tarjoaa rajapinnan muille palveluille. Kukin mikropalvelu voidaan viedä tuotantoon riippumattaa muista mikropalevluista. Yhdessä mikropalvelut muodostavat varsinaisen sovelluksen. Mikropalvelut lisäävät tarvetta automaatiolle, helpolle tavalle viedä mikropalvelut tuotantoon. Samalla palveluiden skaalautuminen tarpeen mukaan helpottuu.
 
-DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulen opettelemaan DevOps teknologioista Dockerin ja Kubernetesin. Näiden toiminnan testaamista varten tulen tekemään pienen testisovelluksen LAMP pinon päälle. Kokonaisuus on meille täysin uutta asiaa, joten testisovelluksesta pyrimme tekemään mikropalveluarkkitehtuurin mukaisen, jos aikataulu sen sallii. Ensijainen tavoite on saada testisovellus kontitettua Dockerin avulla ja vietyä se tuotantoon Kubernetesin avulla. Tähän pyrimme tekemään oman alustan, mutta vaihtoehtona on käyttää olemassaolevia pilvipalveluita.
+DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana tulemme opettelemaan DevOps teknologioista Dockerin ja Kubernetesin. Kokonaisuus on meille täysin uutta asiaa. Ensijainen tavoite on saada testisovellus(Hello world -sovellus) kontitettua Dockerin avulla ja vietyä se tuotantoon Kubernetesin avulla. Tavoitteena on tehdä klusteri pilveen.
 
 ### Projektin tavoitteet
 
@@ -17,28 +17,31 @@ Projektin tavoitteena on oppia
 - Asennus
 - Arkkitehtuuri
 - Docker kontin tekeminen
-- Deployment 
+- Tehdään Hello World kontti testaamista varten
 2. Kubernetes
 - Asennus
+- Minikube
 - Arkkitehtuuri
 - Deployment
-3. Tehdä testisovellus komponenttien testaamiseen
-- Yksinkertainen LAMP pinon päällä toimiva ohjelma, joka hakee tietokannasta Web-sivulle sisältöä
-4. Tutkia eri pilvipalveluita, jotka tarjoavat Dockerin ja Kubernetesin sovelluskehityseen 
-- Google
-- Docker
+4. Asennus AWS:n
+- Klusteri
+- Load Balancer
+- Domain nimi
+5. Mikropalvelut
+- Tutustumme arkkitehtuuriin
+
 
 ### Projektin eteneminen ja välitavoitteet
 
 Projekti etenee seuraavasti
 1. Esiselvitys
 - Teknologioiden opiskelua (Docker, Kubernetes, mikropalvelut)
-2. Docker kontitus LAMPlle
+2. Docker kontitus Hello World
 - Asennusohjeet Githubissa
 3. Kubernetes asennus / pilvipalveluna
 -  Asennusohjeet Githubissa
-4. Lopullinen testisovellus, ja koko pinon testaaminen
-- Kontitus, tuotantoonvienti Kubernetesin avulla
+4. Mikropalvelut
+- tutustuminen
  
 ### Projektiorganisaatio ja sidosryhmät
 
