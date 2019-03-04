@@ -184,7 +184,8 @@ $ aws --version
 
 Tarvitaan AWS tunnus. Luodaan sellainen.
 
-![AWS services](pilvipalvelut/pics/AWS_services.png)
+![AWS services](https://github.com/immonju1/pilvipalvelut/blob/master/pics/AWS_services.png)
+
 Kuva. AWS palvelut näkymä
 
 Kirjaudu sisään ja mene:
