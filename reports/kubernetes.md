@@ -323,10 +323,296 @@ Maksullinen, joten poista kun ei tarvita. Tein poiston.
 ```
 $ kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
-Klusterin voi luoda uudestaan: kops create cluster-komennolla
+Klusterin voi luoda uudestaan: ``kops create cluster-komennolla``
 
 
+# Podin luominen
 
+Harjoitus tehdään **Minikukubessa**.
 
+Luodaan ensin Pod, ja sitä varten tiedosto pod-helloworld.yml
 
- 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodehelloworld.example.com
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: kubernetes-demo
+    image: immonju/helloworld
+    ports:
+    - containerPort: 8080
+
+```
+
+## Luodaan pod kubectl:n avulla
+
+    kubectl create -f pod-helloworld.yml
+
+Tulos
+
+    pod/nodehelloworld.example.com created
+
+## Tarkistus
+
+    kubectl describe pod nodehelloworld.example.com
+
+Näkee mistä hakee imagen.
+
+```
+Name:               nodehelloworld.example.com
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Tue, 05 Mar 2019 18:14:47 +0200
+Labels:             app=helloworld
+Annotations:        <none>
+Status:             Pending
+IP:                 
+Containers:
+  kubernetes-demo:
+    Container ID:   
+    Image:          immonju/helloworld
+    Image ID:       
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-2gck9 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  default-token-2gck9:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-2gck9
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  43s   default-scheduler  Successfully assigned default/nodehelloworld.example.com to minikube
+  Normal  Pulling    42s   kubelet, minikube  pulling image "immonju/helloworld"
+  Normal  Pulled     25s   kubelet, minikube  Successfully pulled image "immonju/helloworld"
+  Normal  Created    25s   kubelet, minikube  Created container
+  Normal  Started    24s   kubelet, minikube  Started container
+```
+
+## Kuinka päädtä Podiin palveluun kiinni
+
+Pääsy sovellukseen tapahtuu normaalisti servicen kautta. Toinen vaihtoehto servicelle on NodePort (suoraan noden porttiin). NodePort:ia voi käyttää jos ei ole LoadBalanceria. LB tarvitaan jos on useampi node.
+
+Jos ei ole vielä serviceä olemassa, voidaan käyttää port-forward komentoa. 
+
+    kubectl port-forward nodehelloworld.example.com 8081:8080
+
+local port 8081 ohjautuu porttiin 8080.
+
+Tarkista curl localhost:8081 toisessa shellissä.
+
+toimii, tulos
+
+```
+$ curl localhost:8081
+
+Hello world
+
+```
+
+## Luodaan Service Minikubeen
+
+Podin luomisen jälkeen voidaan luoda service. Tarvitaan AWS kanssa, jos halutaan LB.
+
+    kubectl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
+
+Tulos
+    service/nodehelloworld-service exposed
+
+Palvelun URL
+
+    minikube service nodehelloworld-service --url
+
+```
+$ minikube service nodehelloworld-service --url
+http://192.168.99.100:32038
+```
+
+Saa URLin palveluun, AWS pitää katsoa instanssit (EC2), mikä on IP.
+
+Komennolla
+
+    kubectl get service
+
+Näkee päällä olevat palvelut.
+
+## Hyödyllisiä komentoja
+
+Poista pod
+
+    kubectl delete pod nodehelloworld.example.com
+
+Poista service
+
+    kubectl delete service nodehelloworld-service
+
+Mene podiin
+
+    kubectl attach nodehelloworld.example.com -i
+
+Kontainerin hakemiston sisältö
+
+    kubectl exec nodehelloworld.example.com -- ls
+
+Komentoriville pod:iin
+
+    kubectl exec -it nodehelloworld.example.com -- bash
+
+Lokit
+
+    kubectl logs nodehelloworld.example.com
+
+Palvelun tila
+
+    kubectl describe service nodehelloworld-service
+
+Tulostus:
+
+```
+$ kubectl describe service nodehelloworld-service
+Name:                     nodehelloworld-service
+Namespace:                default
+Labels:                   app=helloworld
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     NodePort
+IP:                       10.97.112.60
+Port:                     <unset>  3000/TCP
+TargetPort:               3000/TCP
+NodePort:                 <unset>  32038/TCP
+Endpoints:                172.17.0.5:3000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+Toisesta Pod:sta voi kutsua Endpoint: "172.17.0.5:3000"
+
+## Luodaan toinen pod, toisella kontainerilla
+
+    kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
+
+Pääsee suoraan konttiin sisälle.
+
+Voi testata yhteyttä toiseen podiin. Koska budycubessa ei curlia, voi käyttää telnet 172.17.0.5:3000 (Endpoint)
+
+# Loadbalancerin lisääminen AWSään (TODO)
+
+Käytetään **AWS** tästä eteenpäin.
+
+Kaikki mitä voit tehdä kubectl:llä voidaan laittaa .yml tiedostoon.
+
+Luodaan pod ja palvelu.
+
+pod: helloworld.yml
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodehelloworld.example.com
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: kubernetes-demo
+    image: immonju/helloworld
+    ports:
+    - name: nodejs-port
+      containerPort: 8080
+```
+
+service: helloworld-service.yml
+- Lisää loadbalancerin
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: helloworld-service
+spec:
+  port: 80
+  targetPort: nodejs-port
+  protocol: TCP
+selector:
+  app: helloworld
+type: LoadBalancer
+```
+
+## Luodaan pod AWSään
+
+**testaus**
+
+### Ensin pitää luoda klusteri.
+
+```
+kops create cluster --name=kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033 --zones=eu-central-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.juhaimmonen.com
+```
+
+Komennon jälkeen klusteri pitää vielä julkaista.
+
+```
+$ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
+```
+
+### Luodaan Service
+
+    kubectl create -f helloworld-service.yml
+
+Nyt EC2:ssa pitäisi näkyä klusterin lisäksi loadbalancer.
+
+## Domain nimen testaaminen
+
+domain nimi oli kubernetes.juhaimmonen.com
+
+Route 53:ssa voi luoda alias-nimen loadbalancerille. Saadaan sovellus näkyviin domain nimellä internettiin.
+
+Klikkaa Create Record Set ja syötä domain
+
+    helloworld.kubernetes.juhaimmonen.com
+
+Määritä tämä aliakseksi LB:lle
+
+## Poista palvelu, podit ja klusteri
+
+**Pitää testata**
+
+Pelkkä klusterin poisto riittänee.
+
+Poista service
+
+    kubectl delete service helloworld
+
+Poista pod
+
+    kubectl delete pod helloworld
+
+Klusterin poisto
+
+```
+$ kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
+```
+
