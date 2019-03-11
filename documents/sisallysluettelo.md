@@ -33,7 +33,6 @@
 
 ## Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
 ## Mikropalvelut (?)  <a name="mikropalvelut"></a>
-## Testisovellus  <a name="Testisovellus"></a>
 ## Yhteenveto  <a name="Yhteenveto"></a>
 
 
