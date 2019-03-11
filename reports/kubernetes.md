@@ -533,7 +533,7 @@ pod: helloworld.yml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nodehelloworld.example.com
+  name: nodehelloworld-pod
   labels:
     app: helloworld
 spec:
@@ -550,21 +550,20 @@ service: helloworld-service.yml
 
 ```
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   name: helloworld-service
 spec:
-  port: 80
-  targetPort: nodejs-port
-  protocol: TCP
-selector:
-  app: helloworld
-type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: nodejs-port
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: LoadBalancer
 ```
 
 ## Luodaan pod AWSään
-
-**testaus**
 
 ### Ensin pitää luoda klusteri.
 
@@ -578,11 +577,47 @@ Komennon jälkeen klusteri pitää vielä julkaista.
 $ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
 ```
 
+### Luodaan Pod
+
+    kubectl create -f helloworld.yml
+
 ### Luodaan Service
 
     kubectl create -f helloworld-service.yml
 
 Nyt EC2:ssa pitäisi näkyä klusterin lisäksi loadbalancer.
+
+### Oikeuksien lisääminen ELB luomiseen
+
+LB luonti ei onnistunut Servicelle, joten loin lisää oikeuksia IAM käyttäjälle
+- Puuttuva rooli oli elasticloadbalancing
+
+Tämän jälkeen LB luonti onnistui Servicen luonnilla.
+
+
+```
+$ kubectl describe service helloworld-service
+
+Name:                     helloworld-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     LoadBalancer
+IP:                       100.65.161.183
+LoadBalancer Ingress:     a94279ba2442911e98e700288b3b3c66-38697140.eu-central-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               nodejs-port/TCP
+NodePort:                 <unset>  32396/TCP
+Endpoints:                100.96.1.4:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  20m   service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   20m   service-controller  Ensured load balancer
+```
 
 ## Domain nimen testaaminen
 
@@ -594,21 +629,21 @@ Klikkaa Create Record Set ja syötä domain
 
     helloworld.kubernetes.juhaimmonen.com
 
-Määritä tämä aliakseksi LB:lle
+Määritä tämä aliakseksi LB:lle. Surffasin osoitteeseen ja ohjelma toimi.
+
+![helloworld form AWS with LB](pics/aes_lb_helloworld.png)
 
 ## Poista palvelu, podit ja klusteri
 
-**Pitää testata**
-
-Pelkkä klusterin poisto riittänee.
+Pelkkä klusterin poisto riittää.
 
 Poista service
 
-    kubectl delete service helloworld
+    kubectl delete service helloworld-service
 
 Poista pod
 
-    kubectl delete pod helloworld
+    kubectl delete pod nodehelloworld-pod
 
 Klusterin poisto
 
