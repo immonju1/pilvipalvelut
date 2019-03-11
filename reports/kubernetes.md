@@ -637,14 +637,6 @@ Määritä tämä aliakseksi LB:lle. Surffasin osoitteeseen ja ohjelma toimi.
 
 Pelkkä klusterin poisto riittää.
 
-Poista service
-
-    kubectl delete service helloworld-service
-
-Poista pod
-
-    kubectl delete pod nodehelloworld-pod
-
 Klusterin poisto
 
 ```
