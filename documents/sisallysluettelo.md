@@ -11,8 +11,7 @@
 
 4. [Mikä on Kuberbetes](#mika-on-kubernetes)
 5. [Mikropalvelut (?)](#mikropalvelut)
-6. [Testisovellus](#Testisovellus)
-7. [Yhteenveto](#Yhteenveto)
+6. [Yhteenveto](#Yhteenveto)
 
 ## Johdanto  <a name="Johdanto"></a>
 ## Mitä on Devops <a name="mita-on-devops"></a>
@@ -20,30 +19,17 @@
 
 ## Mikä on Docker <a name="mika-on-docker"></a>
 
-Tähän tulee tekstiä.
-<details>
+#### Tähän tulee tekstiä.
     
-<summary>Arkkitehtuuri <a name="arkkitehtuuri1"></a></summary>
+#### Arkkitehtuuri
 
-</details>
+#### Komentokieli, käytetyimmät komennot  <a name="komennot">
 
-<details>
-    
-<summary>Komentokieli, käytetyimmät komennot  <a name="komennot"></a></summary>
+#### Imaget, mistä saadaan 
 
-</details>
+#### Konttien ajaminen
 
-<details>
-
-<summary>Imaget, mistä saadaan <a name="imaget"></a></summary>
-
-</details>
-
-<details>
-
-<summary>Konttien ajaminen <a name="kontit"></a></summary>
-
-</details>
+#### Testisovellus
 
 ## Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
 ## Mikropalvelut (?)  <a name="mikropalvelut"></a>
