@@ -631,7 +631,7 @@ Klikkaa Create Record Set ja syötä domain
 
 Määritä tämä aliakseksi LB:lle. Surffasin osoitteeseen ja ohjelma toimi.
 
-![helloworld form AWS with LB](pilvipalvelut/pics/aws_lb_helloworld.png)
+![helloworld form AWS with LB](https://raw.githubusercontent.com/immonju1/pilvipalvelut/master/pics/aws_lb_helloworld.png)
 
 ## Poista palvelu, podit ja klusteri
 
