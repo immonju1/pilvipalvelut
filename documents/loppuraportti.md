@@ -1,4 +1,4 @@
-# Sisällyluettelo.
+# Sisällyluettelo
 
 1. [Johdanto](#Johdanto)
 2. [Mitä on DevOps](#mita-on-devops)
