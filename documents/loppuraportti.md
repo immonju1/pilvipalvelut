@@ -15,29 +15,36 @@
 
 # Johdanto  <a name="Johdanto"></a>
 
-Johdanto
+??? Kesken ???
+
+Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologianan pilvipalveluissa on DevOps.
+
+DevOps on, sekä tapa organisoida töitä ohjelmistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
+
+Palveluiden nopeampi tuotantoonvienti ja kehittäminen vaatii myös uudenlaista arkkitehtuuria. Isojen monoliittisten sovellusten sijaan tarvitaan arkkitehtuuri, joka mahdollistaa pienten itsenäisten palveluiden kehittämisen ja tuotantoonviennin. Arkkitehtuuria kutsutaan mikropalveluarkkitehtuuriksi. 
+
+DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana opettelimme DevOps teknologioista Dockerin ja Kubernetesin. Teimme kevyen testisovelluksen simuloimaan mikropalvelua (Hello world -sovellus), kontitimme sen Dockerin avulla ja veimme sen tuotantoon Kubernetes klusteriin, jossa oli loadbalancer. Palvelu oli saavutettavissa domain nimen avulla.
+
+Seuraavassa käymme läpi asennuksen eri vaiheet ja teknologiat, joita käytimme projektin aikana.
 
 # Mikropalvelut (draft) <a name="mikropalvelut"></a>
 
 ## Yleistä
 
-DevOpsista jotain.
-
 Kubernetesin avulla on helppo viedä tuotantoon hyvin erilaisia sovelluksia. Sovellukset voivat olla monoliitteja, joilla ei ole mitään tekemistä toistensa kanssa. Tai mikroserviceitä, pieniä palveluita, jotka yhdessä muodostavat sovelluksen.
 
 Mikropalveluarkkkitehtuurin suosio kasvaa jatkuvasti. Tämä lähestymistapa antaa kehittäjille mahdolisuuden pilkkoa sovellus pieniin itsenäisiin osiin. Lukuisten mikropalveluiden hallinta voi aiheuttaa palveluiden hallinnalle ongelmia. Kuinka hallita ja operoida kymmeniä, mahdollisesti satoja eri mikropalveluita, voi olla ongelmallista.
 
-Tähän lisää ja paremmin. Hyödyt jne.
 
-Samaan aikaan tuotannossa eri versioita palveluista, liikenne voidaan ohjata eri versioille ja verrata vaikka toimintaa.
-
-## Mikropalveluiden periaate 
+## Mikropalveluiden periaate ja hyödyt
 
 Microservices-arkkitehtuurilla tarkoitetaan yksittäistä itsenäistä sovellusta, joka tarjoaa integraatiorajapinnan muille sovelluksille. Isompi ohjelmisto koostuu useista eri mikroserviceistä, päinvastoin kuin perinteinen ohjelmisto, joka koostuu yhdestä isosta sovelluksesta, joka tekee kaiken. (DevOps kurssi 2017.) Mikropalveluarkkitehtuuri on vaihtoehto monoliittiselle sovellukselle.
 
 Sujuva ohjelmiston jatkokehitys edellyttää usein uusien teknologioiden liittämisen vanhaan järjestelmään. Mikäli järjestelmän osia voi vaihtaa pikkuhiljaa uusiin ja tarpeita vastaaviin, helpottuu ohjelmiston kehitys ja ylläpito. (DevOps kurssi 2017.) Tämä on mahdollista mikropalveluilla.
 
 Lisäksi yksinkertainen palvelu on helppo kirjoittaa kokonaan uusiksi eikä muutaman palvelun uudelleenkirjoittaminen vie paljoa aikaa. Mikropalveuiden avulla voidaan myös korvata olemassaolevaa vanhaa teknologiaa tai korvata iso monoliitti pikkuhiljaa. (DevOps kurssi 2017.)
+
+Mikropalveluiden avulla samaan aikaan tuotannossa voi olla eri versioita palveluista, liikenne voidaan ohjata eri versioille ja verrata vaikka toimintaa (Viane 2018).
 
 ## Mikropalveluiden haasteita
 
@@ -53,7 +60,7 @@ Ratkaisuna aiemmin mainittuihin haasteisiin on toki tehdä mikropalveluihin itse
 
 Reititys mikropalveluiden välillä, siten että eri versioita mikropalveluista voi olla olemassa, voidaan hoitaa hallintakerroksen avulla (management interface). Samoin lokien keruu ja monitorointi tapahtuu hallintakerroksen avulla. (Viane 2018.)
 
-# Lähteet
+# Lähteet mikropalveluihin
 
 DevOps Fundamentals-koulutus 28.8.2017 – 30.8.2017. Kouluttaja Kai Jokiniemi, Eficode.
 
@@ -148,27 +155,39 @@ Testisovelluksemme on yksikertainen node.js sovellus, joka tulostaa Hello World!
 
 ## Docker file
 
+```
+FROM node:8
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+CMD ["npm", "start"]
+```
 
 
-## Testi Docker containerin luonti
+## Docker containerin luonti
 
 Docker Hubiin pitää viedä ensin image, jota voidaan ajaa AWSssä tai Minikubessa.
-
-Tähän tarkoitukseen on aiemmin luotu Hello World image, joka /scrpits hakemistossa.
 
 Rakennetaan image
  ```
 docker build -t helloworld .
  ```
-Testataan
+Testataan lokaalisti
 
  ```
  docker run -d -p 8080:8080 helloworld
  ```
  
-## Julkaistaan Docker Hub image 
+## Julkaistaan Docker Hubiin image 
  
- Luotu tunnus osoitteessa:   https://hub.docker.com/ 
+ Luotu tunnus osoitteessa:  https://hub.docker.com/ 
  
  Luotu Dashboard: Create Repository-toiminnolla.
  
@@ -185,15 +204,24 @@ Testataan
 
 # Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
 
-??? Järjestys, millaiset kappaleet ???
+??? kesken ja pitää parantaa ???
+
+Kubernetes on Open source orkestraattori Docker kontainereille. Kontainereissa voi olla esim. Web sovelluksia. Kubernetesin avulla hallinnoidaan näitä kontainereita. (What is Kubernetes)
+
+Docker ja Kubernetes täydentävät toisiaan, tyypillisesti sovellukset kontitetaan Dockerilla, ja Kubernetes orkestroi niitä. (Poulton 6) Kontainerina voi olla muukin kuin Docker. Kubernetesin avulla useita kontainereita voidaan ajaa samalla koneella, kontainerin voi käynnistää tietylle nodelle, kontainereita voi uudelleenkäynnistää ja kontainereita voi siirtää toiselle nodelle. (lähde ?)
+
+Kubernetes tekee perinteiset ohjelmistojen tuotantoonviennit ja päivitykset helpoksi. Sovelluksille voi tehdä deploymentteja (tuotantoon vientejä), sovelluksen versiota voi päivittää, vikatilanteessa voidaan palata edelliseen sovellusversioon (roll back) ja päivityksiä on mahdollista tehdä katkottomasti, eli päivitys ei näy loppukäyttäjille. (Poulton 5) Sovellusta voidaan myös skaalata joustavasti.
+
+Käyttäjän ei tarvitse välittää missä ja miten ohjelma pyörii, Kubernetes hoitaa sovelluksen ajoon haluttuun ympäristöön. (Poulton 10)
 
 Seuraavassa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea.
 
 Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWSään.
 
-Viimeisessä kappaleessa käydään läpi Kubernetesin arkkitehtuuri.
+Lopuksi  käydään läpi Kubernetesin arkkitehtuuri.
 
-## Minikube
+
+# Minikube
 
 Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes ympäristön. Toinen vaihtoehto on Docker Client.
 
@@ -336,13 +364,448 @@ Palvelun tila
     kubectl describe service nodehelloworld-service
 
 
-## Kubernetesin asennus AWS:ään
+# Kubernetesin asennus AWS:ään
+
+??? Tätä pitää parantaa joka suhteessa, ja testata että kaikki vielä ???
 
 Kubernetes klusterin asentaminen AWS-palvelunn osoittautui melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
 
+Asensimme Kubernetes clusteri kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa.
+
+Tarvitaan image, joten ensin luodaan Docker image Docker Hubiin. TODO: parempi testi-image?
+- immonju/helloworld
+- k8s.gcr.io/echoserver
+
+## AWS asennuksen esiehdot
+
+AWS Asennukseen tarvittiin melko paljon asioita, jotta sitä pääsi yrittämään. Seuraavassa käymme läpi vaiheet, jotka asentamiseen tarvitaan. 
+
+### Tarvittavat asennukset
+
+AWS tunnus
+- Palvelun hallintaan AWS alustalla
+
+kubectl omalle koneelle
+- Kubernetes hallintatyökalu
+
+kops asennus omalle koneelle
+- Kubernetes hallintatyökalu
+
+Awscli tool omalle koneelle
+- AWS hallintaan
+
+- AWS tunnukselle seuraavat oikeudet: 
+  - AmazonEC2FullAccess
+  - AmazonRoute53FullAccess
+  - AmazonS3FullAccess
+  - IAMFullAccess
+  - AmazonVPCFullAccess
+  - Asentamisen helpottamiseksi päädyimme käyttämään administrator oikeustasoa.
+
+DNS domain nimi
+- Halusimme tehdä asennuksen loppuun asti, ja tarjota testisovelluksesellemme myös domaim nimen.
+
+### Käytetty ympäristö
+
+Asensimme palvelut bento/ubuntu-16.04 Vagrant koneelle.
+
+Nimipalvelu meilä oli NameCheap palvelusta.
+
+## Asenna kubectl
+
+Asenna kubectl aiemmin olleen ohjeen mukaan.
+
+## Asenna kops
+
+Kops on työkalu, jolla voi tehdä tuotantotason Kubernetes asennuksia, päivityksiä ja ylläpitoa.
+
+https://github.com/kubernetes/kops
+
+Asennus 
+
+```
+curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
+
+```
+
+Testaus
+
+```
+$ kops version
+```
+
+## Asenna ja konfiguroi awscli
+
+### Asennus
+
+Uusimman version saa näillä ohjeilla
+https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html
+
+Vaiheet on käyty seuraavissa kappaleissa läpi.
+
+#### Asenna pip3
+
+Tarkista ensin Python versio
+- python3 --version
+
+Asenna pip3
+```
+$ curl -O https://bootstrap.pypa.io/get-pip.py
+$ python3 get-pip.py --user
+```
+Testaus
+```
+$ pip3 --version
+```
+
+#### Awscli asennus
+
+```
+$ pip3 install awscli --upgrade --user
+```
+
+testaus
+```
+$ aws --version
+```
+
+### Konfigurointi
+
+Konfiguroimiseen tarvitaan AWS tunnus. Loimme sen AWS:ssä. Tämän jälkeen piti luoda IAM tunnus, jota varsinaisesti käytetään palveluiden deploymentissa AWSään.
+
+![AWS services](https://github.com/immonju1/pilvipalvelut/blob/master/pics/AWS_services.png)
+
+Kuva. AWS palvelut näkymä.
+
+#### IAM käyttäjän luominen
+
+Kirjaudu sisään AWS:ään ja mene:
+
+- Identity and access management (IAM) -> users -> create new user.
+
+Loimme käyttäjän nimellä kops. Käyttäjän luomisen jälkeen saadaan access key ja secret access key käyttäjälle. 
+
+![IAM user](https://github.com/immonju1/pilvipalvelut/blob/master/pics/IAM_user.png)
+
+Kuva. IAM käyttäjä.
+
+#### Avainten konfigurointi
+
+Konfiguraoidaan komentoriviltä tämän jälkeen avaimet, jotka saadaan AWS:stä.
+
+```
+$ aws configure
+AWS Access Key ID [None]: **************
+AWS Secret Access Key [None]: **************
+Default region name [None]: 
+Default output format [None]:
+```
+
+Tarkistus
+
+ls -ahl ~/.aws/
+
+Käyttäjälle pitää antaa tämän jälkeen lisää oikeuksia AWS konsolissa.
+
+Annoimme seuraavat oikeudet
+- administration access
+
+### Luodaan S3 bucket
+
+S3 buckettia tarvitaan konfiguraation ja tilan tallentamiseen.
+
+Käyttöliittymän kautta create new bucket. 
+
+bucket-name: kops-state-a1703033
+
+![S3 bucket](https://github.com/immonju1/pilvipalvelut/blob/master/pics/S3_bucket.png)
+
+Kuva. S3 bucket.
+
+### Seuraavaksi domain nimen luominen
+
+Domain nimi luodaan WAS:n route 53 palvelussa.
+
+Route 53 -> DNS management -> create hosted zone
+
+Domain name
+- kubernetes.juhaimmonen.com
+
+![DNS](https://github.com/immonju1/pilvipalvelut/blob/master/pics/dns.png)
+
+Kuva. DNS zone
+
+Tämän jälkeen asensimme NameCheapissa nimipalveluun AWSstä saadut recordit, jotta domain nimemme ohjautuu Route 53 nimipalvelimille.
+
+### Luodaan SSH avaimet
+
+Seuravaksi loimme SSH avaimet , joita tarvitaan loginia varten, kun loggaudutaan klusterin nodeille.
+
+Yksityinen avain
+
+```
+$ ssh-keygen -f .ssh/id_rsa
+```
+
+## Klusterin luominen
+
+Kubernetes klusterin luominen AWS:ään
+
+```
+kops create cluster --name=kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033 --zones=eu-central-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.juhaimmonen.com
+```
+
+Jos zonen kanssa ongelmia, oman saa haettua
+```
+aws ec2 describe-availability-zones --region eu-central-1
+```
+
+Komennon jälkeen klusteri pitää vielä julkaista.
+
+```
+$ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
+```
+
+## Loadbalancerin lisääminen AWSään palvelulle
+
+Kaikki mitä voit tehdä kubectl:llä voidaan laittaa .yml tiedostoon. Kokeileimme POdin ja palvelun luomista konfiguraatiotiedostojen (manifest) avulla.
+
+Loadbalancerin jouduimme luomaan, koska halusimme testisovellukselle domain nimen käyttöön. Ilman loadbalaceria se ei ole mahdollista.
+
+## Luodaan pod ja palvelu
+
+Tarvittavat manifestit Podin ja Servicen luomiseen.
+
+pod: helloworld.yml
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodehelloworld-pod
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: kubernetes-demo
+    image: immonju/helloworld
+    ports:
+    - name: nodejs-port
+      containerPort: 8080
+```
+
+service: helloworld-service.yml
+- Lisää loadbalancerin
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-service
+spec:
+  ports:
+  - port: 80
+    targetPort: nodejs-port
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: LoadBalancer
+```
+
+### Luodaan pod AWSään
+
+Klusteri luotiin jo aikaisemmin.
+
+    kubectl create -f helloworld.yml
+
+### Luodaan Service
+
+Palvelun luominen sovellukselle.
+
+    kubectl create -f helloworld-service.yml
+
+Nyt AWS:n EC2:ssa pitäisi näkyä klusterin lisäksi loadbalancer.
+
+### Oikeuksien lisääminen ELB luomiseen
+
+LB luonti ei onnistunut Servicelle, joten jouduimme luomaan lisää oikeuksia IAM käyttäjälle
+- Puuttuva rooli oli elasticloadbalancing
+
+Tämä ei selvinnyt muuten kuin virheilmoitusta tutkimalla, ja AWS dokumentaatioon perehtymällä.
+
+Oikeuksien lisäämisen jälkeen LB luonti onnistui Servicen luonnilla.
 
 
-## Kubernetes arkkitehtuuri
+```
+$ kubectl describe service helloworld-service
+
+Name:                     helloworld-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     LoadBalancer
+IP:                       100.65.161.183
+LoadBalancer Ingress:     a94279ba2442911e98e700288b3b3c66-38697140.eu-central-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               nodejs-port/TCP
+NodePort:                 <unset>  32396/TCP
+Endpoints:                100.96.1.4:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  20m   service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   20m   service-controller  Ensured load balancer
+```
+
+## Domain nimen testaaminen
+
+domain nimi oli kubernetes.juhaimmonen.com
+
+Route 53:ssa voi luoda alias-nimen loadbalancerille. Saadaan sovellus näkyviin domain nimellä internettiin.
+
+Klikkaa Create Record Set ja syötä domain
+
+    helloworld.kubernetes.juhaimmonen.com
+
+Määritä tämä aliakseksi LB:lle.
+
+Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.com
+
+![helloworld form AWS with LB](https://raw.githubusercontent.com/immonju1/pilvipalvelut/master/pics/aws_lb_helloworld.png)
+
+
+## Poista klusteri
+
+Pelkkä klusterin poisto riittää, samalal poistuvat Pod:it ja palvelu, sekä loadbalancer.
+
+Klusterin poisto
+
+```
+$ kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
+```
+
+
+# Kubernetes Arkkitehtuuri
+
+## Cluster
+
+Kubernetesin cluster eli rykelmällä tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen yhden yksikön. Kuberenetes valjastaa kontitetut sovellukset rykelmälle ilman, että tarvitsee säätää jokaista konetta erikseen.
+
+Kuva jostain kokonaisarkkitehtuurista.
+
+### Master ja Nodet
+
+Kubernetes klusteri rakentuu mastereista ja nodeista. Nämä voivat olla Linux servereitä, jotka voivat olla virtuaalikoneita tai fyysisiä palvelimia.
+
+### Master
+
+Master on vastuussa klusterin hallinnoinnista. Se myös monitoroi klusteria, ajaa muutokset sinne ja reagoi tapahtumiin klusterissa. (Poulton 15) HA ratkaisuissa mastereita voi olla useita.
+
+Seuraavassa on esitelty Masterin eri komponentit.
+
+#### API server (aivot)
+
+API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
+
+#### Klusterin tietovarasto (muisti)
+
+Klusterin hallinnollinen data ja konfiguraatiot säilötään etcd:n, joka on hajautettu tietokanta. etcd on "yksi totuus" klusterista.
+
+#### Control Manager
+
+Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 17)
+
+#### Scheduler
+
+Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 17)
+
+### Node
+
+Nodet ovat Kubernetes klusterin työyksiköitä. Niiden tehtävä on odottaa uusia tehtäviä API serveriltä, toteuttaa ne ja raportoida tilastaan takaisin Masterille. (Poulton 18)
+
+Node rakentuu kolmesta eri komponentista.
+
+#### Kubelet
+
+Kubelet ohjaa Noden toimintaa, sen tehtävän on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitan esim. uusi Node Podeille. (Poulton 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
+
+#### Container runtime (CR)
+
+Container Runtime tarvitaan konttien ajamiseen Nodella. CR hakee imaget ja käynnistää sekä pysäyttää ne. (Poulton 19) 
+
+#### Network / Kube proxy
+
+Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella nodella on oma IP, sekä IPtables asetukset kohdallaan. (Poulton 20)
+
+## Sovellusten pakkaaminen Kubernetesissa
+
+Jotta sovellusta voidaan ajaa Kubernetes klusterissa, pitää sovelluksesta tehdä Docker image, tälle imagelle voidaan sitten tehdä deployment manifest-tiedoston avulla. (Poulton 20) Deployment tehdään Podin sisällä, joka on "kääre" kontainerille.
+
+Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kapseloidaan. Kukin kapselointi tarjoaa omat abstraktiokerroksensa ja palvelunsa sovellukselle. Sovellus kapseloidaan kontin sisälle, kontti kapseloidaan Podin sisälle, Deployment kapseloi Podit nodella. Service kapseloi Deploymentit.
+
+Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 20)
+
+![Kubernetes Node](­kubernetes_node.png)
+Kuva kapseloinnista (Poulton 20)
+
+### Manifest ja tavoitetila
+
+Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. 
+
+Nämä välitetään API serverille, ja tallennetaan halutuksi tilaksi etcd tietovarastoon. 
+
+API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
+
+Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 20 koko kappale)
+
+## Pods
+
+Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. 
+
+### Arkkitehtuuri
+
+Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 24)
+
+Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Pod voi sijaita vain yhdellä nodella. (Poulton 27)
+
+### Elinkaari
+
+Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 27)
+
+### Deployments
+
+Deployment on ylemmän tason kapselointi Podeille, joka tarjoaa lisäpalveluita, kuten skaalautumisen, loppukäyttäjille näkymättömän versionvaihon (zero-downtime update) ja rollbackin aiempaan versioon. (Poulton 27)
+
+### Services
+
+Podit itsessään ovat epäluotettavia, sovellukset niissä saattavat vikaantua. Uusia podeja käynnistyy ja terminoituu. Service edustaa pysyvyyttä sovellukselle. Service kapseloi joukon Podeja (eri deploymenteissa) ja tarjoaa niille front-endin ulkomaailmaan. Nämä palvelut pitävät sisällään domain nimen, IP-osoitteet, portit ja kuormanjaon sovellukeselle. (Poulton 28)
+
+Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpointin sovellukselle. Vastaavasti vaikka Podeja skaalattaisiin ylös tai alaspäin, tietää Service käytössä olevat Podit ja sovelluksen käyttäjille skaalaus on näkymätön. (Poulton 28-29) 
+
+Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 30)
+
+
+# Lähteet
+
+Poulton, Nigel 2018. The Kubernetes Book: version 3. eBook. 
+
+Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. 
+
+What is Kubernetes. https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/. Luettu 7.3.2019.
+
+Kube-scheduler. https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/
+
+Peltola, Reko 2017. Kubernetes-klusterin asennus ja käytöönotto. https://www.theseus.fi/bitstream/handle/10024/138954/Peltola_Reko.pdf?sequence=1&isAllowed=y
+
+Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.theseus.fi/bitstream/handle/10024/120976/Opinnayte_jyri_sakkara_final.pdf?sequence=1
+
+Ellingwood 2016. 
+
 
 
 

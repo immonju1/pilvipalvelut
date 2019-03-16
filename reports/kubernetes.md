@@ -310,7 +310,13 @@ Testataan
 - kubectl
 - kops binaryt omalle koneelle
 - awscli tool
-- AWS tunnukselle seuraavat oikeudet: AmazonEC2FullAccess, AmazonRoute53FullAccess, AmazonS3FullAccess, IAMFullAccess, AmazonVPCFullAccess -> tässä asennuksessa laitetaan administrator.
+- AWS tunnukselle seuraavat oikeudet: 
+  - AmazonEC2FullAccess
+  - AmazonRoute53FullAccess
+  - AmazonS3FullAccess
+  - IAMFullAccess
+  - AmazonVPCFullAccess
+  - Asentamisen helpottamiseksi päädyimme käyttämään administrator oikeustasoa.
 - DNS domain nimi, jos halutaan käyttää
 - Asennetaan bento/ubuntu-16.04 Vagrant koneelle
 
@@ -455,6 +461,7 @@ Komennon jälkeen klusteri pitää vielä julkaista.
 ```
 $ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
 ```
+
 ### Validointi
 
 Status saadaan selville
