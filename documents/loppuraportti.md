@@ -1,20 +1,63 @@
 # Sisällyluettelo
 
 1. [Johdanto](#Johdanto)
-2. [Mitä on DevOps](#mita-on-devops)
+2. [Mikropalvelut](#mikropalvelut)
 3. [Mikä on Docker](#mika-on-docker) 
     1. [Arkkitehtuuri](#arkkitehtuuri1)
     2. [Komentokieli, käytetyimmät komennot](#komennot)
     3. [Imaget, mistä saadaan](#imaget)
     4. [Konttien ajaminen](#kontit)
-
-
 4. [Mikä on Kuberbetes](#mika-on-kubernetes)
-5. [Mikropalvelut (?)](#mikropalvelut)
-6. [Yhteenveto](#Yhteenveto)
+    1. Minikube
+    2. AWS asennus
+    3. Arkkitehtuuri
+5. [Yhteenveto](#Yhteenveto)
 
-## Johdanto  <a name="Johdanto"></a>
-## Mitä on Devops <a name="mita-on-devops"></a>
+# Johdanto  <a name="Johdanto"></a>
+
+Johdanto
+
+# Mikropalvelut (draft) <a name="mikropalvelut"></a>
+
+## Yleistä
+
+DevOpsista jotain.
+
+Kubernetesin avulla on helppo viedä tuotantoon hyvin erilaisia sovelluksia. Sovellukset voivat olla monoliitteja, joilla ei ole mitään tekemistä toistensa kanssa. Tai mikroserviceitä, pieniä palveluita, jotka yhdessä muodostavat sovelluksen.
+
+Mikropalveluarkkkitehtuurin suosio kasvaa jatkuvasti. Tämä lähestymistapa antaa kehittäjille mahdolisuuden pilkkoa sovellus pieniin itsenäisiin osiin. Lukuisten mikropalveluiden hallinta voi aiheuttaa palveluiden hallinnalle ongelmia. Kuinka hallita ja operoida kymmeniä, mahdollisesti satoja eri mikropalveluita, voi olla ongelmallista.
+
+Tähän lisää ja paremmin. Hyödyt jne.
+
+Samaan aikaan tuotannossa eri versioita palveluista, liikenne voidaan ohjata eri versioille ja verrata vaikka toimintaa.
+
+## Mikropalveluiden periaate 
+
+Microservices-arkkitehtuurilla tarkoitetaan yksittäistä itsenäistä sovellusta, joka tarjoaa integraatiorajapinnan muille sovelluksille. Isompi ohjelmisto koostuu useista eri mikroserviceistä, päinvastoin kuin perinteinen ohjelmisto, joka koostuu yhdestä isosta sovelluksesta, joka tekee kaiken. (DevOps kurssi 2017.) Mikropalveluarkkitehtuuri on vaihtoehto monoliittiselle sovellukselle.
+
+Sujuva ohjelmiston jatkokehitys edellyttää usein uusien teknologioiden liittämisen vanhaan järjestelmään. Mikäli järjestelmän osia voi vaihtaa pikkuhiljaa uusiin ja tarpeita vastaaviin, helpottuu ohjelmiston kehitys ja ylläpito. (DevOps kurssi 2017.) Tämä on mahdollista mikropalveluilla.
+
+Lisäksi yksinkertainen palvelu on helppo kirjoittaa kokonaan uusiksi eikä muutaman palvelun uudelleenkirjoittaminen vie paljoa aikaa. Mikropalveuiden avulla voidaan myös korvata olemassaolevaa vanhaa teknologiaa tai korvata iso monoliitti pikkuhiljaa. (DevOps kurssi 2017.)
+
+## Mikropalveluiden haasteita
+
+Mikropalveluarkkitehtuuri voi johtaa toisaalta hyvin monimutkaiseen arkkiehtuuriin. Lukuisa joukko mikropalveluita kommunikoi keskenään, eikä ole selkeää kokonaiskuvaa siitä, mikä palvelu käyttää mitäkin toista palvelua. Tuloksena on melkoinen sekasotku, joka ei ole kenenkään ylläpidettävissä. (Viane 2018.)
+
+Mikropalveluarkkitehtuurin tai toteutusten ongelmana on myös se, että ei ole salausta tietoliikenteessä mikropalveluiden välillä. Jos kommunikointi toisen mikropalvelun kanssa epäonnistuu, ei ole vikasietoisuutta, yhteyttä ei yritetä uudestaan. Vikasietoisuus pitää olla manuaalisesti koodattuna kuhunkin mikropalveluun. Sovelluksella tai mikropalveluilla ei ole älykästä kuormanjakoa, eli ei seurata mikropalveluiden latenssia, käytetään vain yksinkertaista algoritmia kuormanjakoon.  (Viane 2018.)
+
+Mikropalveluiden välillä ei voida tehdä reitityspäätöksiä. Mikropalveluiden välisestä liikenteestä ei jää välttämättä lokeja, eikä liikennettä monitorointia. Mikropalveluiden välillä ei ole myöskään  pääsynvalvontaa, ellei sitä tehdä itse mikropalveluihin.  (Viane 2018.)
+
+## Ratkaisu mikropalveluiden haasteisiin
+
+Ratkaisuna aiemmin mainittuihin haasteisiin on toki tehdä mikropalveluihin itseensä kaikki tarvittavat asiat, mutta se vaatii jokaiselta mikropalveluiden kehittäjältä oman toteutuksen. Ratkaisuna voidaan käyttää proxyn lisäämistä kaikkiin mikropalveluihin. Kommunikointi tapahtuu proxyn avulla mikropalveluiden välillä. Proxy hoitaa salauksen ja vikasietoisuuden. Proxyissa voi olla myös kuormanjako-ominaisuuksia. (Viane 2018.)
+
+Reititys mikropalveluiden välillä, siten että eri versioita mikropalveluista voi olla olemassa, voidaan hoitaa hallintakerroksen avulla (management interface). Samoin lokien keruu ja monitorointi tapahtuu hallintakerroksen avulla. (Viane 2018.)
+
+# Lähteet
+
+DevOps Fundamentals-koulutus 28.8.2017 – 30.8.2017. Kouluttaja Kai Jokiniemi, Eficode.
+
+Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. Udemy.
 
 
 ## Mikä on Docker <a name="mika-on-docker"></a>
@@ -78,7 +121,6 @@ Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useam
 jotain lisää FIND IP,  Expose port, linking containers ??
 
 
-#### Testisovellus
 
 
 -------------------------------
@@ -98,9 +140,214 @@ Packt Publishing, E-kirja
 
 ------------------------------
 
-## Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
-## Mikropalvelut (?)  <a name="mikropalvelut"></a>
-## Yhteenveto  <a name="Yhteenveto"></a>
+# Testisovellus
+
+Testisovelluksemme on yksikertainen node.js sovellus, joka tulostaa Hello World!
+
+??? Pitää muokata ???
+
+## Docker file
+
+
+
+## Testi Docker containerin luonti
+
+Docker Hubiin pitää viedä ensin image, jota voidaan ajaa AWSssä tai Minikubessa.
+
+Tähän tarkoitukseen on aiemmin luotu Hello World image, joka /scrpits hakemistossa.
+
+Rakennetaan image
+ ```
+docker build -t helloworld .
+ ```
+Testataan
+
+ ```
+ docker run -d -p 8080:8080 helloworld
+ ```
+ 
+## Julkaistaan Docker Hub image 
+ 
+ Luotu tunnus osoitteessa:   https://hub.docker.com/ 
+ 
+ Luotu Dashboard: Create Repository-toiminnolla.
+ 
+ Muutettu imagen nimi omalla koneella
+ ```
+ docker tag helloworld immonju/helloworld
+ ```
+ Login ja vienti repoon.
+ ```
+ docker login
+ 
+ docker push immonju/helloworld
+```
+
+# Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
+
+??? Järjestys, millaiset kappaleet ???
+
+Seuraavassa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea.
+
+Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWSään.
+
+Viimeisessä kappaleessa käydään läpi Kubernetesin arkkitehtuuri.
+
+## Minikube
+
+Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes ympäristön. Toinen vaihtoehto on Docker Client.
+
+Minikuben asentaminen vaatii virtuaalikoneen esim. Virtualbox.
+
+Linkki Minikuben dokumentaatioon [](https://github.com/kubernetes/minikube/)
+
+Raporteissamme on tarkemmin Minikuben asentamisesta ja testaamisesta. Linkki.
+
+### Asentaminen
+
+ ```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+ ```
+
+Asennuksen jälkeen toiminnan voi tarkistaa.
+
+ ```
+minikube start
+
+minikube status
+ ```
+
+### Kubectl
+
+Kubectl on komentorivityökalu sovellusten hallintaan Kubernetesissä.
+
+Lisää dokumentaatiota löytyy osoitteeesta [](https://kubernetes.io/docs/tasks/tools/install-kubectl/) ja raporteistamme. Linkki.
+
+#### Kubectl asennus
+
+Kubectl tarvitaan Kubernetes klusterin ohjaamiseen. Sen voi asentaa itselleen suraavilla komennoilla.
+
+```
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+ ```
+
+Kubectl komentoja, joilla voi tarkistaa Minikuben asennuksen onnistumisen.
+
+```
+kubectl 
+
+kubecluster-info
+```
+
+### Kubernetesin testaaminen Minikuben avulla
+
+??? koko setti pitää testata ja tekstiä parantaa ???
+
+#### Podin luominen
+
+Luodaan ensin Pod, ja sitä varten tiedosto pod-helloworld.yml
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodehelloworld.example.com
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: kubernetes-demo
+    image: immonju/helloworld
+    ports:
+    - containerPort: 8080
+
+```
+
+Luodaan pod kubectl:n avulla
+
+    kubectl create -f pod-helloworld.yml
+
+Tarkistus, että asentunut oikein.
+
+    kubectl describe pod nodehelloworld.example.com
+
+#### Luodaan Service Minikubeen
+
+Podin luomisen jälkeen voidaan luoda service.
+
+    kubectl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
+
+Palvelun URL saadaan selville komennolla, jonka jälkeen Web selaimella voi tarkistaa sovelluksen toiminnan.
+
+    minikube service nodehelloworld-service --url
+
+Komennolla
+
+    kubectl get service
+
+Näkee päällä olevat palvelut
+
+#### Sovelluksen käyttäminen
+
+Pääsy sovellukseen tapahtuu normaalisti servicen kautta. Toinen vaihtoehto servicelle on NodePort (suoraan noden porttiin). NodePort:ia voi käyttää jos ei ole LoadBalanceria. Loadbalancer tarvitaan jos on useampi node varattuna sovellukselle.
+
+Jos ei ole vielä serviceä olemassa, voidaan käyttää port-forward komentoa, jolloin sovellusta käytetään suoraan Podin kautta.
+
+    kubectl port-forward nodehelloworld.example.com 8081:8080
+
+local port 8081 ohjautuu porttiin 8080.
+
+Toinen vaihtoehto on käyttää servicen URL, joka mainittu edellisessä kappaleessa.
+
+### Hyödyllisiä komentoja
+
+???Näitä liikaa??? Vai taulukkoon ???
+
+Poista pod
+
+    kubectl delete pod nodehelloworld.example.com
+
+Poista service
+
+    kubectl delete service nodehelloworld-service
+
+Mene podiin
+
+    kubectl attach nodehelloworld.example.com -i
+
+Kontainerin hakemiston sisältö
+
+    kubectl exec nodehelloworld.example.com -- ls
+
+Komentoriville pod:iin
+
+    kubectl exec -it nodehelloworld.example.com -- bash
+
+Lokit
+
+    kubectl logs nodehelloworld.example.com
+
+Palvelun tila
+
+    kubectl describe service nodehelloworld-service
+
+
+## Kubernetesin asennus AWS:ään
+
+Kubernetes klusterin asentaminen AWS-palvelunn osoittautui melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
+
+
+
+## Kubernetes arkkitehtuuri
+
+
+
+
+# Yhteenveto  <a name="Yhteenveto"></a>
 
 
 
