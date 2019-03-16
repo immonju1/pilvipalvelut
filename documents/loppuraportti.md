@@ -82,7 +82,7 @@ jotain lisää FIND IP,  Expose port, linking containers ??
 
 
 -------------------------------
-Kirja lähteet:
+Kirja lähteet Dockeria varten:
 
 Learning Docker
 Raj, Pethuru ; Chelladhurai, Jeeva S. ; Singh, Vinod
