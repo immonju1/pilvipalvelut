@@ -278,7 +278,7 @@ Kubectl komentoja, joilla voi tarkistaa Minikuben asennuksen onnistumisen.
 ```
 kubectl 
 
-kubecluster-info
+kubectl cluster-info
 ```
 
 ### Kubernetesin testaaminen Minikuben avulla
