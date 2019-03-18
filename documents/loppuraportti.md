@@ -579,7 +579,7 @@ Seuravaksi loimme SSH avaimet , joita tarvitaan loginia varten, kun loggaudutaan
 Yksityinen avain
 
 ```
-$ ssh-keygen -f .ssh/id_rsa
+ssh-keygen -f .ssh/id_rsa
 ```
 
 ## Klusterin luominen
@@ -598,7 +598,19 @@ aws ec2 describe-availability-zones --region eu-central-1
 Komennon jälkeen klusteri pitää vielä julkaista.
 
 ```
-$ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
+kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a1703033
+```
+
+Klusterin validointi
+```
+kubectl get node
+```
+```
+kops validate cluster
+```
+SSH yhteys masteriin.
+```
+ssh -i ~/.ssh/id_rsa admin@api.kubernetes.juhaimmonen.com
 ```
 
 ## Loadbalancerin lisääminen AWSään palvelulle
@@ -719,7 +731,7 @@ Pelkkä klusterin poisto riittää, samalal poistuvat Pod:it ja palvelu, sekä l
 Klusterin poisto
 
 ```
-$ kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
+kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
 
 
