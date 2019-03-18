@@ -233,6 +233,11 @@ Raporteissamme on tarkemmin Minikuben asentamisesta ja testaamisesta. Linkki.
 
 ### Asentaminen
 
+VirtualBoxin asentaminen onnistuu alla olevalla komennolla.
+```
+sudo apt-get install virtualbox
+```
+
  ```
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
  ```
