@@ -695,6 +695,11 @@ Klusteri luotiin jo aikaisemmin.
 
     kubectl create -f helloworld.yml
 
+Tarkista podin luominen seuraavalla komennolla.
+```
+kubectl get pod
+```
+
 ### Luodaan Service
 
 Palvelun luominen sovellukselle.
