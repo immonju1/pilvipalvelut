@@ -388,6 +388,8 @@ Palvelun tila
 
 ??? Tätä pitää parantaa joka suhteessa, ja testata että kaikki vielä ???
 
+Asennuksessa noudatettu Udemy kurssia. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 Kubernetes klusterin asentaminen AWS-palvelunn osoittautui melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
 
 Asensimme Kubernetes clusteri kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa.
