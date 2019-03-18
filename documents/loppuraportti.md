@@ -339,6 +339,10 @@ Jos ei ole vielä serviceä olemassa, voidaan käyttää port-forward komentoa, 
 
 local port 8081 ohjautuu porttiin 8080.
 
+```
+curl localhost:8081
+```
+
 Toinen vaihtoehto on käyttää servicen URL, joka mainittu edellisessä kappaleessa.
 
 ### Hyödyllisiä komentoja
