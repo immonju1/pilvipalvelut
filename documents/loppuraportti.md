@@ -604,16 +604,46 @@ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a17
 Klusterin validointi
 ```
 kubectl get node
+
+vagrant@vagrant:~$ kubectl get node
+NAME                                             STATUS   ROLES    AGE   VERSION
+ip-172-20-56-105.eu-central-1.compute.internal   Ready    node     2m    v1.11.7
+ip-172-20-60-110.eu-central-1.compute.internal   Ready    node     3m    v1.11.7
+ip-172-20-63-171.eu-central-1.compute.internal   Ready    master   4m    v1.11.7
+
 ```
+
+
 ```
 kops validate cluster
 ```
+```
+vagrant@vagrant:~$ kops validate cluster --state=s3://kops-state-a1703033 
+Using cluster from kubectl context: kubernetes.juhaimmonen.com
+
+Validating cluster kubernetes.juhaimmonen.com
+
+INSTANCE GROUPS
+NAME			ROLE	MACHINETYPE	MIN	MAX	SUBNETS
+master-eu-central-1a	Master	t2.micro	1	1	eu-central-1a
+nodes			Node	t2.micro	2	2	eu-central-1a
+
+NODE STATUS
+NAME						ROLE	READY
+ip-172-20-56-105.eu-central-1.compute.internal	node	True
+ip-172-20-60-110.eu-central-1.compute.internal	node	True
+ip-172-20-63-171.eu-central-1.compute.internal	master	True
+
+Your cluster kubernetes.juhaimmonen.com is ready
+```
+
+
 SSH yhteys masteriin.
 ```
 ssh -i ~/.ssh/id_rsa admin@api.kubernetes.juhaimmonen.com
 ```
 
-## Loadbalancerin lisääminen AWSään palvelulle
+## Sovelluksen Podin, Servicen ja Loadbalancerin lisääminen AWSään palvelulle
 
 Kaikki mitä voit tehdä kubectl:llä voidaan laittaa .yml tiedostoon. Kokeileimme POdin ja palvelun luomista konfiguraatiotiedostojen (manifest) avulla.
 
