@@ -151,8 +151,6 @@ Packt Publishing, E-kirja
 
 Testisovelluksemme on yksikertainen node.js sovellus, joka tulostaa Hello World!
 
-??? Pitää muokata ???
-
 ## Docker file
 
 ```
@@ -170,6 +168,42 @@ EXPOSE 8080
 CMD ["npm", "start"]
 ```
 ## Lähdekoodi
+
+```
+'use strict';
+
+const express = require('express');
+
+//constants
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
+// app
+const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello world\n');
+});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
+```
+
+```
+package.json
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "First Last <first.last@example.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+} 
+```
 
 ## Docker containerin luonti
 
@@ -229,8 +263,6 @@ Minikuben asentaminen vaatii virtuaalikoneen esim. Virtualbox.
 
 Linkki Minikuben dokumentaatioon [](https://github.com/kubernetes/minikube/)
 
-Raporteissamme on tarkemmin Minikuben asentamisesta ja testaamisesta. Linkki.
-
 ### Asentaminen
 
 VirtualBoxin asentaminen onnistuu alla olevalla komennolla.
@@ -245,23 +277,28 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 
 
 Minikuben käynnistäminen:
- ```
+
+```
 minikube start
 ```
+
 Asennuksen jälkeen minikuben statuksen voi tarkistaa.
+
 ```
 minikube status
  ```
- Minikuben voi pysäyttää komennolla:
- ```
+
+Minikuben voi pysäyttää komennolla:
+
+```
  minikube stop
- ```
+```
 
 ### Kubectl
 
 Kubectl on komentorivityökalu sovellusten hallintaan Kubernetesissä.
 
-Lisää dokumentaatiota löytyy osoitteeesta [](https://kubernetes.io/docs/tasks/tools/install-kubectl/) ja raporteistamme. Linkki.
+Lisää dokumentaatiota löytyy osoitteeesta [](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 #### Kubectl asennus
 
@@ -279,17 +316,27 @@ sudo apt-get update
 sudo apt-get install -y kubectl
  ```
 
-Kubectl komentoja, joilla voi tarkistaa Minikuben asennuksen onnistumisen.
+Kubectl testaus, onko asentunut.
 
 ```
-kubectl 
+kubectl
+```
 
+Jos Minikube on päällä, Minikube klusterin tiedot komennolla
+
+```
 kubectl cluster-info
 ```
 
 ### Kubernetesin testaaminen Minikuben avulla
 
-??? koko setti pitää testata ja tekstiä parantaa ???
+Käynnistä Minikube ensin.
+
+```
+minikube start
+```
+
+Tämän jälkeen luodaan Pod ja Sercvice. Ajettava image on "immonju/helloworld"
 
 #### Podin luominen
 
@@ -325,10 +372,6 @@ Podin luomisen jälkeen voidaan luoda service.
 
     kubectl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
 
-Palvelun URL saadaan selville komennolla, jonka jälkeen Web selaimella voi tarkistaa sovelluksen toiminnan.
-
-    minikube service nodehelloworld-service --url
-
 Komennolla
 
     kubectl get service
@@ -337,9 +380,15 @@ Näkee päällä olevat palvelut
 
 #### Sovelluksen käyttäminen
 
-Pääsy sovellukseen tapahtuu normaalisti servicen kautta. Toinen vaihtoehto servicelle on NodePort (suoraan noden porttiin). NodePort:ia voi käyttää jos ei ole LoadBalanceria. Loadbalancer tarvitaan jos on useampi node varattuna sovellukselle.
+Pääsy sovellukseen tapahtuu normaalisti servicen kautta. 
 
-Jos ei ole vielä serviceä olemassa, voidaan käyttää port-forward komentoa, jolloin sovellusta käytetään suoraan Podin kautta.
+Palvelun URL saadaan selville alla olevalla komennolla, jonka jälkeen Web selaimella voi tarkistaa sovelluksen toiminnan.
+
+    minikube service nodehelloworld-service --url
+
+Toinen vaihtoehto servicelle on NodePort (suoraan noden porttiin). NodePort:ia voidaan käyttää jos ei ole LoadBalanceria. Loadbalancer tarvitaan jos on useampi Node varattuna sovellukselle.
+
+Jos ei ole vielä Serviceä olemassa, voidaan käyttää port-forward komentoa, jolloin sovellusta käytetään suoraan Podin kautta.
 
     kubectl port-forward nodehelloworld.example.com 8081:8080
 
@@ -349,11 +398,7 @@ local port 8081 ohjautuu porttiin 8080.
 curl localhost:8081
 ```
 
-Toinen vaihtoehto on käyttää servicen URL, joka mainittu edellisessä kappaleessa.
-
 ### Hyödyllisiä komentoja
-
-???Näitä liikaa??? Vai taulukkoon ???
 
 Poista pod
 
@@ -386,23 +431,19 @@ Palvelun tila
 
 # Kubernetesin asennus AWS:ään
 
-??? Tätä pitää parantaa joka suhteessa, ja testata että kaikki vielä ???
+Asennuksessa on noudatettu Udemy kurssin Learn DevOps-materiaalia. Ilman kyseitä materiaalia asennus olisis ollut huomattavasti vaikeamapi.
 
-Asennuksessa noudatettu Udemy kurssia. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-Kubernetes klusterin asentaminen AWS-palvelunn osoittautui melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
+Kubernetes klusterin asentaminen AWS-palvelunn osoittautui silti melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
 
 Asensimme Kubernetes clusteri kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa.
 
-Tarvitaan image, joten ensin luodaan Docker image Docker Hubiin. TODO: parempi testi-image?
-- immonju/helloworld
-- k8s.gcr.io/echoserver
+Docker Hubissa meillä oli käytössä aiemmin luomamme image: "immonju/helloworld".
 
 ## AWS asennuksen esiehdot
 
-AWS Asennukseen tarvittiin melko paljon asioita, jotta sitä pääsi yrittämään. Seuraavassa käymme läpi vaiheet, jotka asentamiseen tarvitaan. 
+Seuraavassa käymme läpi vaiheet, jotka asentamiseen tarvitaan. 
 
-### Tarvittavat asennukset
+### Tarvittavat tunnukset ja asennukset
 
 AWS tunnus
 - Palvelun hallintaan AWS alustalla
@@ -430,6 +471,9 @@ DNS domain nimi
 ### Käytetty ympäristö
 
 Asensimme palvelut bento/ubuntu-16.04 Vagrant koneelle.
+- kubectl
+- kops
+- Awscli
 
 Nimipalvelu meilä oli NameCheap palvelusta.
 
@@ -473,20 +517,23 @@ Tarkista ensin Python versio
 - python3 --version
 
 Tarvittaessa tarvitset python3-disutils, jonka voit asentaa alla olevalla komennolla.
+
 ```
 sudo apt-get install python3-distutils
 ```
-Tarkista ympäristön muuttujat. Saatat mahdollisesti tarvita komentoa:
-```
-export PATH=~/.local/bin:$PATH
-```
 
 Asenna pip3
+
 ```
 curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py --user
 ```
 
+Tarkista ympäristömuuttuja, jotta siellä on polku pip3:een. Saatat mahdollisesti tarvita komentoa:
+
+```
+export PATH=~/.local/bin:$PATH
+```
 
 Testaus
 ```
@@ -604,7 +651,8 @@ kops update cluster kubernetes.juhaimmonen.com --yes --state=s3://kops-state-a17
 Klusterin validointi
 ```
 kubectl get node
-
+```
+```
 vagrant@vagrant:~$ kubectl get node
 NAME                                             STATUS   ROLES    AGE   VERSION
 ip-172-20-56-105.eu-central-1.compute.internal   Ready    node     2m    v1.11.7
@@ -613,6 +661,7 @@ ip-172-20-63-171.eu-central-1.compute.internal   Ready    master   4m    v1.11.7
 
 ```
 
+Voi tarkistaa myös kommennolla
 
 ```
 kops validate cluster
@@ -637,19 +686,18 @@ ip-172-20-63-171.eu-central-1.compute.internal	master	True
 Your cluster kubernetes.juhaimmonen.com is ready
 ```
 
-
-SSH yhteys masteriin.
+SSH yhteys masteriin aiemmin luotuja SSH-avaimia käyttäen.
 ```
 ssh -i ~/.ssh/id_rsa admin@api.kubernetes.juhaimmonen.com
 ```
 
-## Sovelluksen Podin, Servicen ja Loadbalancerin lisääminen AWSään palvelulle
+## Podin, Servicen ja Loadbalancerin lisääminen AWS
 
-Kaikki mitä voit tehdä kubectl:llä voidaan laittaa .yml tiedostoon. Kokeileimme POdin ja palvelun luomista konfiguraatiotiedostojen (manifest) avulla.
+Kaikki mitä voidaan tehdä kubectl:llä, voidaan laittaa myös .yml tiedostoon. Kokeileimme Podin ja Servicen luomista konfiguraatiotiedostojen (manifest) avulla.
 
 Loadbalancerin jouduimme luomaan, koska halusimme testisovellukselle domain nimen käyttöön. Ilman loadbalaceria se ei ole mahdollista.
 
-## Luodaan pod ja palvelu
+## Luodaan Pod ja Service
 
 Tarvittavat manifestit Podin ja Servicen luomiseen.
 
@@ -689,26 +737,26 @@ spec:
   type: LoadBalancer
 ```
 
-### Luodaan pod AWSään
+### Luodaan Pod AWS
 
-Klusteri luotiin jo aikaisemmin.
+Klusteri luotiin jo aikaisemmin. Luodaan Pod sinne.
 
     kubectl create -f helloworld.yml
 
 Tarkista podin luominen seuraavalla komennolla.
+
 ```
 kubectl get pod
 ```
 
-### Oikeuksien lisääminen ELB luomiseen
+### Oikeuksien lisääminen Loadbalancerin luomiseen
 
-LB luonti ei onnistunut Servicelle, joten jouduimme luomaan lisää oikeuksia IAM käyttäjälle
+Loadbalancer luonti ei onnistunut Servicelle, joten jouduimme luomaan lisää oikeuksia IAM käyttäjälle.
 - Puuttuva rooli oli elasticloadbalancing
 
 Tämä ei selvinnyt muuten kuin virheilmoitusta tutkimalla, ja AWS dokumentaatioon perehtymällä.
 
 Oikeuksien lisäämisen jälkeen LB luonti onnistui Servicen luonnilla.
-
 
 ### Luodaan Service
 
@@ -716,7 +764,7 @@ Palvelun luominen sovellukselle.
 
     kubectl create -f helloworld-service.yml
 
-Nyt AWS:n EC2:ssa pitäisi näkyä klusterin lisäksi loadbalancer.
+Nyt AWS:n EC2:ssa pitäisi näkyä Masterin ja Nodejen lisäksi loadbalancer.
 
 
 Seuraavalla komennolla voi hakea servicen tiedot. Komennolla pystyt varmistamaan, että load balancer on luotu palveluun.
@@ -748,13 +796,13 @@ Events:
 
 domain nimi oli kubernetes.juhaimmonen.com
 
-Route 53:ssa voi luoda alias-nimen loadbalancerille. Saadaan sovellus näkyviin domain nimellä internettiin.
+Route 53:ssa voi luoda alias-nimen loadbalancerille. Tämä avulla saadaan sovellus näkyviin domain nimellä internettiin.
 
 Klikkaa Create Record Set ja syötä domain
 
     helloworld.kubernetes.juhaimmonen.com
 
-Määritä tämä aliakseksi LB:lle.
+Määritä tämä aliakseksi Loadbalancerille.
 
 Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.com
 
@@ -763,14 +811,13 @@ Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.co
 
 ## Poista klusteri
 
-Pelkkä klusterin poisto riittää, samalla poistuvat Pod:it ja palvelu, sekä loadbalancer.
+Pelkkä klusterin poisto riittää, samalla poistuvat Pod:it ja Service, sekä Loadbalancer.
 
 Klusterin poisto
 
 ```
 kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
-
 
 # Kubernetes Arkkitehtuuri
 
@@ -876,7 +923,7 @@ Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niill
 
 Poulton, Nigel 2018. The Kubernetes Book: version 3. eBook. 
 
-Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. 
+Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. Udemy.
 
 What is Kubernetes. https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/. Luettu 7.3.2019.
 
