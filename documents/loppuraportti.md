@@ -700,14 +700,6 @@ Tarkista podin luominen seuraavalla komennolla.
 kubectl get pod
 ```
 
-### Luodaan Service
-
-Palvelun luominen sovellukselle.
-
-    kubectl create -f helloworld-service.yml
-
-Nyt AWS:n EC2:ssa pitäisi näkyä klusterin lisäksi loadbalancer.
-
 ### Oikeuksien lisääminen ELB luomiseen
 
 LB luonti ei onnistunut Servicelle, joten jouduimme luomaan lisää oikeuksia IAM käyttäjälle
@@ -718,6 +710,16 @@ Tämä ei selvinnyt muuten kuin virheilmoitusta tutkimalla, ja AWS dokumentaatio
 Oikeuksien lisäämisen jälkeen LB luonti onnistui Servicen luonnilla.
 
 
+### Luodaan Service
+
+Palvelun luominen sovellukselle.
+
+    kubectl create -f helloworld-service.yml
+
+Nyt AWS:n EC2:ssa pitäisi näkyä klusterin lisäksi loadbalancer.
+
+
+Seuraavalla komennolla voi hakea servicen tiedot. Komennolla pystyt varmistamaan, että load balancer on luotu palveluun.
 ```
 $ kubectl describe service helloworld-service
 
@@ -761,7 +763,7 @@ Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.co
 
 ## Poista klusteri
 
-Pelkkä klusterin poisto riittää, samalal poistuvat Pod:it ja palvelu, sekä loadbalancer.
+Pelkkä klusterin poisto riittää, samalla poistuvat Pod:it ja palvelu, sekä loadbalancer.
 
 Klusterin poisto
 
