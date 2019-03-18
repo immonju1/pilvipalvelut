@@ -243,12 +243,18 @@ Minikuben asennetaan seuraavalla komennolla.
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
  ```
 
-Asennuksen jälkeen toiminnan voi tarkistaa.
 
+Minikuben käynnistäminen:
  ```
 minikube start
-
+```
+Asennuksen jälkeen minikuben statuksen voi tarkistaa.
+```
 minikube status
+ ```
+ Minikuben voi pysäyttää komennolla:
+ ```
+ minikube stop
  ```
 
 ### Kubectl
