@@ -470,14 +470,25 @@ Vaiheet on käyty seuraavissa kappaleissa läpi.
 Tarkista ensin Python versio
 - python3 --version
 
+Tarvittaessa tarvitset python3-disutils, jonka voit asentaa alla olevalla komennolla.
+```
+sudo apt-get install python3-distutils
+```
+Tarkista ympäristön muuttujat. Saatat mahdollisesti tarvita komentoa:
+```
+export PATH=~/.local/bin:$PATH
+```
+
 Asenna pip3
 ```
-$ curl -O https://bootstrap.pypa.io/get-pip.py
-$ python3 get-pip.py --user
+curl -O https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py --user
 ```
+
+
 Testaus
 ```
-$ pip3 --version
+pip3 --version
 ```
 
 #### Awscli asennus
