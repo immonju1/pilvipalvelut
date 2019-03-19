@@ -15,15 +15,13 @@
 
 # Johdanto  <a name="Johdanto"></a>
 
-??? Kesken ???
-
-Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologianan pilvipalveluissa on DevOps.
+Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologiana pilvipalveluissa on DevOps.
 
 DevOps on, sekä tapa organisoida töitä ohjelmistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
 
 Palveluiden nopeampi tuotantoonvienti ja kehittäminen vaatii myös uudenlaista arkkitehtuuria. Isojen monoliittisten sovellusten sijaan tarvitaan arkkitehtuuri, joka mahdollistaa pienten itsenäisten palveluiden kehittämisen ja tuotantoonviennin. Arkkitehtuuria kutsutaan mikropalveluarkkitehtuuriksi. 
 
-DevOpsiin liittyy lukuisia teknisistä ratkaisuista. Projektin aikana opettelimme DevOps teknologioista Dockerin ja Kubernetesin. Teimme kevyen testisovelluksen simuloimaan mikropalvelua (Hello world -sovellus), kontitimme sen Dockerin avulla ja veimme sen tuotantoon Kubernetes klusteriin, jossa oli loadbalancer. Palvelu oli saavutettavissa domain nimen avulla.
+DevOpsiin liittyy lukuisia teknisistä ratkaisuita. Projektin aikana opettelimme DevOps teknologioista Dockerin ja Kubernetesin. Teimme kevyen testisovelluksen simuloimaan mikropalvelua (Hello world -sovellus), kontitimme sen Dockerin avulla ja veimme sen tuotantoon Kubernetes klusteriin, jossa oli loadbalancer. Palvelu oli saavutettavissa domain nimen avulla.
 
 Seuraavassa käymme läpi asennuksen eri vaiheet ja teknologiat, joita käytimme projektin aikana.
 
@@ -31,10 +29,9 @@ Seuraavassa käymme läpi asennuksen eri vaiheet ja teknologiat, joita käytimme
 
 ## Yleistä
 
-Kubernetesin avulla on helppo viedä tuotantoon hyvin erilaisia sovelluksia. Sovellukset voivat olla monoliitteja, joilla ei ole mitään tekemistä toistensa kanssa. Tai mikroserviceitä, pieniä palveluita, jotka yhdessä muodostavat sovelluksen.
+Kubernetesin avulla on helppo viedä tuotantoon hyvin erilaisia sovelluksia. Sovellukset voivat olla monoliitteja, joilla ei ole mitään tekemistä toistensa kanssa. Tai mikropalveluita, pieniä sovelluksia, jotka yhdessä muodostavat isommman sovelluksen.
 
-Mikropalveluarkkkitehtuurin suosio kasvaa jatkuvasti. Tämä lähestymistapa antaa kehittäjille mahdolisuuden pilkkoa sovellus pieniin itsenäisiin osiin. Lukuisten mikropalveluiden hallinta voi aiheuttaa palveluiden hallinnalle ongelmia. Kuinka hallita ja operoida kymmeniä, mahdollisesti satoja eri mikropalveluita, voi olla ongelmallista.
-
+Mikropalveluarkkkitehtuurin suosio kasvaa jatkuvasti. Tämä lähestymistapa antaa kehittäjille mahdolisuuden pilkkoa sovellus pieniin itsenäisiin osiin. Lukuisten mikropalveluiden hallinta voi aiheuttaa palveluiden hallinnalle ongelmia. Kuinka hallita ja operoida kymmeniä, mahdollisesti satoja eri mikropalveluita.
 
 ## Mikropalveluiden periaate ja hyödyt
 
@@ -44,7 +41,7 @@ Sujuva ohjelmiston jatkokehitys edellyttää usein uusien teknologioiden liittä
 
 Lisäksi yksinkertainen palvelu on helppo kirjoittaa kokonaan uusiksi eikä muutaman palvelun uudelleenkirjoittaminen vie paljoa aikaa. Mikropalveuiden avulla voidaan myös korvata olemassaolevaa vanhaa teknologiaa tai korvata iso monoliitti pikkuhiljaa. (DevOps kurssi 2017.)
 
-Mikropalveluiden avulla samaan aikaan tuotannossa voi olla eri versioita palveluista, liikenne voidaan ohjata eri versioille ja verrata vaikka toimintaa (Viane 2018).
+Mikropalveluiden avulla samaan aikaan tuotannossa voi olla eri versioita palveluista, liikenne voidaan ohjata eri versioille ja verrata niiden toimintaa (Viane 2018).
 
 ## Mikropalveluiden haasteita
 
@@ -149,7 +146,7 @@ Packt Publishing, E-kirja
 
 # Testisovellus
 
-Testisovelluksemme on yksikertainen node.js sovellus, joka tulostaa Hello World!
+Testisovelluksemme on yksikertainen node.js sovellus, joka tulostaa Hello World.
 
 ## Docker file
 
@@ -238,26 +235,19 @@ Testataan lokaalisti
 
 # Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
 
-??? kesken ja pitää parantaa ???
+Kubernetes on Open source sovellus, jolla voidaan viedä tuotantoon, skaalata ja hallinnoida kontitettuja sovelluksia. Kontainereissa voi olla esim. Web sovelluksia. (Goasguen vuosi.What is Kubernetes.) Kubernetes on orkestraattori, joka mahdollistaa mikropalveluarkkitehtuurin. Ilman orkestraattoria konttien hallinnointi isossa sovelluksessa, joka koostuu mikropalveluista, on hyvin hankalaa.
 
-Kubernetes on Open source orkestraattori Docker kontainereille. Kontainereissa voi olla esim. Web sovelluksia. Kubernetesin avulla hallinnoidaan näitä kontainereita. (What is Kubernetes)
-
-Docker ja Kubernetes täydentävät toisiaan, tyypillisesti sovellukset kontitetaan Dockerilla, ja Kubernetes orkestroi niitä. (Poulton 6) Kontainerina voi olla muukin kuin Docker. Kubernetesin avulla useita kontainereita voidaan ajaa samalla koneella, kontainerin voi käynnistää tietylle nodelle, kontainereita voi uudelleenkäynnistää ja kontainereita voi siirtää toiselle nodelle. (lähde ?)
+Docker ja Kubernetes täydentävät toisiaan, tyypillisesti sovellukset kontitetaan Dockerilla, ja Kubernetes orkestroi niitä. (Poulton 6) Kontainerina voi olla muukin kuin Docker. Kubernetesin avulla useita kontainereita voidaan ajaa samalla koneella, kontainerin voi käynnistää tietylle nodelle, kontainereita voi uudelleenkäynnistää ja kontainereita voi siirtää toiselle nodelle. (Viane 2018)
 
 Kubernetes tekee perinteiset ohjelmistojen tuotantoonviennit ja päivitykset helpoksi. Sovelluksille voi tehdä deploymentteja (tuotantoon vientejä), sovelluksen versiota voi päivittää, vikatilanteessa voidaan palata edelliseen sovellusversioon (roll back) ja päivityksiä on mahdollista tehdä katkottomasti, eli päivitys ei näy loppukäyttäjille. (Poulton 5) Sovellusta voidaan myös skaalata joustavasti.
 
 Käyttäjän ei tarvitse välittää missä ja miten ohjelma pyörii, Kubernetes hoitaa sovelluksen ajoon haluttuun ympäristöön. (Poulton 10)
 
-Seuraavassa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea.
-
-Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWSään.
-
-Lopuksi  käydään läpi Kubernetesin arkkitehtuuri.
-
+Seuraavassa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea. Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWSään. Lopuksi  käydään läpi Kubernetesin arkkitehtuuri.
 
 # Minikube
 
-Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes ympäristön. Toinen vaihtoehto on Docker Client.
+Minikube on työkalu, jolla voi asentaa itselleen yksinkertaisen Kubernetes klusterin. Toinen vaihtoehto on Docker Client. Minikuben voi asentaa linuxiin, Windowsiin tai Macille.
 
 Minikuben asentaminen vaatii virtuaalikoneen esim. Virtualbox.
 
@@ -265,16 +255,19 @@ Linkki Minikuben dokumentaatioon [](https://github.com/kubernetes/minikube/)
 
 ### Asentaminen
 
-VirtualBoxin asentaminen onnistuu alla olevalla komennolla.
+Asensimme Minikuben koneelle, jossa Ubuntu 18.04 LTS.
+
+VirtualBoxin asentaminen onnistuu alla olevalla komennolla, jos sitä ei ole asennettuna.
+
 ```
 sudo apt-get install virtualbox
 ```
 
 Minikuben asennetaan seuraavalla komennolla.
+
 ```
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
  ```
-
 
 Minikuben käynnistäminen:
 
@@ -288,7 +281,7 @@ Asennuksen jälkeen minikuben statuksen voi tarkistaa.
 minikube status
  ```
 
-Minikuben voi pysäyttää komennolla:
+Minikuben voi pysäyttää komennolla
 
 ```
  minikube stop
@@ -296,13 +289,13 @@ Minikuben voi pysäyttää komennolla:
 
 ### Kubectl
 
-Kubectl on komentorivityökalu sovellusten hallintaan Kubernetesissä.
+Kubectl on komentorivityökalu sovellusten hallintaan, kun käytössä on Kubernetes. Kubectl avulla voidaan selvittää klusterin resursseja, voidaan luoda, poistaa tai muuttaa komponentteja, sekä viedä sovelluksia klusteriin. Kubectl tarvitaan siis  Kubernetes klusterin ohjaamiseen.
 
 Lisää dokumentaatiota löytyy osoitteeesta [](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 #### Kubectl asennus
 
-Kubectl tarvitaan Kubernetes klusterin ohjaamiseen. Sen voi asentaa itselleen suraavilla komennoilla.
+Kubectl:n voi asentaa itselleen seuraavilla komennoilla.
 
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https
@@ -316,13 +309,13 @@ sudo apt-get update
 sudo apt-get install -y kubectl
  ```
 
-Kubectl testaus, onko asentunut.
+Kubectl testaus, onko asentunut. Tulostuu kubectl komentovaihtoehdot.
 
 ```
 kubectl
 ```
 
-Jos Minikube on päällä, Minikube klusterin tiedot komennolla
+Jos Minikube on päällä, Minikube klusterin tiedot saadaan komennolla
 
 ```
 kubectl cluster-info
@@ -340,7 +333,7 @@ Tämän jälkeen luodaan Pod ja Sercvice. Ajettava image on "immonju/helloworld"
 
 #### Podin luominen
 
-Luodaan ensin Pod, ja sitä varten tiedosto pod-helloworld.yml
+Podin luomiseen käytettävä tiedosto pod-helloworld.yml
 
 ```
 apiVersion: v1
@@ -376,7 +369,7 @@ Komennolla
 
     kubectl get service
 
-Näkee päällä olevat palvelut
+Nähdään päällä olevat palvelut.
 
 #### Sovelluksen käyttäminen
 
@@ -386,13 +379,13 @@ Palvelun URL saadaan selville alla olevalla komennolla, jonka jälkeen Web selai
 
     minikube service nodehelloworld-service --url
 
-Toinen vaihtoehto servicelle on NodePort (suoraan noden porttiin). NodePort:ia voidaan käyttää jos ei ole LoadBalanceria. Loadbalancer tarvitaan jos on useampi Node varattuna sovellukselle.
+Toinen vaihtoehto on NodePort, jolloin käytetään sovellusta suoraan Noden portin kautta. NodePort:ia ei kannata käyttää, jos sovellus on asennettu usealle Nodelle. Tällöin tarvitaan Loadbalancer, joka ohjaa liikennettä Nodeille.
 
-Jos ei ole vielä Serviceä olemassa, voidaan käyttää port-forward komentoa, jolloin sovellusta käytetään suoraan Podin kautta.
+Porttiohjaukseen voidaan käyttää port-forward komentoa, jolloin sovellusta käytetään suoraan Podin kautta.
 
     kubectl port-forward nodehelloworld.example.com 8081:8080
 
-local port 8081 ohjautuu porttiin 8080.
+local port 8081 ohjautuu porttiin 8080, jota kuuntelee sovellus Podissa.
 
 ```
 curl localhost:8081
@@ -428,14 +421,13 @@ Palvelun tila
 
     kubectl describe service nodehelloworld-service
 
-
 # Kubernetesin asennus AWS:ään
 
-Asennuksessa on noudatettu Udemy kurssin Learn DevOps-materiaalia. Ilman kyseitä materiaalia asennus olisis ollut huomattavasti vaikeamapi.
+Asennuksessa on noudatettu Udemy kurssin Learn DevOps-materiaalia. Ilman kyseistä materiaalia asennus olisi ollut huomattavasti vaikeamapi.
 
-Kubernetes klusterin asentaminen AWS-palvelunn osoittautui silti melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
+Kubernetes klusterin asentaminen AWS-palveluun osoittautui silti melko haastavaksi, mutta usean yrityksen jälkeen saimme sen sinne toimimaan.
 
-Asensimme Kubernetes clusteri kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa.
+Asensimme Kubernetes klusterin kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa, ja käytimme sitä klusterin hallintaan AWSssä.
 
 Docker Hubissa meillä oli käytössä aiemmin luomamme image: "immonju/helloworld".
 
@@ -466,7 +458,7 @@ Awscli tool omalle koneelle
   - Asentamisen helpottamiseksi päädyimme käyttämään administrator oikeustasoa.
 
 DNS domain nimi
-- Halusimme tehdä asennuksen loppuun asti, ja tarjota testisovelluksesellemme myös domaim nimen.
+- Halusimme tehdä asennuksen loppuun asti, ja tarjota testisovelluksellemme myös domain nimen.
 
 ### Käytetty ympäristö
 
@@ -573,7 +565,7 @@ Kuva. IAM käyttäjä.
 
 #### Avainten konfigurointi
 
-Konfiguraoidaan komentoriviltä tämän jälkeen avaimet, jotka saadaan AWS:stä.
+Konfiguroidaan komentoriviltä tämän jälkeen avaimet, jotka saadaan AWS:stä.
 
 ```
 $ aws configure
@@ -653,7 +645,6 @@ Klusterin validointi
 kubectl get node
 ```
 ```
-vagrant@vagrant:~$ kubectl get node
 NAME                                             STATUS   ROLES    AGE   VERSION
 ip-172-20-56-105.eu-central-1.compute.internal   Ready    node     2m    v1.11.7
 ip-172-20-60-110.eu-central-1.compute.internal   Ready    node     3m    v1.11.7
@@ -664,7 +655,7 @@ ip-172-20-63-171.eu-central-1.compute.internal   Ready    master   4m    v1.11.7
 Voi tarkistaa myös kommennolla
 
 ```
-kops validate cluster
+kops validate cluster --state=s3://kops-state-a1703033 
 ```
 ```
 vagrant@vagrant:~$ kops validate cluster --state=s3://kops-state-a1703033 
@@ -739,7 +730,7 @@ spec:
 
 ### Luodaan Pod AWS
 
-Klusteri luotiin jo aikaisemmin. Luodaan Pod sinne.
+Klusteri luotiin jo aikaisemmin Kopsin avulla. Luodaan Pod klusteriin.
 
     kubectl create -f helloworld.yml
 
@@ -768,6 +759,7 @@ Nyt AWS:n EC2:ssa pitäisi näkyä Masterin ja Nodejen lisäksi loadbalancer.
 
 
 Seuraavalla komennolla voi hakea servicen tiedot. Komennolla pystyt varmistamaan, että load balancer on luotu palveluun.
+
 ```
 $ kubectl describe service helloworld-service
 
@@ -796,13 +788,13 @@ Events:
 
 domain nimi oli kubernetes.juhaimmonen.com
 
-Route 53:ssa voi luoda alias-nimen loadbalancerille. Tämä avulla saadaan sovellus näkyviin domain nimellä internettiin.
+Route 53:ssa voi luoda alias-nimen loadbalancerille. Tämä avulla saadaan liikenne ohjattua domain nimellä sovellukselle.
 
 Klikkaa Create Record Set ja syötä domain
 
     helloworld.kubernetes.juhaimmonen.com
 
-Määritä tämä aliakseksi Loadbalancerille.
+Määritä tämä vielä aliakseksi Loadbalancerille.
 
 Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.com
 
@@ -821,9 +813,9 @@ kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 
 # Kubernetes Arkkitehtuuri
 
-## Cluster
+## Klusteri
 
-Kubernetesin cluster eli rykelmällä tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen yhden yksikön. Kuberenetes valjastaa kontitetut sovellukset rykelmälle ilman, että tarvitsee säätää jokaista konetta erikseen.
+Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä. (Goasguen 2017.What is Kubernetes.) Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
 
 Kuva jostain kokonaisarkkitehtuurista.
 
@@ -861,15 +853,15 @@ Node rakentuu kolmesta eri komponentista.
 
 #### Kubelet
 
-Kubelet ohjaa Noden toimintaa, sen tehtävän on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitan esim. uusi Node Podeille. (Poulton 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
+Kubelet ohjaa Noden toimintaa ja huolehtii, että tarvittavat Podit ovat ajossa. Sen tehtävänä on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitaan esim. uusi Node Podeille. (Poulton 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
 
 #### Container runtime (CR)
 
 Container Runtime tarvitaan konttien ajamiseen Nodella. CR hakee imaget ja käynnistää sekä pysäyttää ne. (Poulton 19) 
 
-#### Network / Kube proxy
+#### Kube-proxy
 
-Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella nodella on oma IP, sekä IPtables asetukset kohdallaan. (Poulton 20)
+Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella Nodella on oma IP, sekä IPtables asetukset kohdallaan liikenteen reitittämiseksi oikealle Podille. (Poulton 20)
 
 ## Sovellusten pakkaaminen Kubernetesissa
 
@@ -892,23 +884,29 @@ API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
 
 Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 20 koko kappale)
 
-## Pods
+## Kubernetes objektit
 
-Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. 
+### Pods
 
-### Arkkitehtuuri
+Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
 
-Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 24)
+#### Arkkitehtuuri
 
-Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Pod voi sijaita vain yhdellä nodella. (Poulton 27)
+Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
 
-### Elinkaari
+Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 27)
 
-Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 27)
+#### Elinkaari
+
+Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 27) Podeja ei siis yritetä käynnistää uudelleen, jos Pod tuhoutuu tai lakkaa toimista, tilalle vain luodaan uusi.
 
 ### Deployments
 
-Deployment on ylemmän tason kapselointi Podeille, joka tarjoaa lisäpalveluita, kuten skaalautumisen, loppukäyttäjille näkymättömän versionvaihon (zero-downtime update) ja rollbackin aiempaan versioon. (Poulton 27)
+Deployment on ylemmän tason kapselointi Podeille, joka tarjoaa lisäpalveluita, kuten skaalautumisen, loppukäyttäjille näkymättömän versionvaihon (zero-downtime update) ja rollbackin aiempaan versioon. (Poulton 27) Podeja hallinnoidaan Deployment objektin avulla. Deployment määrittelee haluntun tilan Podille, ja se ylläpitää tilaa. (Warnock XXXX. Kubernetes architecture and design.)
+
+### ReplicaSet
+
+ReplicaSet huolehtii, että Podeja on oikea määrä ajossa tiettynä aikana. ReplicaSet on hyvä määritellä Deploymentin osana. Se määrittelee kuinka monta sovellusinstanssai klsuterissa on ajossa. (Warnock XXXX. Kubernetes architecture and design.) Ohjelman skaalaminen tapahtuu ReplicaSetin avulla.
 
 ### Services
 
@@ -918,8 +916,9 @@ Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpoi
 
 Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 30)
 
-
 # Lähteet
+
+Goasguen, Sébastien 2017. Kubernetes Fundamentals. O'Reilly. ebook.
 
 Poulton, Nigel 2018. The Kubernetes Book: version 3. eBook. 
 
@@ -929,13 +928,15 @@ What is Kubernetes. https://kubernetes.io/docs/concepts/overview/what-is-kuberne
 
 Kube-scheduler. https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/
 
-Peltola, Reko 2017. Kubernetes-klusterin asennus ja käytöönotto. https://www.theseus.fi/bitstream/handle/10024/138954/Peltola_Reko.pdf?sequence=1&isAllowed=y
+Warnock, Braine E.E.. Learning Kubernetes. ebook.
 
-Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.theseus.fi/bitstream/handle/10024/120976/Opinnayte_jyri_sakkara_final.pdf?sequence=1
+Muita:
 
 Ellingwood 2016. 
 
+Peltola, Reko 2017. Kubernetes-klusterin asennus ja käytöönotto. https://www.theseus.fi/bitstream/handle/10024/138954/Peltola_Reko.pdf?sequence=1&isAllowed=y
 
+Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.theseus.fi/bitstream/handle/10024/120976/Opinnayte_jyri_sakkara_final.pdf?sequence=1
 
 
 
