@@ -22,7 +22,12 @@
     3. [Sovellusten pakkaaminen Kubernetesissä](#manifest)
     3. [Kubernetes objektit](#objektit)
 7. [Minikube](#minikube)
-8. [Yhteenveto](#Yhteenveto)
+    1. [asentaminen](m-asennus)
+    2. [Kubectl](#kubectl)
+    3. [Testaus](#k-testaus)
+    4. [Hyödyllisiä komentoja](#komentoja)
+8. [Kubernetesin asennus AWS:ään](#aws)
+9. [Yhteenveto](#Yhteenveto)
 
 <a name="Johdanto"></a>
 
@@ -320,6 +325,8 @@ Minikuben asentaminen vaatii virtuaalikoneen esim. Virtualbox.
 
 Linkki Minikuben dokumentaatioon [](https://github.com/kubernetes/minikube/)
 
+<a name="m-asennus"></a>
+
 ## Asentaminen
 
 Asensimme Minikuben koneelle, jossa Ubuntu 18.04 LTS.
@@ -354,6 +361,8 @@ Minikuben voi pysäyttää komennolla
  minikube stop
 ```
 
+<a name="kubectl"></a>
+
 ## Kubectl
 
 Kubectl on komentorivityökalu sovellusten hallintaan, kun käytössä on Kubernetes. Kubectl avulla voidaan selvittää klusterin resursseja, voidaan luoda, poistaa tai muuttaa komponentteja, sekä viedä sovelluksia klusteriin. Kubectl tarvitaan siis  Kubernetes klusterin ohjaamiseen.
@@ -387,8 +396,9 @@ Jos Minikube on päällä, Minikube klusterin tiedot saadaan komennolla
 ```
 kubectl cluster-info
 ```
+<a name="k-testaus"></a>
 
-## Kubernetesin testaaminen Minikuben avulla
+## Testaus
 
 Käynnistä Minikube ensin.
 
@@ -457,6 +467,7 @@ local port 8081 ohjautuu porttiin 8080, jota kuuntelee sovellus Podissa.
 ```
 curl localhost:8081
 ```
+<a name="komentoja"></a>
 
 ## Hyödyllisiä komentoja
 
