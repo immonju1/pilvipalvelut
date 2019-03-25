@@ -782,7 +782,7 @@ ssh -i ~/.ssh/id_rsa admin@api.kubernetes.juhaimmonen.com
 
 <a name="lb"></a>
 
-## Podin, Servicen ja Loadbalancer
+## Pod, Service ja Loadbalancer
 
 Kaikki mitä voidaan tehdä kubectl:llä, voidaan laittaa myös .yml tiedostoon. Kokeileimme Podin ja Servicen luomista konfiguraatiotiedostojen (manifest) avulla.
 
@@ -884,7 +884,7 @@ Events:
   Normal  EnsuredLoadBalancer   20m   service-controller  Ensured load balancer
 ```
 
-<a name="domain_nimi"></a>
+<a name="domain"></a>
 
 ## Domain nimen testaaminen
 
@@ -902,7 +902,7 @@ Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.co
 
 ![helloworld form AWS with LB](https://raw.githubusercontent.com/immonju1/pilvipalvelut/master/pics/aws_lb_helloworld.png)
 
-<a name="poista_klusteri"></a>
+<a name="poista"></a>
 
 ## Poista klusteri
 
