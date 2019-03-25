@@ -22,7 +22,7 @@
     3. [Sovellusten pakkaaminen Kubernetesissä](#manifest)
     3. [Kubernetes objektit](#objektit)
 7. [Minikube](#minikube)
-    1. [asentaminen](m-asennus)
+    1. [Asentaminen](#m-asennus)
     2. [Kubectl](#kubectl)
     3. [Testaus](#k-testaus)
     4. [Hyödyllisiä komentoja](#komentoja)
