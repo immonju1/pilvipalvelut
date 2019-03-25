@@ -160,43 +160,6 @@ COPY . .
 EXPOSE 8080
 CMD ["npm", "start"]
 ```
-## Lähdekoodi
-
-```
-'use strict';
-
-const express = require('express');
-
-//constants
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
-// app
-const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello world\n');
-});
-
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
-```
-
-```
-package.json
-{
-  "name": "docker_web_app",
-  "version": "1.0.0",
-  "description": "Node.js on Docker",
-  "author": "First Last <first.last@example.com>",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.16.1"
-  }
-} 
-```
 
 ## Docker containerin luonti
 
