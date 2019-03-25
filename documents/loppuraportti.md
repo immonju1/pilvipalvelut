@@ -194,15 +194,120 @@ Testataan lokaalisti
 
 # Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
 
-Kubernetes on Open source sovellus, jolla voidaan viedä tuotantoon, skaalata ja hallinnoida kontitettuja sovelluksia. Kontainereissa voi olla esim. Web sovelluksia. (Goasguen vuosi.What is Kubernetes.) Kubernetes on orkestraattori, joka mahdollistaa mikropalveluarkkitehtuurin. Ilman orkestraattoria konttien hallinnointi isossa sovelluksessa, joka koostuu mikropalveluista, on hyvin hankalaa.
+Kubernetes on Open source sovellus, jolla voidaan viedä tuotantoon, skaalata ja hallinnoida kontitettuja sovelluksia. Kontainereissa voi olla esim. Web sovelluksia. (Goasguen 2017. What is Kubernetes.) Kubernetes on orkestraattori, joka mahdollistaa mikropalveluarkkitehtuurin. Ilman orkestraattoria konttien hallinnointi isossa sovelluksessa, joka koostuu mikropalveluista, on hyvin hankalaa.
 
-Docker ja Kubernetes täydentävät toisiaan, tyypillisesti sovellukset kontitetaan Dockerilla, ja Kubernetes orkestroi niitä. (Poulton 6) Kontainerina voi olla muukin kuin Docker. Kubernetesin avulla useita kontainereita voidaan ajaa samalla koneella, kontainerin voi käynnistää tietylle nodelle, kontainereita voi uudelleenkäynnistää ja kontainereita voi siirtää toiselle nodelle. (Viane 2018)
+Docker ja Kubernetes täydentävät toisiaan, tyypillisesti sovellukset kontitetaan Dockerilla, ja Kubernetes orkestroi niitä. (Poulton 2018, 6) Kontainerina voi olla muukin kuin Docker. Kubernetesin avulla useita kontainereita voidaan ajaa samalla koneella, kontainerin voi käynnistää tietylle nodelle, kontainereita voi uudelleenkäynnistää ja kontainereita voi siirtää toiselle nodelle. (Viane 2018)
 
-Kubernetes tekee perinteiset ohjelmistojen tuotantoonviennit ja päivitykset helpoksi. Sovelluksille voi tehdä deploymentteja (tuotantoon vientejä), sovelluksen versiota voi päivittää, vikatilanteessa voidaan palata edelliseen sovellusversioon (roll back) ja päivityksiä on mahdollista tehdä katkottomasti, eli päivitys ei näy loppukäyttäjille. (Poulton 5) Sovellusta voidaan myös skaalata joustavasti.
+Kubernetes tekee perinteiset ohjelmistojen tuotantoonviennit ja päivitykset helpoksi. Sovelluksille voi tehdä deploymentteja (tuotantoon vientejä), sovelluksen versiota voi päivittää, vikatilanteessa voidaan palata edelliseen sovellusversioon (roll back) ja päivityksiä on mahdollista tehdä katkottomasti, eli päivitys ei näy loppukäyttäjille. (Poulton 2018, 5) Sovellusta voidaan myös skaalata joustavasti.
 
-Käyttäjän ei tarvitse välittää missä ja miten ohjelma pyörii, Kubernetes hoitaa sovelluksen ajoon haluttuun ympäristöön. (Poulton 10)
+Käyttäjän ei tarvitse välittää missä ja miten ohjelma pyörii, Kubernetes hoitaa sovelluksen ajoon haluttuun ympäristöön. (Poulton 2018, 10)
 
-Seuraavassa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea. Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWSään. Lopuksi  käydään läpi Kubernetesin arkkitehtuuri.
+Seuraavassa kappaleessa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea. Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWS:ään. Lopuksi käydään läpi Kubernetesin arkkitehtuuri.
+
+# Kubernetes Arkkitehtuuri
+
+## Klusteri
+
+Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä. (Goasguen 2017.What is Kubernetes.) Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
+
+Kuva jostain kokonaisarkkitehtuurista.
+
+### Master ja Nodet
+
+Kubernetes klusteri rakentuu mastereista ja nodeista. Nämä voivat olla Linux servereitä, jotka voivat olla virtuaalikoneita tai fyysisiä palvelimia.
+
+### Master
+
+Master on vastuussa klusterin hallinnoinnista. Se myös monitoroi klusteria, ajaa muutokset sinne ja reagoi tapahtumiin klusterissa. (Poulton 15) HA ratkaisuissa mastereita voi olla useita.
+
+Seuraavassa on esitelty Masterin eri komponentit.
+
+#### API server (aivot)
+
+API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
+
+#### Klusterin tietovarasto (muisti)
+
+Klusterin hallinnollinen data ja konfiguraatiot säilötään etcd:n, joka on hajautettu tietokanta. etcd on "yksi totuus" klusterista.
+
+#### Control Manager
+
+Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 17)
+
+#### Scheduler
+
+Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 17)
+
+### Node
+
+Nodet ovat Kubernetes klusterin työyksiköitä. Niiden tehtävä on odottaa uusia tehtäviä API serveriltä, toteuttaa ne ja raportoida tilastaan takaisin Masterille. (Poulton 18)
+
+Node rakentuu kolmesta eri komponentista.
+
+#### Kubelet
+
+Kubelet ohjaa Noden toimintaa ja huolehtii, että tarvittavat Podit ovat ajossa. Sen tehtävänä on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitaan esim. uusi Node Podeille. (Poulton 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
+
+#### Container runtime (CR)
+
+Container Runtime tarvitaan konttien ajamiseen Nodella. CR hakee imaget ja käynnistää sekä pysäyttää ne. (Poulton 19) 
+
+#### Kube-proxy
+
+Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella Nodella on oma IP, sekä IPtables asetukset kohdallaan liikenteen reitittämiseksi oikealle Podille. (Poulton 20)
+
+## Sovellusten pakkaaminen Kubernetesissa
+
+Jotta sovellusta voidaan ajaa Kubernetes klusterissa, pitää sovelluksesta tehdä Docker image, tälle imagelle voidaan sitten tehdä deployment manifest-tiedoston avulla. (Poulton 20) Deployment tehdään Podin sisällä, joka on "kääre" kontainerille.
+
+Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kapseloidaan. Kukin kapselointi tarjoaa omat abstraktiokerroksensa ja palvelunsa sovellukselle. Sovellus kapseloidaan kontin sisälle, kontti kapseloidaan Podin sisälle, Deployment kapseloi Podit nodella. Service kapseloi Deploymentit.
+
+Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 20)
+
+![Kubernetes Node](­kubernetes_node.png)
+Kuva kapseloinnista (Poulton 20)
+
+### Manifest ja tavoitetila
+
+Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. 
+
+Nämä välitetään API serverille, ja tallennetaan halutuksi tilaksi etcd tietovarastoon. 
+
+API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
+
+Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 20 koko kappale)
+
+## Kubernetes objektit
+
+### Pods
+
+Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
+
+#### Arkkitehtuuri
+
+Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
+
+Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 27)
+
+#### Elinkaari
+
+Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 2018, 27) Podeja ei siis yritetä käynnistää uudelleen, jos Pod tuhoutuu tai lakkaa toimista, tilalle vain luodaan uusi.
+
+### Deployments
+
+Deployment on ylemmän tason kapselointi Podeille, joka tarjoaa lisäpalveluita, kuten skaalautumisen, loppukäyttäjille näkymättömän versionvaihon (zero-downtime update) ja rollbackin aiempaan versioon. (Poulton 2018, 27) Podeja hallinnoidaan Deployment objektin avulla. Deployment määrittelee haluntun tilan Podille, ja se ylläpitää tilaa. (Warnock XXXX. Kubernetes architecture and design.)
+
+### ReplicaSet
+
+ReplicaSet huolehtii, että Podeja on oikea määrä ajossa tiettynä aikana. ReplicaSet on hyvä määritellä Deploymentin osana. Se määrittelee kuinka monta sovellusinstanssai klsuterissa on ajossa. (Warnock XXXX. Kubernetes architecture and design.) Ohjelman skaalaminen tapahtuu ReplicaSetin avulla.
+
+### Services
+
+Podit itsessään ovat epäluotettavia, sovellukset niissä saattavat vikaantua. Uusia podeja käynnistyy ja terminoituu. Service edustaa pysyvyyttä sovellukselle. Service kapseloi joukon Podeja (eri deploymenteissa) ja tarjoaa niille front-endin ulkomaailmaan. Nämä palvelut pitävät sisällään domain nimen, IP-osoitteet, portit ja kuormanjaon sovellukeselle. (Poulton 2018, 28)
+
+Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpointin sovellukselle. Vastaavasti vaikka Podeja skaalattaisiin ylös tai alaspäin, tietää Service käytössä olevat Podit ja sovelluksen käyttäjille skaalaus on näkymätön. (Poulton 28-29) 
+
+Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 2018, 30)
 
 # Minikube
 
@@ -770,110 +875,6 @@ Klusterin poisto
 kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
 
-# Kubernetes Arkkitehtuuri
-
-## Klusteri
-
-Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä. (Goasguen 2017.What is Kubernetes.) Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
-
-Kuva jostain kokonaisarkkitehtuurista.
-
-### Master ja Nodet
-
-Kubernetes klusteri rakentuu mastereista ja nodeista. Nämä voivat olla Linux servereitä, jotka voivat olla virtuaalikoneita tai fyysisiä palvelimia.
-
-### Master
-
-Master on vastuussa klusterin hallinnoinnista. Se myös monitoroi klusteria, ajaa muutokset sinne ja reagoi tapahtumiin klusterissa. (Poulton 15) HA ratkaisuissa mastereita voi olla useita.
-
-Seuraavassa on esitelty Masterin eri komponentit.
-
-#### API server (aivot)
-
-API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
-
-#### Klusterin tietovarasto (muisti)
-
-Klusterin hallinnollinen data ja konfiguraatiot säilötään etcd:n, joka on hajautettu tietokanta. etcd on "yksi totuus" klusterista.
-
-#### Control Manager
-
-Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 17)
-
-#### Scheduler
-
-Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 17)
-
-### Node
-
-Nodet ovat Kubernetes klusterin työyksiköitä. Niiden tehtävä on odottaa uusia tehtäviä API serveriltä, toteuttaa ne ja raportoida tilastaan takaisin Masterille. (Poulton 18)
-
-Node rakentuu kolmesta eri komponentista.
-
-#### Kubelet
-
-Kubelet ohjaa Noden toimintaa ja huolehtii, että tarvittavat Podit ovat ajossa. Sen tehtävänä on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitaan esim. uusi Node Podeille. (Poulton 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
-
-#### Container runtime (CR)
-
-Container Runtime tarvitaan konttien ajamiseen Nodella. CR hakee imaget ja käynnistää sekä pysäyttää ne. (Poulton 19) 
-
-#### Kube-proxy
-
-Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella Nodella on oma IP, sekä IPtables asetukset kohdallaan liikenteen reitittämiseksi oikealle Podille. (Poulton 20)
-
-## Sovellusten pakkaaminen Kubernetesissa
-
-Jotta sovellusta voidaan ajaa Kubernetes klusterissa, pitää sovelluksesta tehdä Docker image, tälle imagelle voidaan sitten tehdä deployment manifest-tiedoston avulla. (Poulton 20) Deployment tehdään Podin sisällä, joka on "kääre" kontainerille.
-
-Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kapseloidaan. Kukin kapselointi tarjoaa omat abstraktiokerroksensa ja palvelunsa sovellukselle. Sovellus kapseloidaan kontin sisälle, kontti kapseloidaan Podin sisälle, Deployment kapseloi Podit nodella. Service kapseloi Deploymentit.
-
-Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 20)
-
-![Kubernetes Node](­kubernetes_node.png)
-Kuva kapseloinnista (Poulton 20)
-
-### Manifest ja tavoitetila
-
-Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. 
-
-Nämä välitetään API serverille, ja tallennetaan halutuksi tilaksi etcd tietovarastoon. 
-
-API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
-
-Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 20 koko kappale)
-
-## Kubernetes objektit
-
-### Pods
-
-Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
-
-#### Arkkitehtuuri
-
-Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
-
-Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 27)
-
-#### Elinkaari
-
-Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 27) Podeja ei siis yritetä käynnistää uudelleen, jos Pod tuhoutuu tai lakkaa toimista, tilalle vain luodaan uusi.
-
-### Deployments
-
-Deployment on ylemmän tason kapselointi Podeille, joka tarjoaa lisäpalveluita, kuten skaalautumisen, loppukäyttäjille näkymättömän versionvaihon (zero-downtime update) ja rollbackin aiempaan versioon. (Poulton 27) Podeja hallinnoidaan Deployment objektin avulla. Deployment määrittelee haluntun tilan Podille, ja se ylläpitää tilaa. (Warnock XXXX. Kubernetes architecture and design.)
-
-### ReplicaSet
-
-ReplicaSet huolehtii, että Podeja on oikea määrä ajossa tiettynä aikana. ReplicaSet on hyvä määritellä Deploymentin osana. Se määrittelee kuinka monta sovellusinstanssai klsuterissa on ajossa. (Warnock XXXX. Kubernetes architecture and design.) Ohjelman skaalaminen tapahtuu ReplicaSetin avulla.
-
-### Services
-
-Podit itsessään ovat epäluotettavia, sovellukset niissä saattavat vikaantua. Uusia podeja käynnistyy ja terminoituu. Service edustaa pysyvyyttä sovellukselle. Service kapseloi joukon Podeja (eri deploymenteissa) ja tarjoaa niille front-endin ulkomaailmaan. Nämä palvelut pitävät sisällään domain nimen, IP-osoitteet, portit ja kuormanjaon sovellukeselle. (Poulton 28)
-
-Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpointin sovellukselle. Vastaavasti vaikka Podeja skaalattaisiin ylös tai alaspäin, tietää Service käytössä olevat Podit ja sovelluksen käyttäjille skaalaus on näkymätön. (Poulton 28-29) 
-
-Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 30)
 
 # Yhteenveto  <a name="Yhteenveto"></a>
 
