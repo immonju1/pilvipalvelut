@@ -84,12 +84,12 @@ Dockeria voidaankin verrata ihan perinteisiin rahtikontteihin, joita kuljetaan j
 
 
 ### Arkkitehtuuri
-Kuva havainnollistamaan
 		
 Kontteja voidaan hyödyntää monella eri tapaa ja yleisimpiä tapoja ovat OS (operating system) kontit ja sovelluskontit. OS kontit voidaan helposti mieltää virtuaalikoneiksi (VM), mutta ne poikkeavat virtuaalikoneista (VM) sillä, että ne jakavat isäntäkoneella pyörivän käyttöjärjestelmän ytimen mutta tarjoaa käyttäjätilan eristämisen (user space isolation).
 
 
 ![Docker and Virtualization](https://github.com/immonju1/pilvipalvelut/blob/master/pics/docker_virtualmachine.JPG)
+Kuva 1. LÄHDE. Kuva mukaillen.
 
 Sovelluskontit ovat tarkoitettu yhden prosessin ajamiseen. Se pitää siis sisällään sovelluksen prosessin. OS kontit puolestaan ajavat monia prosesseja. Sovelluskontissa paketoidaan sovelluksen komponentit eri kontteihin ja ne kommunikoivat keskenään API:n ja palveluiden avulla. Tällainen multi-komponentti järjestelmä sivuuttaa jo hiukan mikropalveluita, joista kerrotaan myöhemmin tässä raportissa.
 (Troubleshooting Docker, Chapter 1. Understanding Container Scenarios and an Overview of Docker)
@@ -119,13 +119,12 @@ docker image history
 ```
 (Docker Bootcamp, Chapter 2. Launching application, Docker terminology)
 
-Image on pohjana konteille, mikä tarkoittaa sitä että yhdestä imagesta voidaan luoda monia eri kontteja, joissa on erilaisia ominaisuuksia. Jokaisella kontilla on kirjoitettava kerros (writeable layer) mihin tallennetaan muutokset ja data, mutta ne käyttävät samaa imagea pohjana. Tämä image pysyy muuttumattomana ja kontin poistaminen ei vaikuta imageen.
+Image on pohjana konteille, mikä tarkoittaa sitä että yhdestä imagesta voidaan luoda monia eri kontteja, joissa on erilaisia ominaisuuksia. Imagella on kerroksia (layers) ja kontilla on myös oma kerroksensa. Jokaisella kontilla on kirjoitettava kerros (writeable layer) mihin tallennetaan muutokset ja data, mutta ne käyttävät samaa imagea pohjana. Tämä image pysyy muuttumattomana ja kontin poistaminen ei vaikuta imageen. Kontti voi kirjoittaa kirjoittaa dataa kontissa mutta kontin data ei säily samallalailla kuten imagen.
 (https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers)
 
+KUVA SELKEYTTÄMÄÄN TÄTÄ LAYER HOMMAA?
+
 Imagen rakentamiseen käytetään Dockerfilea. Dockerfile -tiedosto pitää sisällään komennot. Image rakennetaan komennolla ```docker build``` käyttäen Dockerfilea.  (https://docs.docker.com/engine/reference/builder/)
-
-Tähän esimerkki DockerFilesta?
-
 
 Docker Hub on kirjasto ja yhteisö konttien imageille. Image saadaan lataamalla ne Docker Hubista. Se on maailman suurin repositori konttien imageille. Docker hubia käytetään imagien tallentamiseen ja hallinnointiin. Käyttäjät saavat pääsyn tallentaa image julkisiin tai yksityisiin repositoreihin. Se on suunnattu niin kehittäjille että yrityksille. (https://www.docker.com/products/docker-hub)
 
@@ -137,25 +136,6 @@ Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useam
 
 jotain lisää FIND IP,  Expose port, linking containers ??
 
-
-
-
--------------------------------
-Kirja lähteet Dockeria varten:
-
-Learning Docker
-Raj, Pethuru ; Chelladhurai, Jeeva S. ; Singh, Vinod
-Packt Publishing, E-kirja
-
-Docker Bootcamp
-McKendrick, Russ ; Chelladhurai, Jeeva S. ; Raj, Pethuru ; Singh, Vinod
-Packt Publishing, E-kirja
-
-Troubleshooting Docker
-Kohli, Vaibhav; Dua, Rajdeep; Wooten, John
-Packt Publishing, E-kirja
-
-------------------------------
 
 # Testisovellus
 
@@ -965,3 +945,22 @@ Ellingwood 2016.
 Peltola, Reko 2017. Kubernetes-klusterin asennus ja käytöönotto. https://www.theseus.fi/bitstream/handle/10024/138954/Peltola_Reko.pdf?sequence=1&isAllowed=y
 
 Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.theseus.fi/bitstream/handle/10024/120976/Opinnayte_jyri_sakkara_final.pdf?sequence=1
+
+
+
+-------------------------------
+Kirja lähteet Dockeria varten:
+
+Learning Docker
+Raj, Pethuru ; Chelladhurai, Jeeva S. ; Singh, Vinod
+Packt Publishing, E-kirja
+
+Docker Bootcamp
+McKendrick, Russ ; Chelladhurai, Jeeva S. ; Raj, Pethuru ; Singh, Vinod
+Packt Publishing, E-kirja
+
+Troubleshooting Docker
+Kohli, Vaibhav; Dua, Rajdeep; Wooten, John
+Packt Publishing, E-kirja
+
+------------------------------
