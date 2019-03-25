@@ -227,34 +227,33 @@ Master on vastuussa klusterin hallinnoinnista. Se myös monitoroi klusteria, aja
 Seuraavassa on esitelty Masterin eri komponentit.
 
 API server (aivot)
-- API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
+- API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 2018, 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
 
 Klusterin tietovarasto (muisti)
 - Klusterin hallinnollinen data ja konfiguraatiot säilötään etcd:n, joka on hajautettu tietokanta. etcd on "yksi totuus" klusterista.
 
 Control Manager
-- Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 17)
+- Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 2018, 17)
 
 Scheduler
-- Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 17)
+- Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 2018, 17)
 
-### Node
+#### Node
 
-Nodet ovat Kubernetes klusterin työyksiköitä. Niiden tehtävä on odottaa uusia tehtäviä API serveriltä, toteuttaa ne ja raportoida tilastaan takaisin Masterille. (Poulton 18)
+Nodet ovat Kubernetes klusterin työyksiköitä. Niiden tehtävä on odottaa uusia tehtäviä API serveriltä, toteuttaa ne ja raportoida tilastaan takaisin Masterille. (Poulton 2018, 18)
 
 Node rakentuu kolmesta eri komponentista.
 
-#### Kubelet
+Kubelet
+- Kubelet ohjaa Noden toimintaa ja huolehtii, että tarvittavat Podit ovat ajossa. Sen tehtävänä on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitaan esim. uusi Node Podeille. (Poulton 2018, 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
 
-Kubelet ohjaa Noden toimintaa ja huolehtii, että tarvittavat Podit ovat ajossa. Sen tehtävänä on kommunikoida masterin kanssa (API server) ja toteuttaa saadut tehtävät. Master päättää mitä tehdään, jos tarvitaan esim. uusi Node Podeille. (Poulton 19) Esimerkiksi jos Pod terminoituu Nodella, Master päättää missä sitä yritetään ajaa seuraavaksi.
+Container runtime (CR)
+- Container Runtime tarvitaan konttien ajamiseen Nodella. CR hakee imaget ja käynnistää sekä pysäyttää ne. (Poulton 2018, 19) 
 
-#### Container runtime (CR)
+Kube-proxy
+- Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella Nodella on oma IP, sekä IPtables asetukset kohdallaan liikenteen reitittämiseksi oikealle Podille. (Poulton 2018, 20)
 
-Container Runtime tarvitaan konttien ajamiseen Nodella. CR hakee imaget ja käynnistää sekä pysäyttää ne. (Poulton 19) 
-
-#### Kube-proxy
-
-Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella Nodella on oma IP, sekä IPtables asetukset kohdallaan liikenteen reitittämiseksi oikealle Podille. (Poulton 20)
+ <a name"pakkaaminen"></a>
 
 ## Sovellusten pakkaaminen Kubernetesissa
 
@@ -262,10 +261,10 @@ Jotta sovellusta voidaan ajaa Kubernetes klusterissa, pitää sovelluksesta tehd
 
 Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kapseloidaan. Kukin kapselointi tarjoaa omat abstraktiokerroksensa ja palvelunsa sovellukselle. Sovellus kapseloidaan kontin sisälle, kontti kapseloidaan Podin sisälle, Deployment kapseloi Podit nodella. Service kapseloi Deploymentit.
 
-Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 20)
+Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 2018, 20)
 
 ![Kubernetes Node](­kubernetes_node.png)
-Kuva kapseloinnista (Poulton 20)
+Kuva kapseloinnista (Poulton 2018, 20)
 
 ### Manifest ja tavoitetila
 
@@ -275,7 +274,9 @@ Nämä välitetään API serverille, ja tallennetaan halutuksi tilaksi etcd tiet
 
 API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
 
-Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 20 koko kappale)
+Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 2018, 20.)
+
+ <a name"objektit"></a>
 
 ## Kubernetes objektit
 
@@ -283,13 +284,13 @@ Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun
 
 Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
 
-#### Arkkitehtuuri
+### Arkkitehtuuri
 
-Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
+Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 2018, 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
 
-Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 27)
+Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 2018, 27)
 
-#### Elinkaari
+### Elinkaari
 
 Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 2018, 27) Podeja ei siis yritetä käynnistää uudelleen, jos Pod tuhoutuu tai lakkaa toimista, tilalle vain luodaan uusi.
 
@@ -308,6 +309,8 @@ Podit itsessään ovat epäluotettavia, sovellukset niissä saattavat vikaantua.
 Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpointin sovellukselle. Vastaavasti vaikka Podeja skaalattaisiin ylös tai alaspäin, tietää Service käytössä olevat Podit ja sovelluksen käyttäjille skaalaus on näkymätön. (Poulton 28-29) 
 
 Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 2018, 30)
+
+ <a name"objektit"></a>
 
 # Minikube
 
