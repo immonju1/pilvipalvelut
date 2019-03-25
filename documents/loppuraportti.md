@@ -19,6 +19,7 @@
 6. [Mikä on Kuberbetes](#mika-on-kubernetes)
     1. [Kubernetes Arkkitehtuuri](#arkki-kubernetes)
     2. [Sovellusten pakkaaminen Kubernetesissa](#pakkaaminen)
+    3. [Sovellusten pakkaaminen Kubernetesissä](#manifest)
     3. [Kubernetes objektit](#objektit)
 7. [Minikube](#minikube)
 8. [Yhteenveto](#Yhteenveto)
@@ -263,10 +264,12 @@ Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kaps
 
 Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 2018, 20)
 
-![Kubernetes Node](­kubernetes_node.png)
+![Kubernetes Node](pics/kubernetes_node.png)
 Kuva kapseloinnista (Poulton 2018, 20)
 
-### Manifest ja tavoitetila
+ <a name="manifest"></a>
+
+## Manifest ja tavoitetila
 
 Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. 
 
