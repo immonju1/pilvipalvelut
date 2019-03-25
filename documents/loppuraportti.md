@@ -19,7 +19,7 @@
 6. [Mikä on Kuberbetes](#mika-on-kubernetes)
     1. [Kubernetes Arkkitehtuuri](#arkki-kubernetes)
     2. [Sovellusten pakkaaminen Kubernetesissa](#pakkaaminen)
-    3. [Sovellusten pakkaaminen Kubernetesissä](#manifest)
+    3. [Manifest](#manifest)
     3. [Kubernetes objektit](#objektit)
 7. [Minikube](#minikube)
     1. [Asentaminen](#m-asennus)
@@ -224,6 +224,12 @@ Seuraavassa kappaleessa käydään läpi miten Kubernetes asennetaan käyttäen 
 
 ## Kubernetes Arkkitehtuuri
 
+![](https://github.com/immonju1/pilvipalvelut/blob/master/pics/Kubernetes_architectur.webp)
+
+Kuva X. Kubernetes arkkitehtuuri.
+
+Seuraavissa kappaleissa käymme läpi Kubernetesin arkkitehtuurin, sovellusten pakkaamisen ja Kubernetesin objektit.
+
 ### Klusteri
 
 Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä. (Goasguen 2017.What is Kubernetes.) Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
@@ -282,7 +288,7 @@ Kuva kapseloinnista (Poulton 2018, 20)
 
  <a name="manifest"></a>
 
-## Manifest ja tavoitetila
+## Manifest
 
 Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. 
 
