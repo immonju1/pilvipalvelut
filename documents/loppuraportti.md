@@ -32,6 +32,9 @@
     3. [ASenna kops](#kops)
     4. [Asenna ja konfiguroi awscli](#awscli)
     5. [Klusterin luominen](#klusterin_luonti)
+    6. [Pod, Service ja Loadbalancer](#lb)
+    7. [Domain nimen testaaminen](#domain)
+    8. [Poista klusteri](#poista)
 9. [Yhteenveto](#Yhteenveto)
 
 <a name="Johdanto"></a>
