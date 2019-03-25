@@ -31,6 +31,7 @@
     2. [Kubectl](#aws-kubectl)
     3. [ASenna kops](#kops)
     4. [Asenna ja konfiguroi awscli](#awscli)
+    5. [Klusterin luominen](#klusterin_luonti)
 9. [Yhteenveto](#Yhteenveto)
 
 <a name="Johdanto"></a>
@@ -776,13 +777,15 @@ SSH yhteys masteriin aiemmin luotuja SSH-avaimia käyttäen.
 ssh -i ~/.ssh/id_rsa admin@api.kubernetes.juhaimmonen.com
 ```
 
-## Podin, Servicen ja Loadbalancerin lisääminen AWS
+<a name="lb"></a>
+
+## Podin, Servicen ja Loadbalancer
 
 Kaikki mitä voidaan tehdä kubectl:llä, voidaan laittaa myös .yml tiedostoon. Kokeileimme Podin ja Servicen luomista konfiguraatiotiedostojen (manifest) avulla.
 
 Loadbalancerin jouduimme luomaan, koska halusimme testisovellukselle domain nimen käyttöön. Ilman loadbalaceria se ei ole mahdollista.
 
-## Luodaan Pod ja Service
+### Luodaan Pod ja Service
 
 Tarvittavat manifestit Podin ja Servicen luomiseen.
 
@@ -878,6 +881,8 @@ Events:
   Normal  EnsuredLoadBalancer   20m   service-controller  Ensured load balancer
 ```
 
+<a name="domain_nimi"></a>
+
 ## Domain nimen testaaminen
 
 domain nimi oli kubernetes.juhaimmonen.com
@@ -894,6 +899,7 @@ Tämä jälkeen ohjelma vastaa osoitteessa: helloworld.kubernetes.juhaimmonen.co
 
 ![helloworld form AWS with LB](https://raw.githubusercontent.com/immonju1/pilvipalvelut/master/pics/aws_lb_helloworld.png)
 
+<a name="poista_klusteri"></a>
 
 ## Poista klusteri
 
@@ -905,8 +911,9 @@ Klusterin poisto
 kops delete cluster kubernetes.juhaimmonen.com --state=s3://kops-state-a1703033
 ```
 
+ <a name="Yhteenveto"></a>
 
-# Yhteenveto  <a name="Yhteenveto"></a>
+# Yhteenveto 
 
 Projektimme oli hyvin laaja, joten saimme vain pintaraapaisun Dockeriin ja Kubernetesiin. Projektin aikana meille hahmottui paremmin niiden toiminta sekä kokonaisuudessaan mikropalveluiden hyödyntäminen sovelluskehittämisessä.
 
