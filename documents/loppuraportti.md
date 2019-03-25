@@ -253,7 +253,7 @@ Container runtime (CR)
 Kube-proxy
 - Network Proxy huolehtii lokaalista verkosta Nodejen välillä. Esimerkiksi siitä, että jokaisella Nodella on oma IP, sekä IPtables asetukset kohdallaan liikenteen reitittämiseksi oikealle Podille. (Poulton 2018, 20)
 
- <a name"pakkaaminen"></a>
+ <a name="pakkaaminen"></a>
 
 ## Sovellusten pakkaaminen Kubernetesissa
 
@@ -276,7 +276,7 @@ API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
 
 Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 2018, 20.)
 
- <a name"objektit"></a>
+ <a name="objektit"></a>
 
 ## Kubernetes objektit
 
