@@ -1,3 +1,12 @@
+# DevOps - Docker ja Kubernetes mikropalveluarkkitehtuurin mahdollistajina
+***Pilvipalvelut kurssin projektityö kevät 2019***   
+ 
+ [Juha Immonen](https://github.com/immonju1) 
+ 
+ [Niina Villman](https://github.com/niinavi)
+ 
+ 
+
 # Sisällyluettelo
 
 1. [Johdanto](#Johdanto)
@@ -13,7 +22,9 @@
     3. Arkkitehtuuri
 5. [Yhteenveto](#Yhteenveto)
 
-# Johdanto  <a name="Johdanto"></a>
+<a name="Johdanto"></a>
+
+# Johdanto  
 
 Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologiana pilvipalveluissa on DevOps.
 
@@ -25,7 +36,9 @@ DevOpsiin liittyy lukuisia teknisistä ratkaisuita. Projektin aikana opettelimme
 
 Seuraavassa käymme läpi asennuksen eri vaiheet ja teknologiat, joita käytimme projektin aikana.
 
-# Mikropalvelut (draft) <a name="mikropalvelut"></a>
+<a name="mikropalvelut"></a>
+
+# Mikropalvelut 
 
 ## Yleistä
 
@@ -49,19 +62,13 @@ Mikropalveluarkkitehtuuri voi johtaa toisaalta hyvin monimutkaiseen arkkiehtuuri
 
 Mikropalveluarkkitehtuurin tai toteutusten ongelmana on myös se, että ei ole salausta tietoliikenteessä mikropalveluiden välillä. Jos kommunikointi toisen mikropalvelun kanssa epäonnistuu, ei ole vikasietoisuutta, yhteyttä ei yritetä uudestaan. Vikasietoisuus pitää olla manuaalisesti koodattuna kuhunkin mikropalveluun. Sovelluksella tai mikropalveluilla ei ole älykästä kuormanjakoa, eli ei seurata mikropalveluiden latenssia, käytetään vain yksinkertaista algoritmia kuormanjakoon.  (Viane 2018.)
 
-Mikropalveluiden välillä ei voida tehdä reitityspäätöksiä. Mikropalveluiden välisestä liikenteestä ei jää välttämättä lokeja, eikä liikennettä monitorointia. Mikropalveluiden välillä ei ole myöskään  pääsynvalvontaa, ellei sitä tehdä itse mikropalveluihin.  (Viane 2018.)
+Mikropalveluiden välillä ei voida tehdä reitityspäätöksiä. Mikropalveluiden välisestä liikenteestä ei jää välttämättä lokeja, eikä liikennettä monitorointia. Mikropalveluiden välillä ei ole myöskään  pääsynvalvontaa, ellei sitä tehdä itse mikropalveluihin. (Viane 2018.)
 
 ## Ratkaisu mikropalveluiden haasteisiin
 
 Ratkaisuna aiemmin mainittuihin haasteisiin on toki tehdä mikropalveluihin itseensä kaikki tarvittavat asiat, mutta se vaatii jokaiselta mikropalveluiden kehittäjältä oman toteutuksen. Ratkaisuna voidaan käyttää proxyn lisäämistä kaikkiin mikropalveluihin. Kommunikointi tapahtuu proxyn avulla mikropalveluiden välillä. Proxy hoitaa salauksen ja vikasietoisuuden. Proxyissa voi olla myös kuormanjako-ominaisuuksia. (Viane 2018.)
 
 Reititys mikropalveluiden välillä, siten että eri versioita mikropalveluista voi olla olemassa, voidaan hoitaa hallintakerroksen avulla (management interface). Samoin lokien keruu ja monitorointi tapahtuu hallintakerroksen avulla. (Viane 2018.)
-
-# Lähteet mikropalveluihin
-
-DevOps Fundamentals-koulutus 28.8.2017 – 30.8.2017. Kouluttaja Kai Jokiniemi, Eficode.
-
-Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. Udemy.
 
 
 ## Mikä on Docker <a name="mika-on-docker"></a>
@@ -921,7 +928,22 @@ Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpoi
 
 Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 30)
 
+# Yhteenveto  <a name="Yhteenveto"></a>
+
+Projektimme oli hyvin laaja, joten saimme vain pintaraapaisun Dockeriin ja Kubernetesiin. Projektin aikana meille hahmottui paremmin niiden toiminta sekä kokonaisuudessaan mikropalveluiden hyödyntäminen sovelluskehittämisessä.
+
+Projektin aikana opimme miten Dockerin, Minikuben ja Kubernetesin asennus onnistuu.  Saimme myös tuntumaa Amazon Web Services pilvipalveluiden tarjontaan.  Projektin laajan aiheen seurauksena meille tuli tutuksi tapamme oppia ja etsiä tietoa sekä miten pilkkoa isoa aihe-aluetta pienempiin osiin oppimisen helpottamiseksi.
+
+Mitä muuta opimme? 
+
+Projektissa onnistuimme tavoitteissamme. Projektia voisimme jatkaa pidemmälle tutustumalla syvemmin tekniikoihin esimerkiksi kontittamalla isompia sovelluksia Dockerilla ja hallinnoimalla niitä Kubernetesillä. Amazon Web Services -palvelut myös tarjoavat paljon eri palveluita joihin voisi syvemmin tutustua. 
+
+
 # Lähteet
+
+DevOps Fundamentals-koulutus 28.8.2017 – 30.8.2017. Kouluttaja Kai Jokiniemi, Eficode.
+
+Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. Udemy.
 
 Goasguen, Sébastien 2017. Kubernetes Fundamentals. O'Reilly. ebook.
 
@@ -942,18 +964,3 @@ Ellingwood 2016.
 Peltola, Reko 2017. Kubernetes-klusterin asennus ja käytöönotto. https://www.theseus.fi/bitstream/handle/10024/138954/Peltola_Reko.pdf?sequence=1&isAllowed=y
 
 Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.theseus.fi/bitstream/handle/10024/120976/Opinnayte_jyri_sakkara_final.pdf?sequence=1
-
-
-
-# Yhteenveto  <a name="Yhteenveto"></a>
-
-Projektimme oli hyvin laaja, joten saimme vain pintaraapaisun Dockeriin ja Kubernetesiin. Projektin aikana meille hahmottui paremmin niiden toiminta sekä kokonaisuudessaan mikropalveluiden hyödyntäminen sovelluskehittämisessä.
-
-Projektin aikana opimme miten Dockerin, Minikuben ja Kubernetesin asennus onnistuu.  Saimme myös tuntumaa Amazon Web Services pilvipalveluiden tarjontaan.  Projektin laajan aiheen seurauksena meille tuli tutuksi tapamme oppia ja etsiä tietoa sekä miten pilkkoa isoa aihe-aluetta pienempiin osiin oppimisen helpottamiseksi.
-
-Mitä muuta opimme? 
-
-Projektissa onnistuimme tavoitteissamme. Projektia voisimme jatkaa pidemmälle tutustumalla syvemmin tekniikoihin esimerkiksi kontittamalla isompia sovelluksia Dockerilla ja hallinnoimalla niitä Kubernetesillä. Amazon Web Services -palvelut myös tarjoavat paljon eri palveluita joihin voisi syvemmin tutustua. 
-
-
-
