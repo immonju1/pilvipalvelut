@@ -192,7 +192,9 @@ Testataan lokaalisti
  docker push immonju/helloworld
 ```
 
-# Mikä on Kubernetes  <a name="mika-on-kubernetes"></a>
+ <a name="mika-on-kubernetes"></a>
+
+# Mikä on Kubernetes 
 
 Kubernetes on Open source sovellus, jolla voidaan viedä tuotantoon, skaalata ja hallinnoida kontitettuja sovelluksia. Kontainereissa voi olla esim. Web sovelluksia. (Goasguen 2017. What is Kubernetes.) Kubernetes on orkestraattori, joka mahdollistaa mikropalveluarkkitehtuurin. Ilman orkestraattoria konttien hallinnointi isossa sovelluksessa, joka koostuu mikropalveluista, on hyvin hankalaa.
 
@@ -204,9 +206,11 @@ Käyttäjän ei tarvitse välittää missä ja miten ohjelma pyörii, Kubernetes
 
 Seuraavassa kappaleessa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea. Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWS:ään. Lopuksi käydään läpi Kubernetesin arkkitehtuuri.
 
-# Kubernetes Arkkitehtuuri
+ <a name="arkki-kubernetes"></a>
 
-## Klusteri
+## Kubernetes Arkkitehtuuri
+
+### Klusteri
 
 Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä. (Goasguen 2017.What is Kubernetes.) Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
 
@@ -216,27 +220,23 @@ Kuva jostain kokonaisarkkitehtuurista.
 
 Kubernetes klusteri rakentuu mastereista ja nodeista. Nämä voivat olla Linux servereitä, jotka voivat olla virtuaalikoneita tai fyysisiä palvelimia.
 
-### Master
+#### Master
 
-Master on vastuussa klusterin hallinnoinnista. Se myös monitoroi klusteria, ajaa muutokset sinne ja reagoi tapahtumiin klusterissa. (Poulton 15) HA ratkaisuissa mastereita voi olla useita.
+Master on vastuussa klusterin hallinnoinnista. Se myös monitoroi klusteria, ajaa muutokset sinne ja reagoi tapahtumiin klusterissa. (Poulton 2018, 15) HA ratkaisuissa mastereita voi olla useita.
 
 Seuraavassa on esitelty Masterin eri komponentit.
 
-#### API server (aivot)
+API server (aivot)
+- API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
 
-API server tarjoaa REST rajapinnan klusterin käyttämiseen ja ohjaamiseen. Rajapintaan välitetään manifesteiksi kutsuttuja yaml-fomraatissa olevia konfiguraatiotiedostoja. (Poulton 16) Näiden avulla voidaan esimerkiksi viedä sovellus tuotantoon (deployment). 
+Klusterin tietovarasto (muisti)
+- Klusterin hallinnollinen data ja konfiguraatiot säilötään etcd:n, joka on hajautettu tietokanta. etcd on "yksi totuus" klusterista.
 
-#### Klusterin tietovarasto (muisti)
+Control Manager
+- Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 17)
 
-Klusterin hallinnollinen data ja konfiguraatiot säilötään etcd:n, joka on hajautettu tietokanta. etcd on "yksi totuus" klusterista.
-
-#### Control Manager
-
-Valvoo klusteria ja reagoi tapahtumiin. Tavoitteena on varmistaa, että klusteri on tilassa jossa sen halutaan olevan. (Poulton 17)
-
-#### Scheduler
-
-Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 17)
+Scheduler
+- Scheduler jakaa sovellukset klusteriin, siten että sovelluksella on riittävästi resursseja käytössään. (Poulton 17)
 
 ### Node
 
