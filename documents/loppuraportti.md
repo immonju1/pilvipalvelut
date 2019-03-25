@@ -70,8 +70,9 @@ Ratkaisuna aiemmin mainittuihin haasteisiin on toki tehdä mikropalveluihin itse
 
 Reititys mikropalveluiden välillä, siten että eri versioita mikropalveluista voi olla olemassa, voidaan hoitaa hallintakerroksen avulla (management interface). Samoin lokien keruu ja monitorointi tapahtuu hallintakerroksen avulla. (Viane 2018.)
 
+<a name="mika-on-docker"></a>
 
-## Mikä on Docker <a name="mika-on-docker"></a>
+## Mikä on Docker 
 
 Docker on avoimeen lähdekoodiin perustuva teknologia kontitukseen.	
 Dockerin avulla pystyy kontittamaan sovelluksia, mikä mahdollistaa käsittelemisen ja siirtämisen eri alustoille helpommin.
