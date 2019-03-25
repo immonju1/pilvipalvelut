@@ -320,7 +320,7 @@ Minikuben asentaminen vaatii virtuaalikoneen esim. Virtualbox.
 
 Linkki Minikuben dokumentaatioon [](https://github.com/kubernetes/minikube/)
 
-### Asentaminen
+## Asentaminen
 
 Asensimme Minikuben koneelle, jossa Ubuntu 18.04 LTS.
 
@@ -354,13 +354,13 @@ Minikuben voi pysäyttää komennolla
  minikube stop
 ```
 
-### Kubectl
+## Kubectl
 
 Kubectl on komentorivityökalu sovellusten hallintaan, kun käytössä on Kubernetes. Kubectl avulla voidaan selvittää klusterin resursseja, voidaan luoda, poistaa tai muuttaa komponentteja, sekä viedä sovelluksia klusteriin. Kubectl tarvitaan siis  Kubernetes klusterin ohjaamiseen.
 
 Lisää dokumentaatiota löytyy osoitteeesta [](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
-#### Kubectl asennus
+### Kubectl asennus
 
 Kubectl:n voi asentaa itselleen seuraavilla komennoilla.
 
@@ -388,7 +388,7 @@ Jos Minikube on päällä, Minikube klusterin tiedot saadaan komennolla
 kubectl cluster-info
 ```
 
-### Kubernetesin testaaminen Minikuben avulla
+## Kubernetesin testaaminen Minikuben avulla
 
 Käynnistä Minikube ensin.
 
@@ -398,7 +398,7 @@ minikube start
 
 Tämän jälkeen luodaan Pod ja Sercvice. Ajettava image on "immonju/helloworld"
 
-#### Podin luominen
+### Podin luominen
 
 Podin luomiseen käytettävä tiedosto pod-helloworld.yml
 
@@ -426,7 +426,7 @@ Tarkistus, että asentunut oikein.
 
     kubectl describe pod nodehelloworld.example.com
 
-#### Luodaan Service Minikubeen
+### Luodaan Service Minikubeen
 
 Podin luomisen jälkeen voidaan luoda service.
 
@@ -438,7 +438,7 @@ Komennolla
 
 Nähdään päällä olevat palvelut.
 
-#### Sovelluksen käyttäminen
+### Sovelluksen käyttäminen
 
 Pääsy sovellukseen tapahtuu normaalisti servicen kautta. 
 
@@ -458,7 +458,7 @@ local port 8081 ohjautuu porttiin 8080, jota kuuntelee sovellus Podissa.
 curl localhost:8081
 ```
 
-### Hyödyllisiä komentoja
+## Hyödyllisiä komentoja
 
 Poista pod
 
