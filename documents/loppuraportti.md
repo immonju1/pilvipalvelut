@@ -942,5 +942,13 @@ Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.the
 
 # Yhteenveto  <a name="Yhteenveto"></a>
 
+Projektimme oli hyvin laaja, joten saimme vain pintaraapaisun Dockeriin ja Kubernetesiin. Projektin aikana meille hahmottui paremmin niiden toiminta sekä kokonaisuudessaan mikropalveluiden hyödyntäminen sovelluskehittämisessä.
+
+Projektin aikana opimme miten Dockerin, Minikuben ja Kubernetesin asennus onnistuu.  Saimme myös tuntumaa Amazon Web Services pilvipalveluiden tarjontaan.  Projektin laajan aiheen seurauksena meille tuli tutuksi tapamme oppia ja etsiä tietoa sekä miten pilkkoa isoa aihe-aluetta pienempiin osiin oppimisen helpottamiseksi.
+
+Mitä muuta opimme? 
+
+Projektissa onnistuimme tavoitteissamme. Projektia voisimme jatkaa pidemmälle tutustumalla syvemmin tekniikoihin esimerkiksi kontittamalla isompia sovelluksia Dockerilla ja hallinnoimalla niitä Kubernetesillä. Amazon Web Services -palvelut myös tarjoavat paljon eri palveluita joihin voisi syvemmin tutustua. 
+
 
 
