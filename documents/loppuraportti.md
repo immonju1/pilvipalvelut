@@ -6,7 +6,6 @@
  [Niina Villman](https://github.com/niinavi)
  
  
-
 # Sisällyluettelo
 
 1. [Johdanto](#Johdanto)
@@ -18,10 +17,11 @@
     4. [Komentokieli](#komennot)
 5. [Testisovellus](#testisovellus)
 6. [Mikä on Kuberbetes](#mika-on-kubernetes)
-    1. Minikube
-    2. AWS asennus
-    3. Arkkitehtuuri
-7. [Yhteenveto](#Yhteenveto)
+    1. [Kubernetes Arkkitehtuuri](#arkki-kubernetes)
+    2. [Sovellusten pakkaaminen Kubernetesissa](#pakkaaminen)
+    3. [Kubernetes objektit](#objektit)
+7. [Minikube](#minikube)
+8. [Yhteenveto](#Yhteenveto)
 
 <a name="Johdanto"></a>
 
