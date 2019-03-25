@@ -27,6 +27,10 @@
     3. [Testaus](#k-testaus)
     4. [Hyödyllisiä komentoja](#komentoja)
 8. [Kubernetesin asennus AWS:ään](#aws)
+    1. [AWS asennuksen esiehdot](#esiehdot)
+    2. [Kubectl](#aws-kubectl)
+    3. [ASenna kops](#kops)
+    4. [Asenna ja konfiguroi awscli](#awscli)
 9. [Yhteenveto](#Yhteenveto)
 
 <a name="Johdanto"></a>
@@ -471,6 +475,8 @@ curl localhost:8081
 
 ## Hyödyllisiä komentoja
 
+Laita taulukkoon:
+
 Poista pod
 
     kubectl delete pod nodehelloworld.example.com
@@ -499,6 +505,8 @@ Palvelun tila
 
     kubectl describe service nodehelloworld-service
 
+<a name="aws"></a>
+
 # Kubernetesin asennus AWS:ään
 
 Asennuksessa on noudatettu Udemy kurssin Learn DevOps-materiaalia. Ilman kyseistä materiaalia asennus olisi ollut huomattavasti vaikeamapi.
@@ -508,6 +516,8 @@ Kubernetes klusterin asentaminen AWS-palveluun osoittautui silti melko haastavak
 Asensimme Kubernetes klusterin kops:in avulla AWSään. Kops tarkoitta Kubernetes Operations ohjelmaa, ja käytimme sitä klusterin hallintaan AWSssä.
 
 Docker Hubissa meillä oli käytössä aiemmin luomamme image: "immonju/helloworld".
+
+<a name="esiehdot"></a>
 
 ## AWS asennuksen esiehdot
 
@@ -547,9 +557,13 @@ Asensimme palvelut bento/ubuntu-16.04 Vagrant koneelle.
 
 Nimipalvelu meilä oli NameCheap palvelusta.
 
+<a name="aws-kubectl"></a>
+
 ## Asenna kubectl
 
 Asenna kubectl aiemmin olleen ohjeen mukaan.
+
+<a name="kops"></a>
 
 ## Asenna kops
 
@@ -571,6 +585,7 @@ Testaus
 ```
 $ kops version
 ```
+<a name="awscli"></a>
 
 ## Asenna ja konfiguroi awscli
 
@@ -698,6 +713,7 @@ Yksityinen avain
 ```
 ssh-keygen -f .ssh/id_rsa
 ```
+<a name="klusterin_luonti"></a>
 
 ## Klusterin luominen
 
