@@ -23,11 +23,11 @@ Projektin tavoitteena on oppia
 - Minikube
 - Arkkitehtuuri
 - Deployment
-4. Asennus AWS:n
+3. Asennus AWS:n
 - Klusteri
 - Load Balancer
 - Domain nimi
-5. Mikropalvelut
+4. Mikropalvelut
 - Tutustumme arkkitehtuuriin
 
 
