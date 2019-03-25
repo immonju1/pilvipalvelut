@@ -287,15 +287,12 @@ Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun
 
 Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
 
-### Arkkitehtuuri
+Arkkitehtuuri
+- Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 2018, 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
+- Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 2018, 27)
 
-Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 2018, 24) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
-
-Skaalautuvuuden kannalta on parempi, että yhdessä Podissa on ajossa vain yksi kontti. Tällöin voidaan tarvittaessa luoda uusia Podeja, ja sovellusta voidaan skaalta. Yksi Pod voi kuitenkin sijaita vain yhdellä nodella. (Poulton 2018, 27)
-
-### Elinkaari
-
-Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 2018, 27) Podeja ei siis yritetä käynnistää uudelleen, jos Pod tuhoutuu tai lakkaa toimista, tilalle vain luodaan uusi.
+Elinkaari
+- Podit luodaan, ne palvelevat aikansa ja jossain vaiheessa niiden toiminta lakkaa tai ne terminoidaan. Jos Podissa oleva sovellus lakkaa toimimasta, luodaan uusi Pod, johon ladataan sovelluksen image. (Poulton 2018, 27) Podeja ei siis yritetä käynnistää uudelleen, jos Pod tuhoutuu tai lakkaa toimista, tilalle vain luodaan uusi.
 
 ### Deployments
 
@@ -313,7 +310,7 @@ Service pitää yllä kirjapitoa, missä podit ovat, tarjoten luotettavan endpoi
 
 Serice käyttää Labeleita kuorman jakamiseen Podeille, liikenne ohjataan niille Podeille, joilla on oikeat labelit. Servicet ohjaavat liikennettä vain toimiville Podeille. (Poulton 2018, 30)
 
- <a name"objektit"></a>
+ <a name="minikube"></a>
 
 # Minikube
 
