@@ -12,15 +12,16 @@
 1. [Johdanto](#Johdanto)
 2. [Mikropalvelut](#mikropalvelut)
 3. [Mikä on Docker](#mika-on-docker) 
-    1. [Arkkitehtuuri](#arkkitehtuuri1)
-    2. [Komentokieli, käytetyimmät komennot](#komennot)
-    3. [Imaget, mistä saadaan](#imaget)
-    4. [Konttien ajaminen](#kontit)
-4. [Mikä on Kuberbetes](#mika-on-kubernetes)
+    1. [Arkkitehtuuri](#arkkitehtuuri)
+    2. [Imaget](#imaget)
+    3. [Konttien ajaminen](#kontit)
+    4. [Komentokieli](#komennot)
+5. [Testisovellus](#testisovellus)
+6. [Mikä on Kuberbetes](#mika-on-kubernetes)
     1. Minikube
     2. AWS asennus
     3. Arkkitehtuuri
-5. [Yhteenveto](#Yhteenveto)
+7. [Yhteenveto](#Yhteenveto)
 
 <a name="Johdanto"></a>
 
@@ -82,7 +83,7 @@ Docker onkin luotu erityisesti ottaen huomioon kehittäjien ongelmat yhteensopiv
 Dockeria voidaankin verrata ihan perinteisiin rahtikontteihin, joita kuljetaan johdonmukaisesti ja järjestelmällisesti pinottuina.  Kontittaminen tarjoaa paljon etuja, kuten nopea sovellusten käyttöönotto, siirrettävyys ja uudelleenkäytettävyys. Isot yritykset kuten Google, Microsoft ja VMware ovatkin ottaneet Dockerin käyttöön infrastruktuurissaan.
 (Troubleshooting Docker, Chapter 1. Understanding Container Scenarios and an Overview of Docker)
 
-
+<a name="arkkitehtuuri"></a>
 ### Arkkitehtuuri
 		
 Kontteja voidaan hyödyntää monella eri tapaa ja yleisimpiä tapoja ovat OS (operating system) kontit ja sovelluskontit. OS kontit voidaan helposti mieltää virtuaalikoneiksi (VM), mutta ne poikkeavat virtuaalikoneista (VM) sillä, että ne jakavat isäntäkoneella pyörivän käyttöjärjestelmän ytimen mutta tarjoaa käyttäjätilan eristämisen (user space isolation).
@@ -94,20 +95,7 @@ Kuva 1. LÄHDE. Kuva mukaillen.
 Sovelluskontit ovat tarkoitettu yhden prosessin ajamiseen. Se pitää siis sisällään sovelluksen prosessin. OS kontit puolestaan ajavat monia prosesseja. Sovelluskontissa paketoidaan sovelluksen komponentit eri kontteihin ja ne kommunikoivat keskenään API:n ja palveluiden avulla. Tällainen multi-komponentti järjestelmä sivuuttaa jo hiukan mikropalveluita, joista kerrotaan myöhemmin tässä raportissa.
 (Troubleshooting Docker, Chapter 1. Understanding Container Scenarios and an Overview of Docker)
 
-
-
-#### Komentokieli, käytetyimmät komennot  <a name="komennot">
-    
-Komento|Selite
---------|-------------
-docker ps -a|Listaa kontainerit
-docker images|Listaa Imaget
-docker pull <image>|Hakee imagen Docker Hubista
-docker rm <container-id>|poistaa kontainerin (id tai nimi)
-docker rmi <image-id>|poistaa imagen
-docker stop <container-id>|pysäyttää kontainerin
-docker run <image>|ajaa imagen ja luo kontainerin
-
+<a name="imaget"></a>
 #### Image
 
 Image on suoritettava paketti. Se sisältää kaiken tarvittavan sovelluksen suorittamiseen muun muassa koodin, kirjastot, ympäristö nja konfiguraatio tiedostot. Kontit launchataan imagen avulla. (https://docs.docker.com/get-started/)
@@ -128,8 +116,8 @@ Imagen rakentamiseen käytetään Dockerfilea. Dockerfile -tiedosto pitää sis�
 
 Docker Hub on kirjasto ja yhteisö konttien imageille. Image saadaan lataamalla ne Docker Hubista. Se on maailman suurin repositori konttien imageille. Docker hubia käytetään imagien tallentamiseen ja hallinnointiin. Käyttäjät saavat pääsyn tallentaa image julkisiin tai yksityisiin repositoreihin. Se on suunnattu niin kehittäjille että yrityksille. (https://www.docker.com/products/docker-hub)
 
-
-#### Konttien ajaminen
+<a name="kontit"></a>
+### Konttien ajaminen
 
 Kontit ajetaan komennolla ```docker run```. Tämä komento luo kirjoittettavan kerroksen imagen päälle ja käynnistää sen. Pysäytetty kontti voidaan käynnistää uudelleen komennolla ``` docker start```. (https://docs.docker.com/engine/reference/commandline/run/)
 Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useammalla isännällä. Tästä syystä konttien tuleekin pystyä keskustelemaan toistensta kanssa. Konteissa voidaankin käyttää IP-tauluja kontrolloimaan liikennetta konttien välillä. Kahden isäntäkoneen välillä käytetään tunnelointia. Ip osoite voidaan löytää komennolla  ``` docker inspect ``` .
@@ -137,6 +125,21 @@ Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useam
 jotain lisää FIND IP,  Expose port, linking containers ??
 
 
+<a name="komennot"></a>
+### Komentokieli, käytetyimmät komennot 
+    
+Komento|Selite
+--------|-------------
+docker ps -a|Listaa kontainerit
+docker images|Listaa Imaget
+docker pull <image>|Hakee imagen Docker Hubista
+docker rm <container-id>|poistaa kontainerin (id tai nimi)
+docker rmi <image-id>|poistaa imagen
+docker stop <container-id>|pysäyttää kontainerin
+docker run <image>|ajaa imagen ja luo kontainerin
+
+
+<a name="testisovellus"></a>
 # Testisovellus
 
 Testisovelluksemme on yksikertainen node.js sovellus, joka tulostaa Hello World.
