@@ -80,8 +80,13 @@ Kuva havainnollistamaan
 		
 Kontteja voidaan hyödyntää monella eri tapaa ja yleisimpiä tapoja ovat OS (operating system) kontit ja sovelluskontit. OS kontit voidaan helposti mieltää virtuaalikoneiksi (VM), mutta ne poikkeavat virtuaalikoneista (VM) sillä, että ne jakavat isäntäkoneella pyörivän käyttöjärjestelmän ytimen mutta tarjoaa käyttäjätilan eristämisen (user space isolation).
 
+
+![Docker and Virtualization](https://github.com/immonju1/pilvipalvelut/blob/master/pics/docker_virtualmachine.JPG)
+
 Sovelluskontit ovat tarkoitettu yhden prosessin ajamiseen. Se pitää siis sisällään sovelluksen prosessin. OS kontit puolestaan ajavat monia prosesseja. Sovelluskontissa paketoidaan sovelluksen komponentit eri kontteihin ja ne kommunikoivat keskenään API:n ja palveluiden avulla. Tällainen multi-komponentti järjestelmä sivuuttaa jo hiukan mikropalveluita, joista kerrotaan myöhemmin tässä raportissa.
 (Troubleshooting Docker, Chapter 1. Understanding Container Scenarios and an Overview of Docker)
+
+
 
 #### Komentokieli, käytetyimmät komennot  <a name="komennot">
     
