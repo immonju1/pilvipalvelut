@@ -92,10 +92,10 @@ Reititys mikropalveluiden välillä, siten että eri versioita mikropalveluista 
 Docker on avoimeen lähdekoodiin perustuva teknologia kontitukseen.	
 Dockerin avulla pystyy kontittamaan sovelluksia, mikä mahdollistaa käsittelemisen ja siirtämisen eri alustoille helpommin.
 Docker onkin luotu erityisesti ottaen huomioon kehittäjien ongelmat yhteensopivuuden kanssa. Yhteensopivuus ongelmissa törmätään siihen, että sovellus toimii omalla koneella, mutta siirrettäessä toiselle koneelle ilmenee ongelmia esimerkiksi eri versioiden kesken.
-(https://docker-hy.github.io/part1/)
+(Kousa 2019)
 
 Dockeria voidaankin verrata ihan perinteisiin rahtikontteihin, joita kuljetaan johdonmukaisesti ja järjestelmällisesti pinottuina.  Kontittaminen tarjoaa paljon etuja, kuten nopea sovellusten käyttöönotto, siirrettävyys ja uudelleenkäytettävyys. Isot yritykset kuten Google, Microsoft ja VMware ovatkin ottaneet Dockerin käyttöön infrastruktuurissaan.
-(Troubleshooting Docker, Chapter 1. Understanding Container Scenarios and an Overview of Docker)
+(Kohli, Dua & Wooten, luku 1)
 
 <a name="arkkitehtuuri"></a>
 ### Arkkitehtuuri
@@ -104,36 +104,38 @@ Kontteja voidaan hyödyntää monella eri tapaa ja yleisimpiä tapoja ovat OS (o
 
 
 ![Docker and Virtualization](https://github.com/immonju1/pilvipalvelut/blob/master/pics/docker_virtualmachine.JPG)
-Kuva 1. LÄHDE. Kuva mukaillen.
+Kuva 1. Mukaillen Kohli, Dua & Wooten, luku 1. The Docker lifecycle.
+
 
 Sovelluskontit ovat tarkoitettu yhden prosessin ajamiseen. Se pitää siis sisällään sovelluksen prosessin. OS kontit puolestaan ajavat monia prosesseja. Sovelluskontissa paketoidaan sovelluksen komponentit eri kontteihin ja ne kommunikoivat keskenään API:n ja palveluiden avulla. Tällainen multi-komponentti järjestelmä sivuuttaa jo hiukan mikropalveluita, joista kerrotaan myöhemmin tässä raportissa.
-(Troubleshooting Docker, Chapter 1. Understanding Container Scenarios and an Overview of Docker)
+(Kohli, Dua & Wooten, luku 1)
 
 <a name="imaget"></a>
 #### Image
 
-Image on suoritettava paketti. Se sisältää kaiken tarvittavan sovelluksen suorittamiseen muun muassa koodin, kirjastot, ympäristö nja konfiguraatio tiedostot. Kontit launchataan imagen avulla. (https://docs.docker.com/get-started/)
+Image on suoritettava paketti. Se sisältää kaiken tarvittavan sovelluksen suorittamiseen muun muassa koodin, kirjastot, ympäristö nja konfiguraatio tiedostot. Kontit launchataan imagen avulla. (Docker inc 2019)
 
 Jokainen muutos originaliin imageen säilötään erillisellä layerilla. Joka kerta kun kommitoit imageen, luodaan uusi kerros (layer) Docker imageen. Alkuperäinen image ja sen olemassaolevat kerrokset pysyvät muuttumattomina. (Learning Docker, chapter 2 clarifying the docker terms)
 Imagen layereita voi tarkastella komennolla.
 ```
 docker image history
 ```
-(Docker Bootcamp, Chapter 2. Launching application, Docker terminology)
+(McKendrick, Chelladhurai, Raj, & Singh. Luku 2)
 
 Image on pohjana konteille, mikä tarkoittaa sitä että yhdestä imagesta voidaan luoda monia eri kontteja, joissa on erilaisia ominaisuuksia. Imagella on kerroksia (layers) ja kontilla on myös oma kerroksensa. Jokaisella kontilla on kirjoitettava kerros (writeable layer) mihin tallennetaan muutokset ja data, mutta ne käyttävät samaa imagea pohjana. Tämä image pysyy muuttumattomana ja kontin poistaminen ei vaikuta imageen. Kontti voi kirjoittaa kirjoittaa dataa kontissa mutta kontin data ei säily samallalailla kuten imagen.
-(https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers)
+(Docker inc 2019)
 
-KUVA SELKEYTTÄMÄÄN TÄTÄ LAYER HOMMAA?
+KUVA SELKEYTTÄMÄÄN TÄTÄ LAYER HOMMAA? https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers
+Kuva mukaillen Docker inc 2019. Container and layers.
 
-Imagen rakentamiseen käytetään Dockerfilea. Dockerfile -tiedosto pitää sisällään komennot. Image rakennetaan komennolla ```docker build``` käyttäen Dockerfilea.  (https://docs.docker.com/engine/reference/builder/)
+Imagen rakentamiseen käytetään Dockerfilea. Dockerfile -tiedosto pitää sisällään komennot. Image rakennetaan komennolla ```docker build``` käyttäen Dockerfilea.  (Docker inc 2019)
 
-Docker Hub on kirjasto ja yhteisö konttien imageille. Image saadaan lataamalla ne Docker Hubista. Se on maailman suurin repositori konttien imageille. Docker hubia käytetään imagien tallentamiseen ja hallinnointiin. Käyttäjät saavat pääsyn tallentaa image julkisiin tai yksityisiin repositoreihin. Se on suunnattu niin kehittäjille että yrityksille. (https://www.docker.com/products/docker-hub)
+Docker Hub on kirjasto ja yhteisö konttien imageille. Image saadaan lataamalla ne Docker Hubista. Se on maailman suurin repositori konttien imageille. Docker hubia käytetään imagien tallentamiseen ja hallinnointiin. Käyttäjät saavat pääsyn tallentaa image julkisiin tai yksityisiin repositoreihin. Se on suunnattu niin kehittäjille että yrityksille. (Docker inc 2019)
 
 <a name="kontit"></a>
 ### Konttien ajaminen
 
-Kontit ajetaan komennolla ```docker run```. Tämä komento luo kirjoittettavan kerroksen imagen päälle ja käynnistää sen. Pysäytetty kontti voidaan käynnistää uudelleen komennolla ``` docker start```. (https://docs.docker.com/engine/reference/commandline/run/)
+Kontit ajetaan komennolla ```docker run```. Tämä komento luo kirjoittettavan kerroksen imagen päälle ja käynnistää sen. Pysäytetty kontti voidaan käynnistää uudelleen komennolla ``` docker start```. (Docker inc 2019)
 Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useammalla isännällä. Tästä syystä konttien tuleekin pystyä keskustelemaan toistensta kanssa. Konteissa voidaankin käyttää IP-tauluja kontrolloimaan liikennetta konttien välillä. Kahden isäntäkoneen välillä käytetään tunnelointia. Ip osoite voidaan löytää komennolla  ``` docker inspect ``` .
 
 jotain lisää FIND IP,  Expose port, linking containers ??
@@ -151,6 +153,7 @@ docker rm <container-id>|poistaa kontainerin (id tai nimi)
 docker rmi <image-id>|poistaa imagen
 docker stop <container-id>|pysäyttää kontainerin
 docker run <image>|ajaa imagen ja luo kontainerin
+(Kousa 2019)
 
 
 <a name="testisovellus"></a>
@@ -959,6 +962,21 @@ Peltola, Reko 2017. Kubernetes-klusterin asennus ja käytöönotto. https://www.
 
 Sarakkala Jyri 2016. Kubernetes ja klusteroitava verkkosovellus. https://www.theseus.fi/bitstream/handle/10024/120976/Opinnayte_jyri_sakkara_final.pdf?sequence=1
 
+Kousa, Jami. Devops with Docker. Luettavissa: https://docker-hy.github.io/part1/ .Luettu: 31.3.2019.
+
+Kohli, Vaibhav, Dua, Rajdeep & Wooten, John (2017). Troubleshooting Docker. Packt Publishing. eBook.
+
+Docker inc 2019. Get Started, Part 1: Orientation and setup. Luettavissa: https://docs.docker.com/get-started/. Luettu 31.3.2019.
+
+McKendrick, Russ, Chelladhurai, Jeeva S.,  Raj, Pethuru & Singh, Vinod (2017). Docker Bootcamp. Packt Publishing. eBook.
+
+Docker inc 2019. About images, containers, and storage drivers. Luettavissa: https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/. Luettu: 31.3.2019.
+
+Docker inc 2019. Dockerfile reference. Luettavissa: https://docs.docker.com/engine/reference/builder/. Luettu: 31.3.2019.  
+Docker inc 2019. Luettavissa: https://www.docker.com/products/docker-hub. Luettu: 31.3.2019.  
+Docker inc 2019. Docker run. Luettavissa: https://docs.docker.com/engine/reference/commandline/run/. Luettu: 31.3.2019.
+
+
 
 
 -------------------------------
@@ -968,12 +986,5 @@ Learning Docker
 Raj, Pethuru ; Chelladhurai, Jeeva S. ; Singh, Vinod
 Packt Publishing, E-kirja
 
-Docker Bootcamp
-McKendrick, Russ ; Chelladhurai, Jeeva S. ; Raj, Pethuru ; Singh, Vinod
-Packt Publishing, E-kirja
-
-Troubleshooting Docker
-Kohli, Vaibhav; Dua, Rajdeep; Wooten, John
-Packt Publishing, E-kirja
 
 ------------------------------
