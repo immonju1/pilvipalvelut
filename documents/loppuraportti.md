@@ -29,7 +29,7 @@
 8. [Kubernetesin asennus AWS:ään](#aws)
     1. [AWS asennuksen esiehdot](#esiehdot)
     2. [Kubectl](#aws-kubectl)
-    3. [ASenna kops](#kops)
+    3. [Asenna kops](#kops)
     4. [Asenna ja konfiguroi awscli](#awscli)
     5. [Klusterin luominen](#klusterin_luonti)
     6. [Pod, Service ja Loadbalancer](#lb)
@@ -943,46 +943,42 @@ Projektissa onnistuimme tavoitteissamme. Projektia voisimme jatkaa pidemmälle t
 
 
 # Lähteet
+Amazon Web Services 2019. Install the AWS CLI on Linux. Luettavissa: https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html. Luettu: 
+
+Aqua Security 2018. Kubernetes Architecture 101. Luettavissa: https://www.aquasec.com/wiki/display/containers/Kubernetes+Architecture+101. Luettu: 25.3.2019.
 
 DevOps Fundamentals-koulutus 28.8.2017 – 30.8.2017. Kouluttaja Kai Jokiniemi, Eficode.
 
-Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. Udemy.
+Docker inc 2019a. About images, containers, and storage drivers. Luettavissa: https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/. Luettu: 31.3.2019.
+
+Docker inc 2019b. Dockerfile reference. Luettavissa: https://docs.docker.com/engine/reference/builder/. Luettu: 31.3.2019.  
+
+Docker inc 2019c. Luettavissa: https://www.docker.com/products/docker-hub. Luettu: 31.3.2019.  
+
+Docker inc 2019d. Docker run. Luettavissa: https://docs.docker.com/engine/reference/commandline/run/. Luettu: 31.3.2019.
 
 Goasguen, Sébastien 2017. Kubernetes Fundamentals. O'Reilly. ebook.
+
+Kohli, Vaibhav, Dua, Rajdeep & Wooten, John 2017. Troubleshooting Docker. Packt Publishing. eBook.
+
+Kousa, Jami. Devops with Docker. Luettavissa: https://docker-hy.github.io/part1/. Luettu: 31.3.2019.
+
+McKendrick, Russ, Chelladhurai, Jeeva S., Raj, Pethuru & Singh, Vinod 2017. Docker Bootcamp. Packt Publishing. eBook.
+
+Node.js Foundation. Dockerizing a Node.js web app. Luettavissa: https://nodejs.org/de/docs/guides/nodejs-docker-webapp/. Luettu: 4.3.2019
 
 Poulton, Nigel 2018. The Kubernetes Book: version 3. eBook. 
 
 Viane, Edward 2018. Learn DevOps: The complete Kubernetes course. Udemy.
 
-What is Kubernetes. https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/. Luettu 7.3.2019.
-
-Kube-scheduler. https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/
-
 Warnock, Braine E.E. 2018. Learning Kubernetes. Packt Publishing. eBook.
 
-
-Kousa, Jami. Devops with Docker. Luettavissa: https://docker-hy.github.io/part1/. Luettu: 31.3.2019.
-
-Kohli, Vaibhav, Dua, Rajdeep & Wooten, John 2017. Troubleshooting Docker. Packt Publishing. eBook.
-
-Docker inc 2019. Get Started, Part 1: Orientation and setup. Luettavissa: https://docs.docker.com/get-started/. Luettu 31.3.2019.
-
-McKendrick, Russ, Chelladhurai, Jeeva S.,  Raj, Pethuru & Singh, Vinod 2017. Docker Bootcamp. Packt Publishing. eBook.
-
-Docker inc 2019a. About images, containers, and storage drivers. Luettavissa: https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/. Luettu: 31.3.2019.
-
-Docker inc 2019b. Dockerfile reference. Luettavissa: https://docs.docker.com/engine/reference/builder/. Luettu: 31.3.2019.  
-Docker inc 2019c. Luettavissa: https://www.docker.com/products/docker-hub. Luettu: 31.3.2019.  
-Docker inc 2019d. Docker run. Luettavissa: https://docs.docker.com/engine/reference/commandline/run/. Luettu: 31.3.2019.
+What is Kubernetes. https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/. Luettu 7.3.2019.
 
 Raj, Pethuru, Chelladhurai, Jeeva S. & Singh, Vinod 2015. Learning Docker. Packt Publishing. eBook.
-
-Node.js Foundation. Dockerizing a Node.js web app. Luettavissa: https://nodejs.org/de/docs/guides/nodejs-docker-webapp/. Luettu: 4.3.2019
-
-Aqua Security 2018. Kubernetes Architecture 101. Luettavissa: https://www.aquasec.com/wiki/display/containers/Kubernetes+Architecture+101. Luettu: 25.3.2019.
 
 The Kubernetes Authors 2019a. Install Minikube. Luettavissa: https://kubernetes.io/docs/tasks/tools/install-minikube/ Luettu: 21.2.2019
 
 The Kubernetes Authors 2019b. Install and Set Up kubectl. Luettavissa: https://kubernetes.io/docs/tasks/tools/install-kubectl/ Luettu: 28.2.2019
 
-Amazon Web Services 2019. Install the AWS CLI on Linux. Luettavissa: https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html. Luettu: 
+
