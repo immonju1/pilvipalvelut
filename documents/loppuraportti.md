@@ -103,7 +103,7 @@ Dockeria voidaankin verrata ihan perinteisiin rahtikontteihin, joita kuljetaan j
 Kontteja voidaan hyödyntää monella eri tapaa ja yleisimpiä tapoja ovat OS (operating system) kontit ja sovelluskontit. OS kontit voidaan helposti mieltää virtuaalikoneiksi (VM), mutta ne poikkeavat virtuaalikoneista (VM) sillä, että ne jakavat isäntäkoneella pyörivän käyttöjärjestelmän ytimen mutta tarjoaa käyttäjätilan eristämisen (user space isolation).
 
 
-![Docker and Virtualization](https://github.com/immonju1/pilvipalvelut/blob/master/pics/docker_virtualmachine.JPG)
+![Docker and Virtualization](https://github.com/immonju1/pilvipalvelut/blob/master/pics/docker_virtualmachine.png)
 Kuva 1. Mukaillen Kohli, Dua & Wooten, luku 1. The Docker lifecycle.
 
 
@@ -227,7 +227,7 @@ Seuraavassa kappaleessa käydään läpi miten Kubernetes asennetaan käyttäen 
 
 ## Kubernetes Arkkitehtuuri
 
-![](https://github.com/immonju1/pilvipalvelut/blob/master/pics/Kubernetes_architectur.webp)
+![](https://github.com/immonju1/pilvipalvelut/blob/master/pics/kubernetes_arkkitehtuuri.png)
 
 Kuva X. Kubernetes arkkitehtuuri.
 
