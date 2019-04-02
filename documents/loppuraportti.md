@@ -6,7 +6,7 @@
  [Niina Villman](https://github.com/niinavi)
  
  
-# Sisällyluettelo
+# Sisällysluettelo
 
 1. [Johdanto](#Johdanto)
 2. [Mikropalvelut](#mikropalvelut)
@@ -41,7 +41,7 @@
 
 # Johdanto  
 
-Projekti on harjoitustyö Haaga-Helian kurssille pilvipalvelut. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologiana pilvipalveluissa on DevOps.
+Projekti on harjoitustyö Haaga-Helian kurssille pilviteknologiat. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologiana pilvipalveluissa on DevOps.
 
 DevOps on, sekä tapa organisoida töitä ohjelmistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
 
