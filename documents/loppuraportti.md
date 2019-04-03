@@ -137,9 +137,9 @@ Docker Hub on kirjasto ja yhteisö konttien imageille. Image saadaan lataamalla 
 ### Konttien ajaminen
 
 Kontit ajetaan komennolla ```docker run```. Tämä komento luo kirjoittettavan kerroksen imagen päälle ja käynnistää sen. Pysäytetty kontti voidaan käynnistää uudelleen komennolla ``` docker start```. (Docker inc 2019d.)
-Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useammalla isännällä. Tästä syystä konttien tuleekin pystyä keskustelemaan toistensta kanssa. Konteissa voidaankin käyttää IP-tauluja kontrolloimaan liikennetta konttien välillä. Kahden isäntäkoneen välillä käytetään tunnelointia. Ip osoite voidaan löytää komennolla  ``` docker inspect ``` .
+Kontissa pyörivät palvelut voivat pyöriä yhdellä isäntäkoneella tai useammalla isännällä. Tästä syystä konttien tuleekin pystyä keskustelemaan toistensta kanssa. Konteissa voidaankin käyttää IP-tauluja kontrolloimaan liikennetta konttien välillä. Kahden isäntäkoneen välillä käytetään tunnelointia. Ip osoite voidaan löytää komennolla  ``` docker inspect ``` . (Goasguen 2015a, luku 3.)
 
-jotain lisää FIND IP,  Expose port, linking containers ??
+Yhteys konttiin avataan paljastamalla (expose) portti. Docker kontti kuuntelee määrittelemääsi porttia. Portti täytyy julkaista, eli kontin portti ohjataan isäntäkoneen porttiin. Portin määrittelemään tapahtuu lisäämällä rivi ``` EXPOSE <port> ``` Dockerfileen. Portin julkaiseminen tapahtuu ajamalla kontti ja lisäämällä portit komentoon ``` docker run -p <host-port>:<container-port> app-in-port ```. Ensimmäiseksi otetaan siis yhteys isäntäkoneen porttiin ja joka ohjautuu sitten sovelluksen porttiin. Jos isäntäkoneen porttia ei määritellä Docker valitsee automaattiseksi vapaan portin. (Kousa 2019, luku 1.)
 
 
 <a name="komennot"></a>
@@ -216,7 +216,7 @@ Testataan lokaalisti
 
 # Mikä on Kubernetes 
 
-Kubernetes on Open source sovellus, jolla voidaan viedä tuotantoon, skaalata ja hallinnoida kontitettuja sovelluksia. Kontainereissa voi olla esim. Web sovelluksia. (Goasguen 2017, luku "What is Kubernetes".) Kubernetes on orkestraattori, joka mahdollistaa mikropalveluarkkitehtuurin. Ilman orkestraattoria konttien hallinnointi isossa sovelluksessa, joka koostuu mikropalveluista, on hyvin hankalaa.
+Kubernetes on Open source sovellus, jolla voidaan viedä tuotantoon, skaalata ja hallinnoida kontitettuja sovelluksia. Kontainereissa voi olla esim. Web sovelluksia. (Goasguen 2017b, luku "What is Kubernetes".) Kubernetes on orkestraattori, joka mahdollistaa mikropalveluarkkitehtuurin. Ilman orkestraattoria konttien hallinnointi isossa sovelluksessa, joka koostuu mikropalveluista, on hyvin hankalaa.
 
 Docker ja Kubernetes täydentävät toisiaan, tyypillisesti sovellukset kontitetaan Dockerilla, ja Kubernetes orkestroi niitä (Poulton 2018, 6). Kontainerina voi olla muukin kuin Docker. Kubernetesin avulla useita kontainereita voidaan ajaa samalla koneella, kontainerin voi käynnistää tietylle nodelle, kontainereita voi uudelleenkäynnistää ja kontainereita voi siirtää toiselle nodelle. (Viane 2018, luku 1.)
 
@@ -238,7 +238,7 @@ Seuraavissa kappaleissa käymme läpi Kubernetesin arkkitehtuurin, sovellusten p
 
 ### Klusteri
 
-Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä (Goasguen 2017, luku "What is Kubernetes"). Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
+Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä (Goasguen 2017b, luku "What is Kubernetes"). Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
 
 Kuva jostain kokonaisarkkitehtuurista.
 
@@ -957,7 +957,9 @@ Docker inc 2019c. Luettavissa: https://www.docker.com/products/docker-hub. Luett
 
 Docker inc 2019d. Docker run. Luettavissa: https://docs.docker.com/engine/reference/commandline/run/. Luettu: 31.3.2019.
 
-Goasguen, Sébastien 2017. Kubernetes Fundamentals. O'Reilly. ebook.
+Goasguen, Sébastien 2015a. Docker Cookbook. O'Reilly Media. eBook.
+
+Goasguen, Sébastien 2017b. Kubernetes Fundamentals. O'Reilly. ebook.
 
 Kohli, Vaibhav, Dua, Rajdeep & Wooten, John 2017. Troubleshooting Docker. Packt Publishing. eBook.
 
