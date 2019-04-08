@@ -41,7 +41,7 @@
 
 # Johdanto  
 
-Projekti on harjoitustyö Haaga-Helian kurssille pilviteknologiat. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheen projektin aiheeksi, koska haluamme oppia enemmän pilvipalveluista ja miten niitä toteutetaan. Keskeisenä idologiana pilvipalveluissa on DevOps.
+Projekti on harjoitustyö Haaga-Helian kurssille pilviteknologiat. Kurssin laajuus oli 5 opintopistettä. Valitsimme aiheeksi Docker ja Kubernetes mikropalveluarkkitehtuurin mahdollistajina. Haluamme oppia lisää DevOpsista, koska se on keskeinen ideologia pilvipalveluissa.
 
 DevOps on, sekä tapa organisoida töitä ohjelmistokehityksessä, että joukko uusia teknologioita, joiden avulla sovellusten hallintaan liittyviä tehtäviä automatisoidaan. DevOpsin tavoitteena on nopeuttaa sovelluskehityssykliä (Dev), eli viedä tuotantoon mahdollisimman nopeasti. Samalla sen tavoitteena on automatisoida tuotantoonvientiin liittyvät (Ops) taskit. Teknologian ohessa DevOpsiin liitty myös siilojen madaltaminen, kehitys- ja tuotantopuolen ihmiset työskentelevät mielellään samoissa tiimeissä.
 
