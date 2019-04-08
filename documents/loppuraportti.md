@@ -126,7 +126,8 @@ docker image history
 Image on pohjana konteille, mikä tarkoittaa sitä että yhdestä imagesta voidaan luoda monia eri kontteja, joissa on erilaisia ominaisuuksia. Imagella on kerroksia (layers) ja kontilla on myös oma kerroksensa. Jokaisella kontilla on kirjoitettava kerros (writeable layer) mihin tallennetaan muutokset ja data, mutta ne käyttävät samaa imagea pohjana. Tämä image pysyy muuttumattomana ja kontin poistaminen ei vaikuta imageen. Kontti voi kirjoittaa kirjoittaa dataa kontissa mutta kontin data ei säily samallalailla kuten imagen.
 (Docker inc 2019a.)
 
-KUVA SELKEYTTÄMÄÄN TÄTÄ LAYER HOMMAA? https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers
+
+![Docker Layer](https://github.com/immonju1/pilvipalvelut/blob/master/pics/docker_layer.png)
 Kuva mukaillen Docker inc 2019a. Container and layers.
 
 Imagen rakentamiseen käytetään Dockerfilea. Dockerfile -tiedosto pitää sisällään komennot. Image rakennetaan komennolla ```docker build``` käyttäen Dockerfilea.  (Docker inc 2019b.)
