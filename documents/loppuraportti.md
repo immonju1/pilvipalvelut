@@ -492,35 +492,15 @@ curl localhost:8081
 
 ## Hyödyllisiä komentoja
 
-Laita taulukkoon:
-
-Poista pod
-
-    kubectl delete pod nodehelloworld.example.com
-
-Poista service
-
-    kubectl delete service nodehelloworld-service
-
-Mene podiin
-
-    kubectl attach nodehelloworld.example.com -i
-
-Kontainerin hakemiston sisältö
-
-    kubectl exec nodehelloworld.example.com -- ls
-
-Komentoriville pod:iin
-
-    kubectl exec -it nodehelloworld.example.com -- bash
-
-Lokit
-
-    kubectl logs nodehelloworld.example.com
-
-Palvelun tila
-
-    kubectl describe service nodehelloworld-service
+Komento|Selite
+--------|-------------
+Poista pod | kubectl delete pod nodehelloworld.example.com
+Poista service | kubectl delete service nodehelloworld-service
+Mene podiin | kubectl attach nodehelloworld.example.com -i
+Kontainerin hakemiston sisältö | kubectl exec nodehelloworld.example.com -- ls
+Komentoriville pod:iin | kubectl exec -it nodehelloworld.example.com -- bash
+Lokit | kubectl logs nodehelloworld.example.com
+Palvelun tila | kubectl describe service nodehelloworld-service
 
 (Viane 2018, luku 2.)
 
