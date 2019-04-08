@@ -290,7 +290,7 @@ Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kaps
 
 Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 2018, 20.)
 
-![Kubernetes Node](pics/kubernetes_node.png)
+![Kubernetes Node](https://github.com/immonju1/pilvipalvelut/blob/master/pics/kubernetes_node.png)
 Kuva 3. Kubernetes node. (Kuva mukaillen Poulton 2018, 20)
 
  <a name="manifest"></a>
