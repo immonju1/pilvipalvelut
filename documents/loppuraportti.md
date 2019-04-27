@@ -225,7 +225,7 @@ Kubernetes tekee perinteiset ohjelmistojen tuotantoonviennit ja päivitykset hel
 
 Käyttäjän ei tarvitse välittää missä ja miten ohjelma pyörii, Kubernetes hoitaa sovelluksen ajoon haluttuun ympäristöön (Poulton 2018, 10).
 
-Seuraavassa kappaleessa käydään läpi miten Kubernetes asennetaan käyttäen Minikubea. Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWS:ään. Lopuksi käydään läpi Kubernetesin arkkitehtuuri.
+Seuraavassa kappaleessa käydään läpi Kubernetesin arkkitehtuuri, sekä miten Kubernetes asennetaan käyttäen Minikubea. Tämän jälkeen asennetaan Kubernetes klusteri ja ohjelma AWS:ään.
 
  <a name="arkki-kubernetes"></a>
 
@@ -240,8 +240,6 @@ Seuraavissa kappaleissa käymme läpi Kubernetesin arkkitehtuurin, sovellusten p
 ### Klusteri
 
 Kubernetesin klusterilla tarkoitetaan joukkoa tietokoneita, jotka ovat yhteydessä toisiinsa ja muodostaen näin yhden yksikön. Koneet voivat olla virtuaalikoneita tai fyysisiä servereitä (Goasguen 2017b, luku "What is Kubernetes"). Klusterissa on kahdenlaisia koneita, joita voidaan kutsua useilla nimillä. Kutsumme tässä projektissa toisia Master koneiksi (Head Node), ja loppuja koneita Nodeiksi (Worker Node). Master koneita on yleensä yksi.
-
-Kuva jostain kokonaisarkkitehtuurista.
 
 ### Master ja Nodet
 
@@ -288,7 +286,7 @@ Jotta sovellusta voidaan ajaa Kubernetes klusterissa, pitää sovelluksesta tehd
 
 Kubernetes tarjoaa objekteja sovellusten hallintaan. Niiden avulla sovellus kapseloidaan. Kukin kapselointi tarjoaa omat abstraktiokerroksensa ja palvelunsa sovellukselle. Sovellus kapseloidaan kontin sisälle, kontti kapseloidaan Podin sisälle, Deployment kapseloi Podit nodella. Service kapseloi Deploymentit.
 
-Deployment avulla sovellus voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 2018, 20.)
+Deploymentin avulla sovellusta voidaan skaalata (luoda tai vähentää podeja). Sen avulla myös Podeja voidaan käynnistää uudelleen, ja valvoa niiden toimintaa. (Poulton 2018, 20.)
 
 ![Kubernetes Node](https://github.com/immonju1/pilvipalvelut/blob/master/pics/kubernetes_node.png)  
 Kuva 3. Kubernetes node. (Kuva mukaillen Poulton 2018, 20)
@@ -297,13 +295,7 @@ Kuva 3. Kubernetes node. (Kuva mukaillen Poulton 2018, 20)
 
 ## Manifest
 
-Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. 
-
-Nämä välitetään API serverille, ja tallennetaan halutuksi tilaksi etcd tietovarastoon. 
-
-API Server ohjaa sovelluksen oikeaan tilaan klusterissa.
-
-Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 2018, 20.)
+Sovelluksen tila kuvataan manifesteissa, jotka ovat yaml-formaatissa olevia tekstitiedostoja. Nämä välitetään API serverille, ja tallennetaan halutuksi tilaksi etcd tietovarastoon. API Server ohjaa sovelluksen oikeaan tilaan klusterissa. Tämä jälkeen valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun  tilaan. (Poulton 2018, 20.)
 
  <a name="objektit"></a>
 
@@ -311,7 +303,7 @@ Valvonta asetetaan päälle, eli verrataan sovelluksen nykyistä tilaa haluttuun
 
 ### Pods
 
-Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä klusterin Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
+Pod on Kubernetes maailmassa pienin yksikkö, joka voidaan viedä Nodelle. Docker maailmassa vastaava on kontti. Pod sisältää yleensä yhden sovelluskontin.
 
 Arkkitehtuuri
 - Docker kontti kapseloidaan Podin sisälle. Pod on ajoympäristö konteille. Jos kontissa ajetaan useampaa konttia, ne jakavat saman IP-osoitteen. Kontit voivat kommunikoida Podin sisällä locahost verkossa. (Poulton 2018, 24.) Podin voi ajatella olevan kontti, jonka sisällä on kontteja.
@@ -326,7 +318,7 @@ Deployment on ylemmän tason kapselointi Podeille, joka tarjoaa lisäpalveluita,
 
 ### ReplicaSet
 
-ReplicaSet huolehtii, että Podeja on oikea määrä ajossa tiettynä aikana. ReplicaSet on hyvä määritellä Deploymentin osana. Se määrittelee kuinka monta sovellusinstanssai klsuterissa on ajossa. (Warnock 2018, luku "Kubernetes architecture and design".) Ohjelman skaalaminen tapahtuu ReplicaSetin avulla.
+ReplicaSet huolehtii, että Podeja on oikea määrä ajossa tiettynä aikana. ReplicaSet on hyvä määritellä Deploymentin osana. Se määrittelee kuinka monta sovellusinstanssia klusterissa on ajossa. (Warnock 2018, luku "Kubernetes architecture and design".) Ohjelman skaalaminen tapahtuu ReplicaSetin avulla.
 
 ### Services
 
